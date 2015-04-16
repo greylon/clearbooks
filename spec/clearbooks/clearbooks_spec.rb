@@ -12,6 +12,11 @@ describe Clearbooks do
     it "should connect successfully" do
       pending
     end
+
+    it "should implement a connect method" do
+      pending
+    end
+
   end
 
 end
