@@ -1,7 +1,7 @@
 
     These files are part of the CLEARBOOKS solution.
 
-    Copyright 2015, Bjoern Rennhak, Pedro Lopez
+    Copyright 2015, Bjoern Rennhak
                     Greylon Ltd.
 
     This project is open source software under MIT license.
