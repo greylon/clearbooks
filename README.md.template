@@ -53,9 +53,9 @@ As library
 
 
 ```ruby
-2.2.0 :001 > require 'clearbooks'
+2.2.2 :001 > require 'clearbooks'
  => true
-2.2.0 :002 > FIXME
+2.2.2 :002 > FIXME
 ```
 
 or from the command line
@@ -148,13 +148,13 @@ or see http://rvm.io for more details.
 Create proper RVM gemset
 
 ```sh
-~# rvm --create use 2.2.0@clearbooks_project
+~# rvm --create use 2.2.2@clearbooks_project
 ```
 
-Install Ruby VM 2.2.0 or better
+Install Ruby VM 2.2.2 or better
 
 ```sh
-~# rvm install 2.2.0
+~# rvm install 2.2.2
 ```
 
 Install libraries via bundler
