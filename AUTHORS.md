@@ -15,10 +15,10 @@ AUTHORS
     Associated:   Has some relevance to the project and is referable to specific parts of the project.
 
     CLEARBOOKS
-    P: Pedro Lopez
-    M: pedrolopez AT gmx DOT de
+    P: Pedro Lopez Mendoza
+    M: pedrolopezmendoza AT gmail DOT com
     L: -
-    W: https://github.com/FIXME
+    W: https://github.com/pedrolopez
     S: Creator
 
     CLEARBOOKS
