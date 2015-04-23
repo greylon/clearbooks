@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="https://secure.clearbooks.co.uk/api/soap/">
+   <soapenv:Header>
+      <soap:authenticate apiKey="demo"/>
+   </soapenv:Header>
+   <soapenv:Body>
+      <soap:OperationName>
+         <query/>
+      </soap:OperationName>
+   </soapenv:Body>
+</soapenv:Envelope>
