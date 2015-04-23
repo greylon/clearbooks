@@ -101,12 +101,12 @@ Gem::Specification.new do |spec|
   # Data Exchange Containers/Parsing
   spec.add_runtime_dependency 'oj'
   spec.add_runtime_dependency 'ox'
-  spec.add_runtime_dependency 'nokogiri'
-  spec.add_runtime_dependency 'hpricot'
-  spec.add_runtime_dependency 'cobravsmongoose'
+  # spec.add_runtime_dependency 'nokogiri'
+  # spec.add_runtime_dependency 'hpricot'
+  # spec.add_runtime_dependency 'cobravsmongoose'
 
   # Caching
-  spec.add_runtime_dependency 'moneta'
+  # spec.add_runtime_dependency 'moneta'
 
   # l10n
   spec.add_runtime_dependency 'gettext'
