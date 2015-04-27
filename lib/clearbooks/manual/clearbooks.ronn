@@ -1,9 +1,9 @@
-scylla(1) -- Image Data Hub
+clearbooks(1) -- Image Data Hub
 =============================
 
 ## SYNOPSIS
 
-`scylla` COMMAND [--no-color] [--verbose] [ARGS]
+`clearbooks` COMMAND [--no-color] [--verbose] [ARGS]
 
 ## DESCRIPTION
 
@@ -16,25 +16,25 @@ scylla(1) -- Image Data Hub
 * `--verbose`:
   Prints out additional logging information
 
-## SCYLLA COMMANDS
+## clearbooks COMMANDS
 
-We divide `scylla` subcommands into primary commands and utilities.
+We divide `clearbooks` subcommands into primary commands and utilities.
 
 ## PRIMARY COMMANDS
 
-* [scylla config(1)][scylla-config]:
-  Specify and read configuration options for scylla
+* [clearbooks config(1)][clearbooks-config]:
+  Specify and read configuration options for clearbooks
 
-* `scylla help(1)`:
+* `clearbooks help(1)`:
   Displays detailed help for each subcommand
 
 ## UTILITIES
 
-* `scylla check(1)`:
+* `clearbooks check(1)`:
   Determine whether the requirements for your application are installed
   and available to bundler
 
-* `scylla console(1)`:
+* `clearbooks console(1)`:
   Start an IRB session in the context of the current hub
 
 
