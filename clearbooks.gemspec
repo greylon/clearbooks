@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.description          = %q(Unofficial Clear Books PLC (https://www.clearbooks.co.uk) gem handling all interactions of their SOAP API via native Ruby interface)
   spec.summary              = spec.description
 
-  spec.authors              = [ 'Pedro Lopez', 'Bjoern Rennhak' ]
-  spec.email                = [ 'pedrolopez@gmx.de', 'bjoern@greylon.com' ]
+  spec.authors              = [ 'Bjoern Rennhak', 'Oleg Kukareka' ]
+  spec.email                = [ 'bjoern@greylon.com', 'oleg@kukareka.com' ]
 
   spec.homepage             = 'http://github.com/greylon/clearbooks'
 
