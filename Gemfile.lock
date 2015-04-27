@@ -10,6 +10,7 @@ PATH
       gettext
       ick
       mime-types
+      moneta
       money
       ntp
       oj
@@ -250,6 +251,7 @@ GEM
     mime-types (2.5)
     mini_portile (0.6.2)
     minitest (5.6.0)
+    moneta (0.8.0)
     money (6.5.1)
       i18n (>= 0.6.4, <= 0.7.0)
     multi_json (1.11.0)
