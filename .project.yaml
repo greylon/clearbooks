@@ -1,0 +1,8 @@
+---
+
+# These values are consumed by Thor and Rake
+gem_name:         clearbooks
+author:           Bjoern Rennhak
+organization:     Greylon
+
+

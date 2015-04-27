@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+# Make sure load path contains local + global
+$LOAD_PATH << '.'
+$LOAD_PATH << File.dirname( File.join( __FILE__, '../lib/' ) )
+
+# System includes
+require 'bundler'
+require 'thor' unless defined? Thor::Runner
+
+# Custom includes
+require_relative '../lib/clearbooks'
+
+
+# @class      Clearbooks executable
+# @brief      Main entry point for commandline execution
+class Default < Thor
+
+  # desc 'coords GEOHASH [ACCURACY]', 'Get coordinates for geohash with specified accuracy' # {{{
+  # option :accuracy
+  # def coords hash, accuracy = 3
+  #   begin
+  #     raise ArgumentError, 'Too big accuracy' if( accuracy.to_i > 10 )
+  #     coords = Geohash36.to_coords( hash, accuracy.to_i.abs )
+  #     puts "Latitude: #{coords[:latitude]}"
+  #     puts "Longitude: #{coords[:longitude]}"
+  #   rescue ArgumentError => error
+  #     STDERR.puts "Error: #{error.message}"
+  #   end
+  # end # }}}
+
+end # of class Default
+
+Default.start( ARGV )
+
+# vim:ts=2:tw=100:wm=100:syntax=ruby

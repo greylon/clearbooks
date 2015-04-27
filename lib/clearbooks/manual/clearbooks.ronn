@@ -1,0 +1,40 @@
+clearbooks(1) -- Image Data Hub
+=============================
+
+## SYNOPSIS
+
+`clearbooks` COMMAND [--no-color] [--verbose] [ARGS]
+
+## DESCRIPTION
+
+
+## OPTIONS
+
+* `--no-color`:
+  Prints all output without color
+
+* `--verbose`:
+  Prints out additional logging information
+
+## clearbooks COMMANDS
+
+We divide `clearbooks` subcommands into primary commands and utilities.
+
+## PRIMARY COMMANDS
+
+* [clearbooks config(1)][clearbooks-config]:
+  Specify and read configuration options for clearbooks
+
+* `clearbooks help(1)`:
+  Displays detailed help for each subcommand
+
+## UTILITIES
+
+* `clearbooks check(1)`:
+  Determine whether the requirements for your application are installed
+  and available to bundler
+
+* `clearbooks console(1)`:
+  Start an IRB session in the context of the current hub
+
+
