@@ -15,16 +15,16 @@ AUTHORS
     Associated:   Has some relevance to the project and is referable to specific parts of the project.
 
     CLEARBOOKS
-    P: Pedro Lopez Mendoza
-    M: pedrolopezmendoza AT gmail DOT com
-    L: -
-    W: https://github.com/pedrolopez
-    S: Creator
-
-    CLEARBOOKS
     P: Bjoern Rennhak
     M: bjoern AT greylon DOT com
     L: -
     W: http://github.com/rennhak
     S: BDFL, Creator
+
+    CLEARBOOKS
+    P: Oleg Kukareka
+    M: oleg AT kukareka DOT com
+    L: -
+    W: https://github.com/kukareka
+    S: Creator
 
