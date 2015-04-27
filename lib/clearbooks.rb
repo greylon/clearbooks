@@ -9,7 +9,6 @@ require 'rake'
 # Custom library includes
 require_relative 'clearbooks/core_ext'
 
-
 # @module         module Clearbooks
 # @brief          Clearbooks modules and classes namespace
 module Clearbooks
@@ -27,22 +26,50 @@ module Clearbooks
 
   # autoload :Cache,      'clearbooks/library/cache'
   # autoload :Choice,     'clearbooks/library/choice'
+  autoload :Client, 'clearbooks/library/client'
+  autoload :Configuration, 'clearbooks/library/configuration'
+
+  autoload :Invoice, 'clearbooks/model/invoice'
+  autoload :Item, 'clearbooks/model/item'
+  autoload :Base, 'clearbooks/model/base'
 
 
   DEFAULT_CONFIG      = '.clearbooks/config.yaml'.freeze
 
   class << self
 
+    def client
+      @client ||= Client.new
+    end
+
+    def config
+      @config ||= Configuration.new
+    end
+
+    def configure
+      yield config
+    end
+
+    def method_missing(method, *args, &block)
+      client.send(method, *args, &block)
+    end
+
+    def respond_to?(*args)
+      super || client.respond_to?(*args)
+    end
+
   end # of class << self
 
 end # of module Clearbooks
 
 
-if ARGV[0].match 'discovery:'
+
+if ARGV[0].match('discovery:')
   Discovery.start
 else
-  Default.start
+  # Default.start # OK: I don't understand what is "Default", but it refuses to run specs
 end
+
 
 ## Library
 require_relative 'clearbooks/library/dbc'
@@ -53,3 +80,4 @@ require_relative 'clearbooks/library/secure_config'
 
 
 # vim:ts=2:tw=100:wm=100:syntax=ruby
+

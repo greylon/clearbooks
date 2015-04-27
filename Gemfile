@@ -66,7 +66,7 @@ group :test do # {{{
 
   # Testing / Development
   gem 'aruba'
-  gem 'rspec', '~> 2.0'
+  gem 'rspec', '~> 3.2'
   gem 'guard-rspec', require: false
   gem 'nyan-cat-formatter'
   gem 'simplecov', '~> 0.8.1'

@@ -3,9 +3,12 @@
 
 # Custom include
 require 'clearbooks'
+require 'savon/mock/spec_helper'
 
 
 RSpec.configure do |config|
+
+  config.include Savon::SpecHelper
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
