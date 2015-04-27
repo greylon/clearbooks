@@ -5,7 +5,7 @@
 # @brief    Implements the Clearbooks module wrapper around the Clearbooks API
 module Clearbooks
 
-  VERSION = `git describe --tags`.split("-").first || "0.1.0"
+  VERSION = `git describe --tags`.split("-").first || "0.1.0-wrong-version"
 
 end
 
