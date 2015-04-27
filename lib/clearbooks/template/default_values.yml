@@ -1,9 +1,9 @@
 ---
 
-jason:
+clearbooks:
   url: http://
   ip: 127.0.0.1
   port: 80
-  username: jason
-  password: jason
+  username: clearbooks
+  password: clearbooks
   token: token
