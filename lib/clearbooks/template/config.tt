@@ -1,6 +1,6 @@
 ---
 
-jason:
+clearbooks:
   url: <%= config['url'] %>
   ip: <%= config['ip'] %>
   port: <%= config['port'] %>

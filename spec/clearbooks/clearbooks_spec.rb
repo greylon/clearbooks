@@ -33,7 +33,7 @@ module Clearbooks
 
     end
 
-    describe '::list_invoices', :focus do
+    describe '::list_invoices' do
       let(:message) { :any }
       let(:response) { File.read('spec/fixtures/response/invoices.xml') }
       let(:invoices) do

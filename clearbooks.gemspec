@@ -106,7 +106,7 @@ Gem::Specification.new do |spec|
   # spec.add_runtime_dependency 'cobravsmongoose'
 
   # Caching
-  # spec.add_runtime_dependency 'moneta'
+  spec.add_runtime_dependency 'moneta'
 
   # l10n
   spec.add_runtime_dependency 'gettext'

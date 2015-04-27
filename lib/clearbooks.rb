@@ -62,20 +62,16 @@ module Clearbooks
 
 end # of module Clearbooks
 
-
-
-if ARGV[0].match('discovery:')
-  Discovery.start
-else
-  # Default.start # OK: I don't understand what is "Default", but it refuses to run specs
-end
-
+# if ARGV[0].match 'discovery:'
+#   Discovery.start
+# else
+#   Default.start
+# end
 
 ## Library
 require_relative 'clearbooks/library/dbc'
 require_relative 'clearbooks/library/helpers'
 require_relative 'clearbooks/library/logger'
-require_relative 'clearbooks/library/magic'
 require_relative 'clearbooks/library/secure_config'
 
 
