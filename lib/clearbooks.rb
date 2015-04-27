@@ -48,7 +48,6 @@ end # of module Clearbooks
 require_relative 'clearbooks/library/dbc'
 require_relative 'clearbooks/library/helpers'
 require_relative 'clearbooks/library/logger'
-require_relative 'clearbooks/library/magic'
 require_relative 'clearbooks/library/secure_config'
 
 
