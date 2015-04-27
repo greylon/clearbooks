@@ -1,0 +1,9 @@
+---
+
+jason:
+  url: <%= config['url'] %>
+  ip: <%= config['ip'] %>
+  port: <%= config['port'] %>
+  username: <%= config['username'] %>
+  password: <%= config['password'] %>
+  token: <%= config['token'] %>
