@@ -9,6 +9,8 @@ Service [2] via a native Ruby interface. Clear Books is an online accounting sof
 Software as a Service (SaaS). Their official API works via SOAP and WSDL and currently is only officially supported
 via PHP [3].
 
+It allows the handling of invoices, expenses, financial accounts and mobile accounting as well as online HR and payroll.
+
 [1] Clear Books PLC, https://www.clearbooks.co.uk
 [2] https://www.clearbooks.co.uk/support/api
 [3] https://www.clearbooks.co.uk/support/api/code-examples/php/
@@ -20,7 +22,6 @@ via PHP [3].
   - Ruby VM (2.2 or better)
 - Feature Providing Base Libraries
   - Savon
-  - Rake
   - Thor
 - Development
 - Development Base Libraries
@@ -44,7 +45,7 @@ gem install clearbooks
 or by adding to `Gemfile`
 
 ```ruby
-gem 'clearbooks', git: 'https://github.com/greylon/clearbooks'
+gem 'clearbooks', git: 'https://github.com/greylon/clearbooks.git'
 ```
 
 ## Usage
@@ -55,16 +56,16 @@ As library
 ```ruby
 2.2.2 :001 > require 'clearbooks'
  => true
-2.2.2 :002 > FIXME
+2.2.2 :002 > clearbooks = Clearbooks.new
 ```
 
 or from the command line
 
 ```sh
-~# clearbooks
+~# clearbooks --help
 
 Commands:
-  clearbooks FIXME
+  clearbooks
 ```
 
 ## On what Hardware does it run?
