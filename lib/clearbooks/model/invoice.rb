@@ -75,6 +75,15 @@ module Clearbooks
               :@type => @type,
               :@dateDue => @date_due,
               :@creditTerms => @credit_terms,
+              :@reference => @reference,
+              :@project => @project,
+              :@status => @status,
+              :@invoice_prefix => @invoice_prefix,
+              :@invoice_number => @invoice_number,
+              :@external_id => @external_id,
+              :@statement_page => @statement_page,
+              :@date_modified => @date_modified,
+              :@bank_payment_id => @bank_payment_id,
               description: @description,
               items: items.map(&:to_savon)
           }
