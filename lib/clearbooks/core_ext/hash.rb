@@ -14,4 +14,11 @@ class Hash
     copy
   end #}}}
 
+  # @fn         def savon key {{{
+  # @brief      Savon shortcut to get attributes via :key or :@key
+  def savon(key)
+    self[key] || self["@#{(key.to_s)}".to_sym]
+  end #}}}
+
+
 end

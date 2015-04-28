@@ -65,6 +65,22 @@ module Clearbooks
         end
       end
     end
+
+    describe '::create_invoice' do
+      let(:items) { [Item.new(description: 'abcd', unit_price: 10,
+                              quantity: 5, type: '1001001', vat: 0, vat_rate: '0.00:Out')] }
+      let(:invoice) { Invoice.new(date_created: Date.today,
+        credit_terms: 30,
+        entity_id: 1,
+        type: 'purchases',
+        items: items)}
+      let(:response) { Clearbooks.create_invoice(invoice) }
+
+      it 'creates a new invoice' do
+        expect(response).to be_a Hash
+      end
+
+    end
   end
 end
 
