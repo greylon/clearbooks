@@ -121,8 +121,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'uuid'
   spec.add_runtime_dependency 'money'
 
-  spec.add_runtime_dependency 'ruby-filemagic'
-
   ## System libraries needed (info for the user)
   # spec.requirements 'iconv zlib libmagic'
 
