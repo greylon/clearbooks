@@ -2,8 +2,12 @@ module Clearbooks
   # @class Clearbooks Invoice model {{{
   # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
   class Invoice < Base
-    attr_reader :date_created, :date_due, :credit_terms, :description, :entity_id, :reference, :project, :status, :invoice_prefix,
+    attr_reader :invoice_id, :date_created, :date_due, :credit_terms, :description, :entity_id, :reference, :project, :status, :invoice_prefix,
                 :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id
+
+    # @!attribute [r] invoice_id
+    # @return [Fixnum] Invoice Id.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] date_created
     # Required. The tax point of the invoice.
@@ -23,7 +27,7 @@ module Clearbooks
 
     # @!attribute [r] credit_terms
     # Required. The number of days after the tax point that the invoice is due.
-    # @return [String]
+    # @return [Fixnum]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] description
@@ -33,6 +37,7 @@ module Clearbooks
 
     # @!attribute [r] entity_id
     # Required. The customer or supplier id.
+    # @return [Fixnum]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] reference
@@ -81,8 +86,13 @@ module Clearbooks
     # @return [String] Invoice status: paid, unpaid.
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
+    # @!attribute [r] invoice_prefix
+    # @return [String] Invoice prefix.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
 
     def initialize data
+      @invoice_id = data.savon(:invoice_id).to_i
       @date_created = parse_date data.savon(:date_created)
       @date_due = parse_date data.savon(:date_due)
       @credit_terms = data.savon(:credit_terms).to_i
