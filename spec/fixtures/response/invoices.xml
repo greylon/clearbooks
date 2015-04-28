@@ -31,11 +31,11 @@
           </items>
           <description>wewerwer</description>
         </ns1:Invoice>
-        <ns1:Invoice entityId="1" invoice_id="3" invoice_prefix="INV" invoiceNumber="3" reference=""
+        <ns1:Invoice entityId="1" invoice_id="3" invoice_prefix="INV" invoiceNumber="3" reference="ref1"
                      dateCreated="2015-04-27 00:00:00" dateDue="2015-05-27 00:00:00" dateAccrual="2015-04-27 00:00:00"
-                     creditTerms="30" project="0" status="approved"
-                     statementPage="https://secure.clearbooks.co.uk/accounting/sales/invoice_html/?source=statement&amp;type=invoice&amp;c=58055&amp;auth=FrE2BoUuT0Fzb6is8cfRPg"
-                     type="S" multicurrency="1" fxrate="0" gross="12" net="12" vat="0" paid="0" balance="12">
+                     creditTerms="30" project="7" status="approved"
+                     statementPage="https://secure.clearbooks.co.uk/accounting/sales/invoice_html/?source=statement"
+                     type="S" multicurrency="1" fxrate="0" gross="12" net="12" vat="4" paid="2" balance="12">
           <items>
             <ns1:Item unitPrice="3" vat="0" quantity="1" type="1001001" vatRate="0.00:Out" project="0">
               <description>123123</description>
@@ -43,7 +43,7 @@
             <ns1:Item unitPrice="4" vat="0" quantity="1" type="1001001" vatRate="0.00:Out" project="0">
               <description>123232</description>
             </ns1:Item>
-            <ns1:Item unitPrice="5" vat="0" quantity="1" type="1001001" vatRate="0.00:Out" project="0">
+            <ns1:Item unitPrice="5" vat="2" quantity="1" type="1001001" vatRate="0.00:Out" project="3">
               <description>232323</description>
             </ns1:Item>
           </items>
