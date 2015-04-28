@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 module Clearbooks
   class Item < Base
     attr_reader :description, :unit_price, :quantity, :type, :vat, :vat_rate
