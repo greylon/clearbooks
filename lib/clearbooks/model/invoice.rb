@@ -3,7 +3,7 @@ module Clearbooks
     attr_reader :id, :date_created, :date_due, :credit_terms, :description, :entity_id, :reference, :project, :status, :invoice_prefix,
                 :invoice_number, :external_id, :statement_page, :date_modified, :items, :type
 
-    def initialize(data)
+    def initialize data
       @id = data.savon(:invoice_id).to_i
       @date_created = parse_date data.savon(:date_created)
       @date_due = parse_date data.savon(:date_due)
@@ -20,7 +20,7 @@ module Clearbooks
       @date_modified = parse_date data.savon(:date_modified)
       @type = data.savon(:type)
 
-      @items = Item.build(data[:items].is_a?(Array) ? data[:items] : data[:items][:item])
+      @items = Item.build( data[:items].is_a?(Array) ? data[:items] : data[:items][:item])
     end
 
     def to_savon
@@ -32,7 +32,7 @@ module Clearbooks
               :@dateDue => @date_due,
               :@creditTerms => @credit_terms,
               description: @description,
-              items: items.map(&:to_savon)
+              items: items.map &:to_savon
           }
       }
     end

@@ -13,14 +13,18 @@ module Clearbooks
 
     operations :list_invoices, :create_invoice, :create_entity
 
-    def list_invoices(query = {})
-      query = {ledger: :sales}.merge(query)
+    def list_invoices query = {}
+      defaults = { ledger: :sales }
+      query = defaults.merge(query)
       response = super message: {query: '', attributes!: {query: query}}
-      Invoice.build response.to_hash[:list_invoices_response][:create_invoices_return][:invoice]
+      response = response.to_hash
+      Invoice.build response[:list_invoices_response][:create_invoices_return][:invoice]
     end
 
-    def create_invoice(invoice)
-      response = super(message: invoice.to_savon).to_hash[:create_invoice_response][:create_invoice_return]
+    def create_invoice invoice
+      response = super message: invoice.to_savon
+      response = response.to_hash
+      response = response[:create_invoice_response][:create_invoice_return]
       {
           due: BigDecimal.new(response[:@due]),
           invoice_id: response[:@invoice_id].to_i,
@@ -29,11 +33,10 @@ module Clearbooks
       }
     end
 
-    def create_entity(entity)
-      response = super(message: entity.to_savon).to_hash[:create_entity_response][:create_entity_return]
-      {
-          entity_id: response.to_i
-      }
+    def create_entity entity
+      response = super message: entity.to_savon
+      response = response.to_hash
+      Hash.new entity_id: response[:create_entity_response][:create_entity_return].to_i
     end
   end
 end

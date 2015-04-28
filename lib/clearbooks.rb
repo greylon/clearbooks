@@ -51,11 +51,11 @@ module Clearbooks
       yield config
     end
 
-    def method_missing(method, *args, &block)
-      client.send(method, *args, &block)
+    def method_missing method, *args, &block
+      client.send method, *args, &block
     end
 
-    def respond_to?(*args)
+    def respond_to? *args
       super || client.respond_to?(*args)
     end
 

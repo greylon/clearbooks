@@ -41,6 +41,12 @@ module Clearbooks
       describe Invoice do
         let(:invoice) { invoices.last }
 
+        it 'has date_created' do
+          expect(invoice.date_created.year).to eq 2015
+          expect(invoice.date_created.month).to eq 4
+          expect(invoice.date_created.day).to eq 27
+        end
+
         it 'has items' do
           expect(invoice.items).to be_an Array
           expect(invoice.items.count).to eq 3

@@ -2,7 +2,7 @@ module Clearbooks
   class Base
     class << self
 
-      def build(data)
+      def build data
         unless data.is_a? Array
           [create(data)]
         else
@@ -10,9 +10,9 @@ module Clearbooks
         end
       end
 
-      def create(data)
+      def create data
         if data.is_a? Hash
-          new(data)
+          new data
         else
           data
         end
@@ -21,11 +21,11 @@ module Clearbooks
 
     protected
 
-    def parse_date(date)
+    def parse_date date
       if date.nil? || date.is_a?(Date)
         date
       else
-        Date.parse(date)
+        DateTime.strptime date, '%Y-%m-%d %H:%M:%S'
       end
     end
   end
