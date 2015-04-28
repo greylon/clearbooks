@@ -5,6 +5,9 @@ module Clearbooks
     attr_reader :id, :date_created, :date_due, :credit_terms, :description, :entity_id, :reference, :project, :status, :invoice_prefix,
                 :invoice_number, :external_id, :statement_page, :date_modified, :items, :type
 
+    # @!attribute [r] date_created
+    # @return [DateTime] The tax point of the invoice
+
     def initialize data
       @id = data.savon(:invoice_id).to_i
       @date_created = parse_date data.savon(:date_created)
