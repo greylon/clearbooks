@@ -20,5 +20,14 @@ class Hash
     self[key] || self["@#{(key.to_s)}".to_sym]
   end #}}}
 
-
+  # @fn         def from_savon {{{
+  # @brief      Translates ":@key" savon attribute keys to ":key"
+  def from_savon
+    self.reduce({}) do |hash, (k, v)|
+      k = k.to_s
+      k = k[1..-1] if k.start_with? '@'
+      hash[k.to_sym] = v
+      hash
+    end
+  end
 end

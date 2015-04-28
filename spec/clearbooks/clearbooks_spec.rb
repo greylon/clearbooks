@@ -33,16 +33,16 @@ module Clearbooks
 
     end
 
+    before(:all) { savon.mock! }
+    after(:all) { savon.unmock! }
+    let(:message) { :any }
+
     describe '::list_invoices' do
-      let(:message) { :any }
       let(:response) { File.read('spec/fixtures/response/invoices.xml') }
       let(:invoices) do
         savon.expects(:list_invoices).with(message: message).returns(response)
         Clearbooks.list_invoices
       end
-
-      before(:all) { savon.mock! }
-      after(:all) { savon.unmock! }
 
       it 'returns invoice list' do
         expect(invoices).to be_an Array
@@ -74,10 +74,18 @@ module Clearbooks
         entity_id: 1,
         type: 'purchases',
         items: items)}
-      let(:response) { Clearbooks.create_invoice(invoice) }
+      let(:xml) { File.read('spec/fixtures/response/create_invoice.xml') }
+      let(:response) {
+        savon.expects(:create_invoice).with(message: message).returns(xml)
+        Clearbooks.create_invoice(invoice)
+      }
 
       it 'creates a new invoice' do
         expect(response).to be_a Hash
+        expect(response[:due]).to eq 50
+        expect(response[:invoice_id]).to eq 3
+        expect(response[:invoice_prefix]).to eq 'PUR'
+        expect(response[:invoice_number]).to eq '3'
       end
 
     end

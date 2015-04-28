@@ -20,7 +20,13 @@ module Clearbooks
     end
 
     def create_invoice(invoice)
-      super(message: invoice.to_savon).to_hash
+      response = super(message: invoice.to_savon).to_hash[:create_invoice_response][:create_invoice_return]
+      {
+          due: BigDecimal.new(response[:@due]),
+          invoice_id: response[:@invoice_id].to_i,
+          invoice_prefix: response[:@invoice_prefix],
+          invoice_number: response[:@invoice_number]
+      }
     end
   end
 end
