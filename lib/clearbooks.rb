@@ -9,6 +9,7 @@ require 'rake'
 # Custom library includes
 require_relative 'clearbooks/core_ext'
 
+
 # @module         module Clearbooks
 # @brief          Clearbooks modules and classes namespace
 module Clearbooks
@@ -62,6 +63,7 @@ module Clearbooks
 
 end # of module Clearbooks
 
+
 # if ARGV[0].match 'discovery:'
 #   Discovery.start
 # else
@@ -76,4 +78,3 @@ require_relative 'clearbooks/library/secure_config'
 
 
 # vim:ts=2:tw=100:wm=100:syntax=ruby
-
