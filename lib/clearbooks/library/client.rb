@@ -11,7 +11,7 @@ module Clearbooks
                       attributes!: {'tns:authenticate' =>
                                         {apiKey: Clearbooks.config.api_key}}}
 
-    operations :list_invoices, :create_invoice
+    operations :list_invoices, :create_invoice, :create_entity
 
     def list_invoices(query = {})
       query = {ledger: :sales}.merge(query)
@@ -26,6 +26,13 @@ module Clearbooks
           invoice_id: response[:@invoice_id].to_i,
           invoice_prefix: response[:@invoice_prefix],
           invoice_number: response[:@invoice_number]
+      }
+    end
+
+    def create_entity(entity)
+      response = super(message: entity.to_savon).to_hash[:create_entity_response][:create_entity_return]
+      {
+          entity_id: response.to_i
       }
     end
   end

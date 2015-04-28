@@ -22,17 +22,6 @@ module Clearbooks
       end
     end
 
-    describe ".connect" do
-      it "authenticates the user (API key) with the service" do
-        pending
-      end
-
-      it "should implement a connect method" do
-        pending
-      end
-
-    end
-
     before(:all) { savon.mock! }
     after(:all) { savon.unmock! }
     let(:message) { :any }
@@ -75,10 +64,10 @@ module Clearbooks
         type: 'purchases',
         items: items)}
       let(:xml) { File.read('spec/fixtures/response/create_invoice.xml') }
-      let(:response) {
+      let(:response) do
         savon.expects(:create_invoice).with(message: message).returns(xml)
         Clearbooks.create_invoice(invoice)
-      }
+      end
 
       it 'creates a new invoice' do
         expect(response).to be_a Hash
@@ -87,7 +76,38 @@ module Clearbooks
         expect(response[:invoice_prefix]).to eq 'PUR'
         expect(response[:invoice_number]).to eq '3'
       end
+    end
 
+    describe '::create_entity' do
+
+      let(:entity) do
+        Entity.new(company_name: 'DataLogic',
+                    contact_name: 'Oleg Kukareka',
+                    address1: 'Kiev',
+                    country: 'UA',
+                    postcode: '04073',
+                    email: 'info@datalogic.co.uk',
+                    website: 'https://datalogic.co.uk',
+                    phone1: '01234 567890',
+                    supplier: {
+                        default_account_code: '1001001',
+                        default_credit_terms: 30,
+                        default_vat_rate: 0
+                    })
+      end
+
+      let(:xml) { File.read('spec/fixtures/response/create_entity.xml') }
+
+      let(:response) do
+        savon.expects(:create_entity).with(message: message).returns(xml)
+        Clearbooks.create_entity(entity)
+      end
+
+      it 'creates a new entity' do
+        expect(response).to be_a Hash
+        expect(response[:entity_id]).to be_a Fixnum
+        expect(response[:entity_id]).to be > 0
+      end
     end
   end
 end

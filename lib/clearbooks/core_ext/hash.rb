@@ -14,10 +14,21 @@ class Hash
     copy
   end #}}}
 
+  # @fn         def compact {{{
+  # @brief      Deletes keys with +nil+ values from hash copy and returns it
+  def compact
+    delete_if { |k, v| v.nil? }
+  end # }}}
+
   # @fn         def savon key {{{
   # @brief      Savon shortcut to get attributes via :key or :@key
   def savon(key)
-    self[key] || self["@#{(key.to_s)}".to_sym]
+    v = self[key] || self["@#{(key.to_s)}".to_sym]
+    if (v.is_a? Hash)
+      v.from_savon
+    else
+      v
+    end
   end #}}}
 
   # @fn         def from_savon {{{

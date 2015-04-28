@@ -30,10 +30,10 @@ module Clearbooks
   autoload :Client, 'clearbooks/library/client'
   autoload :Configuration, 'clearbooks/library/configuration'
 
+  autoload :Base, 'clearbooks/model/base'
   autoload :Invoice, 'clearbooks/model/invoice'
   autoload :Item, 'clearbooks/model/item'
-  autoload :Base, 'clearbooks/model/base'
-
+  autoload :Entity, 'clearbooks/model/entity'
 
   DEFAULT_CONFIG      = '.clearbooks/config.yaml'.freeze
 
