@@ -68,4 +68,3 @@ module Clearbooks
   end
 end
 
-
