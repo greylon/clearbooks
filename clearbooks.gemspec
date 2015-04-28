@@ -138,9 +138,14 @@ Gem::Specification.new do |spec|
     (c) #{spec.date.to_s}, All rights reserved
     Bjoern Rennhak, Greylon Ltd.
 
-    Don't forget to configure $HOME/.clearbooks/config.
-    To generate config file under $HOME/.clearbooks/ directory,
-    please run 'clearbooks config:generate' command
+    Don't forget to get Clearbooks API key from http://clearbooks.co.uk
+    and save it in ~/.clearbooks/config.yml:
+
+    $ echo "api_key: {your_api_key}" >> ~/.clearbooks/config.yml
+
+    You can also provide the API key in ENV['CLEARBOOKS_API_KEY']:
+
+    $ CLEARBOOKS_API_KEY=your_api_key clearbooks
 
     Thanks for installing unofficial Clearbooks Gem !
   EOS

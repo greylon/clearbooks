@@ -22,7 +22,7 @@ module Clearbooks
     # @fn     def list_invoices {{{
     # @brief  Query list of invoices from Clearbooks API.
     # @param  [Hash] query Hash of options to filter invoices. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/listinvoices/
-    # @return [Array] An array or invoices.
+    # @return [Array, Invoice] An array or invoices.
     # @example
     #   Clearbooks.list_invoices
     def list_invoices query = {}
