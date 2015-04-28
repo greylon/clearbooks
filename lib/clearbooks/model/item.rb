@@ -1,6 +1,8 @@
 require 'bigdecimal'
 
 module Clearbooks
+  # @class Clearbooks Item model {{{
+  # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
   class Item < Base
     attr_reader :description, :unit_price, :quantity, :type, :vat, :vat_rate
 
@@ -25,6 +27,6 @@ module Clearbooks
           }
       }
     end
-  end
+  end # }}}
 end
 

@@ -1,4 +1,6 @@
 module Clearbooks
+  # @class Clearbooks Entity model {{{
+  # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
   class Entity < Base
     attr_reader :company_name,	# string required
                 :contact_name,	# string optional
@@ -85,6 +87,6 @@ module Clearbooks
         }.compact
       end
     end
-  end
+  end # }}}
 end
 

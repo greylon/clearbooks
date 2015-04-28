@@ -1,4 +1,6 @@
 module Clearbooks
+  # @class Clearbooks Invoice model {{{
+  # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
   class Invoice < Base
     attr_reader :id, :date_created, :date_due, :credit_terms, :description, :entity_id, :reference, :project, :status, :invoice_prefix,
                 :invoice_number, :external_id, :statement_page, :date_modified, :items, :type
@@ -36,6 +38,6 @@ module Clearbooks
           }
       }
     end
-  end
+  end # }}}
 end
 
