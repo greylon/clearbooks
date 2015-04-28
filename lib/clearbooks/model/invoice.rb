@@ -32,7 +32,7 @@ module Clearbooks
               :@dateDue => @date_due,
               :@creditTerms => @credit_terms,
               description: @description,
-              items: items.map &:to_savon
+              items: items.map(&:to_savon)
           }
       }
     end
