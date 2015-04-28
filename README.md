@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.4.0-3-g38400cd
+Version 0.6.0-3-gecd170d
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
@@ -11,10 +11,15 @@ via PHP [3].
 
 It allows the handling of invoices, expenses, financial accounts and mobile accounting as well as online HR and payroll.
 
+
 [1] Clear Books PLC, https://www.clearbooks.co.uk
+
 [2] https://www.clearbooks.co.uk/support/api
+
 [3] https://www.clearbooks.co.uk/support/api/code-examples/php/
+
 [4] https://github.com/clearbooks
+
 
 ## Features
 
@@ -31,14 +36,14 @@ It allows the handling of invoices, expenses, financial accounts and mobile acco
 - Code Quality
   - Code review
   - Yard & related  (gem install yard --no-ri --no-rdoc ; gem install rdiscount --no-ri --no-rdoc)
-  - MetricFu/RSpec/Cucumber/DBC/Vagrant/Docker/i18n
+  - MetricFu/RSpec/Cucumber
 
 
 ## Installing
 
 By running gem comand
 
-```
+```sh
 gem install clearbooks
 ```
 
@@ -46,6 +51,23 @@ or by adding to `Gemfile`
 
 ```ruby
 gem 'clearbooks', git: 'https://github.com/greylon/clearbooks.git'
+```
+
+## Get SaaS API key and install it
+
+Go to Clearbooks http://clearbooks.co.uk and get your API key.
+
+Save this key in in `~/.clearbooks/config.yml`.
+
+
+```sh
+~# echo "api_key: {your_api_key}" >> ~/.clearbooks/config.yml
+```
+
+You can also provide the API key in `ENV['CLEARBOOKS_API_KEY']``
+
+```sh
+~# CLEARBOOKS_API_KEY=your_api_key clearbooks
 ```
 
 ## Usage
@@ -65,13 +87,13 @@ or from the command line
 ~# clearbooks --help
 
 Commands:
-  clearbooks
+  clearbooks help [COMMAND]  # Describe available commands or one specific command
 ```
 
 ## On what Hardware does it run?
 
 This Software was originally developed and tested on 32-bit x86 / SMP based PCs running on
-Ubuntu and Gentoo GNU/Linux 3.13.x. Other direct Linux and Unix derivates should be viable too as
+Gentoo GNU/Linux 3.13.x. Other direct Linux and Unix derivates should be viable too as
 long as all dynamical linking dependencys are met.
 
 
@@ -81,6 +103,9 @@ A general developers API guide can be extracted from the Yardoc subdirectory whi
 generate HTML as well as PDF docs. Please refer to the [Rake|Make]file for additional information
 how to generate this documentation.
 
+```sh
+~# rake docs:generate
+```
 
 ## Software Requirements
 
@@ -99,6 +124,9 @@ Configuration is handled at run-time via $HOME/.clearbooks/config.yaml file.
 ## Build & Packaging
 
 Package building such as RPM or DEB has not been integrated at this time.
+
+To build the gem from this repository:
+
 
 ```sh
 ~# rake build
@@ -143,7 +171,7 @@ or
 
 ```
 
-or see http://rvm.io for more details.
+or see `http://rvm.io` for more details.
 
 
 Create proper RVM gemset
@@ -173,7 +201,7 @@ Here is a current listing of all tasks:
 
 
 ```
-rake build                             # Build clearbooks-0.4.0.gem into the pkg directory
+rake build                             # Build clearbooks-0.6.0.gem into the pkg directory
 rake cucumber:pretty                   # Run Cucumber features
 rake cucumber:progress                 # Run Cucumber features
 rake db:auto:migrate                   # Perform auto-migration (reset your db data)
@@ -192,8 +220,8 @@ rake docs:generate                     # Generate Yardoc documentation for this 
 rake docs:graph                        # Generate Yard Graphs for this project
 rake guard:default                     # Execute Ruby Guard
 rake help                              # Shows the usage help screen
-rake install                           # Build and install clearbooks-0.4.0.gem into system gems
-rake install:local                     # Build and install clearbooks-0.4.0.gem into system gems without network access
+rake install                           # Build and install clearbooks-0.6.0.gem into system gems
+rake install:local                     # Build and install clearbooks-0.6.0.gem into system gems without network access
 rake man:build                         # Build the manual pages
 rake man:clean                         # Clean up from the built man pages
 rake measurement:benchmark             # When executing rake tasks measure elapsed time, used with other tasks
@@ -204,10 +232,12 @@ rake readme                            # Generate proper README file from templa
 rake readme:all                        # Generate proper README file from templates
 rake readme:subdirs                    # Builds generates readme files in all sub-directories
 rake readme:topdir                     # Generate top level README file from template
-rake release                           # Create tag v0.4.0 and build and push clearbooks-0.4.0.gem to Rubygems
+rake release                           # Create tag v0.6.0 and build and push clearbooks-0.6.0.gem to Rubygems
 rake spec                              # RSpec Core Tasks
 rake todo                              # Look for TODO and FIXME tags in the code
 rake version                           # Git Tag number of this repo
+rake yardgraph                         # Generate Yard Graphs for this project
+rake yardoc                            # Generate Yardoc documentation for this project
 
 ```
 
@@ -241,7 +271,7 @@ thor :docs:graph                      # Generate Yard Graphs for this project
 thor :environment                     # environment
 thor :guard:default                   # Execute Ruby Guard
 thor :help                            # Shows the usage help screen
-thor :install                         # Build and install clearbooks-0.4.0.gem into system gems
+thor :install                         # Build and install clearbooks-0.6.0.gem into system gems
 thor :man:build                       # Build the manual pages
 thor :man:clean                       # Clean up from the built man pages
 thor :measurement:benchmark           # When executing rake tasks measure elapsed time, used with other tasks
