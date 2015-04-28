@@ -115,6 +115,43 @@ module Clearbooks
         expect(response[:entity_id]).to be > 0
       end
     end
+
+    describe '::list_entities', :focus => true do
+      let(:xml) { File.read('spec/fixtures/response/entities.xml') }
+
+      let(:entities) do
+        savon.expects(:list_entities).with(message: message).returns(xml)
+        Clearbooks.list_entities
+      end
+
+      let(:entity) {entities.last}
+
+      it 'returns list of entnties' do
+        expect(entities).to be_an Array
+        expect(entities.length).to be > 0
+        expect(entity).to be_an Entity
+        expect(entity.id).to eq 7
+        expect(entity.company_name).to eq 'DataLogic'
+        expect(entity.contact_name).to eq 'Oleg Kukareka'
+        expect(entity.address1).to eq 'Street 1'
+        expect(entity.town).to eq 'Kiev'
+        expect(entity.county).to eq 'Ukraine'
+        expect(entity.postcode).to eq '04073'
+        expect(entity.email).to eq 'info@datalogic.co.uk'
+        expect(entity.phone1).to eq '01234 567890'
+        expect(entity.building).to eq 'Building2'
+        expect(entity.address2).to eq 'Street2'
+        expect(entity.phone2).to eq '1234 567890'
+        expect(entity.fax).to eq '2345 67890'
+        expect(entity.website).to eq 'https://datalogic.co.uk'
+        expect(entity.external_id).to eq 3
+        expect(entity.statement_url).to eq 'https://secure.clearbooks.co.uk/s/58055:YGD2d9_WFz6GvKUv4V4anw'
+        expect(entity.supplier[:default_account_code]).to eq '30'
+        expect(entity.supplier[:default_vat_rate]).to eq '10'
+        expect(entity.supplier[:default_credit_terms]).to eq 30
+        expect(entity.customer).to be_nil
+      end
+    end
   end
 end
 
