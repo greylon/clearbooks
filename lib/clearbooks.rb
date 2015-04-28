@@ -82,12 +82,6 @@ module Clearbooks
 end # of module Clearbooks
 
 
-# if ARGV[0].match 'discovery:'
-#   Discovery.start
-# else
-#   Default.start
-# end
-
 ## Library
 require_relative 'clearbooks/library/dbc'
 require_relative 'clearbooks/library/helpers'
