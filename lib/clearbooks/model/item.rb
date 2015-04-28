@@ -8,26 +8,32 @@ module Clearbooks
 
     # @!attribute [r] description
     # Required.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] unit_price
-    # Required. The unit price of an item in pounds.
+    # Required.
+    # @return [BigDecimal] The unit price of an item in pounds.
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] quantity
     # Required.
+    # @return [Fixnum]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] type
-    # required. The account code identifying the revenue stream.
+    # Required. The account code identifying the revenue stream.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] vat
-    # required. The total amount of VAT in pounds. Use either this field or vatRate..
+    # Required. The total amount of VAT in pounds. Use either this field or vat_rate.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] vat_rate
-    # required. The percentage VAT as a decimal number. Use either this field or vat.
+    # Required. The percentage VAT as a decimal number. Use either this field or vat.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     def initialize data

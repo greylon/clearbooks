@@ -7,23 +7,28 @@ module Clearbooks
 
     # @!attribute [r] date_created
     # Required. The tax point of the invoice.
+    # @return [DateTime]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] date_due
     # Required. The date the invoice is due.
     # Use either this field or creditTerms.
+    # @return [DateTime]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] date_accrual
     # Optional. The invoice accrual date.
+    # @return [DateTime]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] credit_terms
     # Required. The number of days after the tax point that the invoice is due.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] description
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] entity_id
@@ -32,20 +37,50 @@ module Clearbooks
 
     # @!attribute [r] reference
     # Optional. A reference string for the invoice.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] project
     # Optional. The id of the project to assign the invoice to.
+    # @return [Fixnum]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] type
     # Optional. A string identifying the type of the invoice.
     # Value one of: purchases, sales, cn-sales, cn-purchases.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] bank_payment_id
     # Optional. The bank account code.
+    # @return [Fixnum]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+    # @!attribute [r] date_modified
+    # @return [DateTime] Date this invoice was last modified.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+    # @!attribute [r] external_id
+    # @return [Fixnum] Id used to link imported invoices.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+    # @!attribute [r] invoice_number
+    # @return [String] Invoice number.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+    # @!attribute [r] items
+    # Required.
+    # @return [Item] A list of item elements identifying the line items.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+    # @!attribute [r] statement_page
+    # @return [String] A link to a printable invoice page with a link to download as a PDF (top right corner).
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+    # @!attribute [r] status
+    # @return [String] Invoice status: paid, unpaid.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
 
     def initialize data
       @date_created = parse_date data.savon(:date_created)
@@ -61,6 +96,7 @@ module Clearbooks
       @external_id = data.savon(:external_id).to_i
       @statement_page = data.savon :statement_page
       @date_modified = parse_date data.savon(:date_modified)
+      @date_accural = parse_date data.savon(:date_accural)
       @type = data.savon(:type)
       @bank_payment_id = data.savon(:bank_payment_id).to_i
 
@@ -74,16 +110,10 @@ module Clearbooks
               :@entityId => @entity_id,
               :@type => @type,
               :@dateDue => @date_due,
+              :@dateAccural => @date_accural,
               :@creditTerms => @credit_terms,
               :@reference => @reference,
               :@project => @project,
-              :@status => @status,
-              :@invoice_prefix => @invoice_prefix,
-              :@invoice_number => @invoice_number,
-              :@external_id => @external_id,
-              :@statement_page => @statement_page,
-              :@date_modified => @date_modified,
-              :@bank_payment_id => @bank_payment_id,
               description: @description,
               items: items.map(&:to_savon)
           }

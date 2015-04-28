@@ -29,70 +29,87 @@ module Clearbooks
 
     # @!attribute [r] company_name
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] contact_name
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] building
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] address1
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] address2
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] town
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] county
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] country
-    # Optional. Enter a country code.
+    # Optional. Country code.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] postcode
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] email
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] phone1
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] phone2
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] fax
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] website
     # Optional.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] external_id
     # Optional.
+    # @return [Fixnum]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] supplier
     # Optional. [:default_account_code, :default_vat_rate, :default_credit_terms]
+    # @return [Hash]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] customer
     # Optional. [:default_account_code, :default_vat_rate, :default_credit_terms]
+    # @return [Hash]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     def initialize data
