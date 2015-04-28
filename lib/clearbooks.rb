@@ -39,17 +39,35 @@ module Clearbooks
 
   class << self
 
+    # @fn def client {{{
+    # @brief Clearbooks client instance. You can use static methods in Clearbooks module instead of referring to the client instance.
+    # @example
+    #   Clearbooks.list_invoices
+    #   # or
+    #   Clearbooks.client.list_invoices
     def client
       @client ||= Client.new
-    end
+    end # }}}
 
+    # @fn def config {{{
+    # @brief Clearbooks configuration
+    # @return [Configuration]
     def config
       @config ||= Configuration.new
-    end
+    end # }}}
 
+    # @fn def configure {{{
+    # @brief Use a block syntax to configure the gem.
+    # @return [Configuration]
+    # @example
+    #       Clearbooks.configure do |config|
+    #         config.api_key = 'api_key'
+    #         config.log = true
+    #         config.logger = Logger.new(STDOUT)
+    #       end
     def configure
       yield config
-    end
+    end # }}}
 
     def method_missing method, *args, &block
       client.send method, *args, &block
