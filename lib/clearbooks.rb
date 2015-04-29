@@ -44,7 +44,7 @@ module Clearbooks
     # @fn       def config {{{
     # @brief    Clearbooks configuration
     #
-    # @return   Returns Configuration object
+    # @return   [Configuration]     Returns Configuration object
     def config
       @config ||= Configuration.new
     end # }}}
@@ -52,7 +52,7 @@ module Clearbooks
     # @fn       def configure {{{
     # @brief    Use a block syntax to configure the gem
     #
-    # @return   Returns Configuration object
+    # @return   [Hash]    Returns Configuration object
     #
     # @example
     #       Clearbooks.configure do |config|
