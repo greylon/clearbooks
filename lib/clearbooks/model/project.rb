@@ -2,7 +2,7 @@ module Clearbooks
   # @class Clearbooks Project model {{{
   # @see https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
   class Project < Base
-    attr_reader :description, :project_name, :status
+    attr_reader :id, :description, :project_name, :status
 
     # @!attribute [r] description
     # Required. The description of the project.
@@ -17,6 +17,7 @@ module Clearbooks
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
 
     def initialize data
+      @id = data.savon(:id).to_i
       @description = data.savon :description
       @project_name = data.savon :project_name
       @status = data.savon :status
@@ -27,7 +28,7 @@ module Clearbooks
           project: {
             :@projectName => @project_name,
             :@status => @status,
-            :description => @description
+            :@description => @description
           }
       }
     end

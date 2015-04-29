@@ -19,10 +19,10 @@ module Clearbooks
 
     operations :create_invoice, :list_invoices,
                :create_entity, :list_entities,
-               :create_project
+               :create_project, :list_projects
 
     # @fn     def list_invoices {{{
-    # @brief  Query list of invoices from Clearbooks API.
+    # @brief  Get list of invoices from Clearbooks API.
     # @param  [Hash] query Hash of options to filter invoices. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/listinvoices/
     # @return [Array, Invoice] An array or invoices.
     # @example
@@ -85,7 +85,7 @@ module Clearbooks
     end # }}}
 
     # @fn     def list_entities {{{
-    # @brief  Query list of entities from Clearbooks API.
+    # @brief  Get list of entities from Clearbooks API.
     # @param  [Hash] query Hash of options to filter entities. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/list-entities/
     # @return [Array, Entity] An array or entities.
     # @example
@@ -109,6 +109,18 @@ module Clearbooks
       response = super message: project.to_savon
       response = response.to_hash
       { project_id: response[:create_project_response][:create_project_return][:@project_id].to_i }
+    end # }}}
+
+    # @fn     def list_projects {{{
+    # @brief  Get list of projects from Clearbooks API.
+    # @param  [Hash] query Hash of options to filter projects. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/listprojects/
+    # @return [Array, Project] An array or projects.
+    # @example
+    #   Clearbooks.list_projects
+    def list_projects query = {}
+      response = super message: {query: query}
+      response = response.to_hash
+      Project.build response[:list_projects_response][:projects][:project]
     end # }}}
   end # }}}
 end
