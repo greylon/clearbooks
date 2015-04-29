@@ -1,9 +1,20 @@
+#!/usr/bin/env ruby
+
+
+# System include
 require 'bigdecimal'
 
+
+# @module     Clearbooks
+# @brief      Handles Ruby idomatic expression of Clear Books SOAP API
 module Clearbooks
-  # @class Clearbooks Item model {{{
-  # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+  # @class    Clearbooks Item model
+  # @brief    Single item from an invoice
+  #
+  # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
   class Item < Base
+
     attr_reader :description, :unit_price, :quantity, :type, :vat, :vat_rate
 
     # @!attribute [r] description
@@ -36,27 +47,39 @@ module Clearbooks
     # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
+    # @fn       def initialize data {{{
+    # @brief    Constructor for Item model
+    #
+    # @param    [FIXME]     data      FIXME
     def initialize data
-      @description = data.savon :description
-      @unit_price = BigDecimal.new data.savon :unit_price
-      @quantity = data.savon(:quantity).to_i
-      @type = data.savon :type
-      @vat = data.savon :vat
-      @vat_rate = data.savon :vat_rate
-    end
+      @description  = data.savon :description
+      @unit_price   = BigDecimal.new data.savon :unit_price
+      @quantity     = data.savon(:quantity).to_i
+      @type         = data.savon :type
+      @vat          = data.savon :vat
+      @vat_rate     = data.savon :vat_rate
+    end # }}}
 
+    # @fn       def to_savon {{{
+    # @brief    Converts given Item (self) to savon readable format
+    #
+    # @return   [Hash]      Returns self as Savon readable Hash
     def to_savon
       {
-          item: {
-            :@unitPrice => @unit_price.to_f,
-            :@quantity => @quantity,
-            :@type => @type,
-            :@vat => @vat,
-            :@vat_rate => @vat_rate,
-            description: @description
-          }
-      }
-    end
-  end # }}}
-end
+        item: {
+          :@unitPrice => @unit_price.to_f,
+          :@quantity  => @quantity,
+          :@type      => @type,
+          :@vat       => @vat,
+          :@vat_rate  => @vat_rate,
 
+          description: @description
+        }
+      }
+    end # }}}
+
+  end # of class Item
+
+end # of module Clearbooks
+
+# vim:ts=2:tw=100:wm=100:syntax=ruby

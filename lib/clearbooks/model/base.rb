@@ -2,10 +2,10 @@
 
 
 # @module     Clearbooks
-# @brief      Handles Ruby idomatic handling of Clear Books SOAP API
+# @brief      Handles Ruby idomatic expression of Clear Books SOAP API
 module Clearbooks
 
-  # @class    Base class for Clearbooks API models {{{
+  # @class    Base class for Clearbooks API models
   # @brief    Implements common operations related to Savon and SOAP
   class Base
 
@@ -61,6 +61,7 @@ module Clearbooks
     end # }}}
 
   end # of class Base
+
 end # of module Clearbooks
 
 # vim:ts=2:tw=100:wm=100:syntax=ruby
