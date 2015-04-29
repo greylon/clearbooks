@@ -34,6 +34,7 @@ module Clearbooks
   autoload :Invoice, 'clearbooks/model/invoice'
   autoload :Item, 'clearbooks/model/item'
   autoload :Entity, 'clearbooks/model/entity'
+  autoload :Project, 'clearbooks/model/project'
 
   DEFAULT_CONFIG      = '.clearbooks/config.yaml'.freeze
 

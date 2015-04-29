@@ -17,8 +17,9 @@ module Clearbooks
                       attributes!: {'tns:authenticate' =>
                                         {apiKey: Clearbooks.config.api_key}}}
 
-    operations :list_invoices, :create_invoice,
-               :create_entity, :list_entities
+    operations :create_invoice, :list_invoices,
+               :create_entity, :list_entities,
+               :create_project
 
     # @fn     def list_invoices {{{
     # @brief  Query list of invoices from Clearbooks API.
@@ -105,7 +106,7 @@ module Clearbooks
     def create_project project
       response = super message: project.to_savon
       response = response.to_hash
-      { project_id: response[:create_project_response][:create_project_return].to_i }
+      { project_id: response[:create_project_response][:create_project_return][:@project_id].to_i }
     end # }}}
   end # }}}
 end

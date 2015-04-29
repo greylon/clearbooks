@@ -13,7 +13,7 @@ module Clearbooks
       let(:project) do
         Project.new(description: 'Project 1 description',
                    project_name: 'Project 1 name',
-                   status: 'Project 1 status')
+                   status: 'open')
       end
 
       # let(:xml) { File.read('spec/fixtures/response/create_project.xml') }

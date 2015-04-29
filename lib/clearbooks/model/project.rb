@@ -1,7 +1,7 @@
 module Clearbooks
   # @class Clearbooks Project model {{{
   # @see https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
-  class Item < Base
+  class Project < Base
     attr_reader :description, :project_name, :status
 
     # @!attribute [r] description
@@ -25,7 +25,7 @@ module Clearbooks
     def to_savon
       {
           project: {
-            :@project_name => @project_name,
+            :@projectName => @project_name,
             :@status => @status,
             :description => @description
           }
