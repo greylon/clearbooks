@@ -102,7 +102,9 @@ module Clearbooks
     # @param  [Project] project A project to be created. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
     # @return [Hash] [:project_id] ID of the created project.
     # @example
-    #
+    #       Clearbooks.create_project Project.new(description: 'Project 1 description',
+    #                   project_name: 'Project 1 name',
+    #                   status: 'open')
     def create_project project
       response = super message: project.to_savon
       response = response.to_hash
