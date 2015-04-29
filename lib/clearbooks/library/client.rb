@@ -21,7 +21,7 @@ module Clearbooks
                :create_entity, :list_entities, :delete_entity,
                :create_project, :list_projects,
                :list_account_codes,
-               :create_journal
+               :create_journal, :delete_journal
 
     # @fn     def list_invoices {{{
     # @brief  Get list of invoices from Clearbooks API.
@@ -158,6 +158,19 @@ module Clearbooks
       response = super message: journal.to_savon
       response = response.to_hash
       { journal_id: response[:create_journal_response][:create_journal_return][:@journal_id].to_i }
+    end # }}}
+
+    # @fn     def delete_journal {{{
+    # @brief  Deletes journal via Clearbooks API.
+    # @param  [Fixnum] journal_id Id of the journal to be deleted.
+    # @return [Boolean] True if the request was successful, otherwise false.
+    # @example
+    #  Clearbooks.delete_journal 10
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/deletejournal/
+    def delete_journal journal_id
+      response = super message: {journalId: journal_id}
+      response = response.to_hash
+      response[:delete_journal_response][:journal_success]
     end # }}}
   end # }}}
 end
