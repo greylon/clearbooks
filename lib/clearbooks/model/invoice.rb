@@ -150,7 +150,7 @@ module Clearbooks
           :@project     => @project,
 
           description:  @description,
-          items:        items.map(&:to_savon)
+          items:        { item: items.map(&:to_savon) }
         }
       }
     end # }}}

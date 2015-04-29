@@ -73,6 +73,31 @@ module Clearbooks
       end
     end
 
-  end
+    describe '.allocate_payment' do
+      let(:xml) { File.read('spec/fixtures/response/allocate_payment.xml') }
 
+      let(:params) do
+        {
+            payment_id:   1,
+            entity_id:    1,
+            type:         'sales',
+            invoices:     [
+                {id: 1, amount: 9.99},
+                {id: 2, amount: 19.99}
+            ]
+        }
+      end
+
+      let(:response) do
+        savon.expects(:allocate_payment).with(message: message).returns(xml)
+        Clearbooks.allocate_payment(params)
+      end
+
+      it 'allocates a payment against an invoice or set of invoices' do
+        expect(response).to be_a Hash
+        expect(response[:success]).to be true
+        expect(response[:msg]).to eq 'The payment has been allocated'
+      end
+    end
+  end
 end

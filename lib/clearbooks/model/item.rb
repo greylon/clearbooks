@@ -62,14 +62,12 @@ module Clearbooks
     # @return   [Hash]      Returns self as Savon readable Hash
     def to_savon
       {
-          item: {
             :@unitPrice     => @unit_price.to_f,
             :@quantity      => @quantity,
             :@type          => @type,
             :@vat           => @vat,
             :@vat_rate      => @vat_rate,
             :description    => @description
-          }
       }
     end # }}}
 
