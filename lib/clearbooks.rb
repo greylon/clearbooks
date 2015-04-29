@@ -27,10 +27,12 @@ module Clearbooks
 
   DEFAULT_CONFIG = '.clearbooks/config.yaml'.freeze
 
+
   class << self
 
-    # @fn def client {{{
-    # @brief Clearbooks client instance. You can use static methods in Clearbooks module instead of referring to the client instance.
+    # @fn       def client {{{
+    # @brief    Clearbooks client instance. You can use static methods in Clearbooks module instead of referring to the client instance.
+    #
     # @example
     #   Clearbooks.list_invoices
     #   # or
@@ -39,16 +41,19 @@ module Clearbooks
       @client ||= Client.new
     end # }}}
 
-    # @fn def config {{{
-    # @brief Clearbooks configuration
-    # @return [Configuration]
+    # @fn       def config {{{
+    # @brief    Clearbooks configuration
+    #
+    # @return   Returns Configuration object
     def config
       @config ||= Configuration.new
     end # }}}
 
-    # @fn def configure {{{
-    # @brief Use a block syntax to configure the gem.
-    # @return [Configuration]
+    # @fn       def configure {{{
+    # @brief    Use a block syntax to configure the gem
+    #
+    # @return   Returns Configuration object
+    #
     # @example
     #       Clearbooks.configure do |config|
     #         config.api_key = 'api_key'
@@ -59,13 +64,25 @@ module Clearbooks
       yield config
     end # }}}
 
+    # @fn       def method_missing method, *args, &block {{{
+    # @brief    Duck typing response for Clearbooks missing methods behavior
+    #
+    # @param    [String]            method      Some unknown method call on Clearbooks class
+    # @param    [Array]             args        Some given function arguments with given method call
+    # @param    [Explicit Block]    block       Some given block argument with the function and arguments
+    #
     def method_missing method, *args, &block
       client.send method, *args, &block
-    end
+    end # }}}
 
+    # @fn       def respond_to? *args {{{
+    # @brief    Duck typing response for Clearbooks method queries
+    #
+    # @param    [Array]       args        Function and function parameter argument list
+    #
     def respond_to? *args
       super || client.respond_to?(*args)
-    end
+    end # }}}
 
   end # of class << self
 
