@@ -13,20 +13,30 @@ module Clearbooks
 
     attr_reader :account, :amount
 
+    # @!attribute [r] account
+    # Optional. Account code for associated transaction.
+    # @return [String]
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
+
+    # @!attribute [r] amount
+    # Optional. Amount for associated transaction in the journal.
+    # @return [BigDecimal]
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
+
     # @fn       def initialize data {{{
     # @brief    Constructor for Ledger model
     #
     # @param    [FIXME]     data      FIXME
     def initialize data
-      @account = data.savon :description
-      @amount = data.savon :amount
+      @account = data.savon :account
+      @amount = BigDecimal.new data.savon :amount
     end # }}}
 
     def to_savon
       {
           ledger: {
               :@account => @account,
-              :@amount => @amount
+              :@amount => @amount.to_f
           }.compact
       }
     end
