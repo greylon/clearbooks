@@ -30,6 +30,35 @@ module Clearbooks
       end
     end
 
+    describe '::list_projects' do
+      let(:xml) { File.read('spec/fixtures/response/projects.xml') }
+
+      let(:projects) do
+        savon.expects(:list_projects).with(message: message).returns(xml)
+        Clearbooks.list_projects
+      end
+
+      it 'returns list of projects' do
+        expect(projects).to be_an Array
+         expect(projects.length).to eq 3
+      end
+
+      describe Project do
+        let(:project) {projects.last}
+
+        it 'is a Project' do
+          expect(project).to be_a Project
+        end
+
+        it 'has proper attribute values' do
+          expect(project.project_name).to eq 'Project 3 name'
+          expect(project.status).to eq 'open'
+          expect(project.description).to eq 'description3'
+          expect(project.id).to eq 3
+        end
+      end
+    end
+
   end
 
 end

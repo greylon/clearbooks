@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:ns1="https://secure.clearbooks.co.uk/api/soap/">
+  <SOAP-ENV:Header>
+    <ns1:authenticate>true</ns1:authenticate>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <SOAP-ENV:listProjectsResponse>
+      <projects>
+        <ns1:Project projectName="Project 1 name" status="open" description="description1" id="1"/>
+        <ns1:Project projectName="Project 2 name" status="open" description="description1" id="2"/>
+        <ns1:Project projectName="Project 3 name" status="open" description="description3" id="3"/>
+      </projects>
+    </SOAP-ENV:listProjectsResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

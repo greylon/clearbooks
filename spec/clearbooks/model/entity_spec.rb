@@ -40,7 +40,7 @@ module Clearbooks
       end
     end
 
-    describe '::list_entities', :focus => true do
+    describe '::list_entities' do
       let(:xml) { File.read('spec/fixtures/response/entities.xml') }
 
       let(:entities) do
