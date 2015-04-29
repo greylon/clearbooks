@@ -5,7 +5,7 @@
 # @brief      Handles Ruby idomatic expression of Clear Books SOAP API
 module Clearbooks
 
-  # @class    Clearbooks Account Code model
+  # @class    Clearbooks Item model
   # @brief    Single item from an invoice
   #
   # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/

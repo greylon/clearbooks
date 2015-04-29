@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 
-# @class        class Hash
+# @class        class String
 # @brief
 class String
   TRUE_VALUES = %W{1 t true on y yes}.freeze
