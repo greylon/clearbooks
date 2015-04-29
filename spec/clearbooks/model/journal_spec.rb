@@ -56,9 +56,15 @@ module Clearbooks
         expect(response[:journal_id]).to be_a Fixnum
         expect(response[:journal_id]).to be > 0
       end
+    end
 
+    describe '::delete_journal' do
+      let(:xml) { File.read('spec/fixtures/response/delete_journal.xml') }
+
+      it 'deletes a journal with given id' do
+        savon.expects(:delete_journal).with(message: message).returns(xml)
+        expect(Clearbooks.delete_journal(8)).to eq true
+      end
     end
   end
-
-
 end
