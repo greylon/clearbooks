@@ -20,7 +20,8 @@ module Clearbooks
     operations :create_invoice, :list_invoices,
                :create_entity, :list_entities, :delete_entity,
                :create_project, :list_projects,
-               :list_account_codes
+               :list_account_codes,
+               :create_journal
 
     # @fn     def list_invoices {{{
     # @brief  Get list of invoices from Clearbooks API.
@@ -145,6 +146,18 @@ module Clearbooks
       response = super
       response = response.to_hash
       AccountCode.build response[:list_account_codes_response][:account_codes][:account_code]
+    end # }}}
+
+    # @fn     def create_journal {{{
+    # @brief  Creates journal via Clearbooks API.
+    # @param  [Journal] journal A journal to be created. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
+    # @return [Hash] [:journal_id] ID of the created journal.
+    # @example
+    #
+    def create_journal journal
+      response = super message: journal.to_savon
+      response = response.to_hash
+      { journal_id: response[:create_journal_response][:create_journal_return][:@journal_id].to_i }
     end # }}}
   end # }}}
 end

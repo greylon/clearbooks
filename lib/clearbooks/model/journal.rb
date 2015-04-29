@@ -55,10 +55,10 @@ module Clearbooks
       {
           journal: {
               :@description => @description,
-              :@accounting_date => @accounting_date,
+              :@accountingDate => @accounting_date.strftime('%F'),
               :@entity => @entity,
               :@project => @project,
-              :@ledgers => @ledgers.map(&:to_savon)
+              :ledgers => @ledgers.map(&:to_savon)
           }.compact
       }
     end
