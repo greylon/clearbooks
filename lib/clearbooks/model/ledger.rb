@@ -32,14 +32,18 @@ module Clearbooks
       @amount = BigDecimal.new data.savon :amount
     end # }}}
 
+    # @fn       def to_savon {{{
+    # @brief    Converts given Ledger (self) to savon readable format
+    #
+    # @return   [Hash]      Returns self as Savon readable Hash
     def to_savon
       {
-          ledger: {
-              :@account => @account,
-              :@amount => @amount.to_f
-          }.compact
+        ledger: {
+          :@account => @account,
+          :@amount => @amount.to_f
+        }.compact
       }
-    end
+    end # }}}
 
   end # of class Ledger
 
