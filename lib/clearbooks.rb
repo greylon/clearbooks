@@ -26,6 +26,8 @@ module Clearbooks
   autoload :Entity, 'clearbooks/model/entity'
   autoload :Project, 'clearbooks/model/project'
   autoload :AccountCode, 'clearbooks/model/account_code'
+  autoload :Journal, 'clearbooks/model/journal'
+  autoload :Ledger, 'clearbooks/model/ledger'
 
   DEFAULT_CONFIG      = '.clearbooks/config.yaml'.freeze
 
