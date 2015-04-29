@@ -12,26 +12,32 @@ module Clearbooks
 
   describe Clearbooks do
 
-    describe Payment do
-      let(:accounting_date) { '2015-05-01 00:00:00' }
-      let(:type) { 'sales' }
-      let(:description) { 'Description1'}
-      let(:amount) { 59.99 }
-      let(:entity_id) { 1 }
-      let(:payment_method) { 1 }
-      let(:bank_account) { 'default' }
-      let(:invoices) do
-        [ {id: 1, amount: '9.99'}, {id:9, amount: '19.99'} ]
-      end
+    before(:all) { savon.mock! }
+    after(:all) { savon.unmock! }
 
-      let(:payment) { Payment.new(accounting_date: accounting_date,
-                                  type: type,
-                                  description: description,
-                                  amount: amount.to_s,
-                                  entity_id: entity_id,
-                                  payment_method: payment_method,
-                                  bank_account: bank_account,
-                                  invoices: invoices) }
+    let(:message) { :any }
+
+    let(:accounting_date) { '2015-05-01 00:00:00' }
+    let(:type) { 'sales' }
+    let(:description) { 'Description1'}
+    let(:amount) { 59.99 }
+    let(:entity_id) { 1 }
+    let(:payment_method) { 1 }
+    let(:bank_account) { '7502001' }
+    let(:invoices) do
+      [ {id: 1, amount: '9.99'}, {id:9, amount: '19.99'} ]
+    end
+
+    let(:payment) { Payment.new(accounting_date: accounting_date,
+                                type: type,
+                                description: description,
+                                amount: amount.to_s,
+                                entity_id: entity_id,
+                                payment_method: payment_method,
+                                bank_account: bank_account,
+                                invoices: invoices) }
+
+    describe Payment do
 
       describe :initialize do
         it 'initializes a new payment' do
@@ -50,7 +56,21 @@ module Clearbooks
           end
         end
       end
+    end
 
+    describe '.create_payment' do
+      let(:xml) { File.read('spec/fixtures/response/create_payment.xml') }
+
+      let(:response) do
+        savon.expects(:create_payment).with(message: message).returns(xml)
+        Clearbooks.create_payment(payment)
+      end
+
+      it 'creates new payment' do
+        expect(response).to be_a Hash
+        expect(response[:payment_id]).to be_a Fixnum
+        expect(response[:payment_id]).to be > 0
+      end
     end
 
   end

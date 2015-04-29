@@ -21,7 +21,8 @@ module Clearbooks
                :create_entity, :list_entities, :delete_entity,
                :create_project, :list_projects,
                :list_account_codes,
-               :create_journal, :delete_journal
+               :create_journal, :delete_journal,
+               :create_payment
 
     # @fn     def list_invoices {{{
     # @brief  Get list of invoices from Clearbooks API.
@@ -171,6 +172,17 @@ module Clearbooks
       response = super message: {journalId: journal_id}
       response = response.to_hash
       response[:delete_journal_response][:journal_success]
+    end # }}}
+
+    # @fn     def create_payment {{{
+    # @brief  Create payment via Clearbooks API.
+    # @param  [Payment] payment The payment to be created. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createpayment/
+    # @return [Hash] [:payment_id] ID of the created payment.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createpayment/
+    def create_payment payment
+      response = super message: payment.to_savon
+      response = response.to_hash
+      { payment_id: response[:create_payment_response][:create_payment_return][:@payment_id].to_i }
     end # }}}
   end # }}}
 end

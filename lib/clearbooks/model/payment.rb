@@ -83,14 +83,14 @@ module Clearbooks
     def to_savon
       {
           payment: {
-              :@accounting_date => @accounting_date.strftime('%F'),
+              :@accountingDate => @accounting_date.strftime('%F'),
               :@type            => @type,
-              :@description     => @description,
               :@amount          => @amount.to_f,
-              :@entity_id       => @entity_id,
-              :@payment_method  => @payment_method,
-              :@bank_account    => @bank_account,
-              :invoices         => savon_invoices
+              :@entityId       => @entity_id,
+              :@paymentMethod  => @payment_method,
+              :@bankAccount    => @bank_account,
+              :description     => @description,
+              :invoices        => { invoice: savon_invoices }
           }
       }
     end # }}}
@@ -100,7 +100,8 @@ module Clearbooks
     def savon_invoices
       @invoices.map do |i|
         {
-          invoice: i
+            :@id      => i[:id],
+            :@amount  => i[:amount]
         }
       end
     end
