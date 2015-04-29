@@ -17,25 +17,15 @@ module Clearbooks
   require_relative 'clearbooks/version'
   require_relative 'clearbooks/error'
 
-  # @module     module Mixin
-  # @brief      Mixin module contains various functions to be used in other components
-  module Mixin
+  autoload :Client,         'clearbooks/library/client'
+  autoload :Configuration,  'clearbooks/library/configuration'
 
-    # autoload :Guess, 'clearbooks/mixin/'
+  autoload :Base,           'clearbooks/model/base'
+  autoload :Invoice,        'clearbooks/model/invoice'
+  autoload :Item,           'clearbooks/model/item'
+  autoload :Entity,         'clearbooks/model/entity'
 
-  end # of module Mixing
-
-  # autoload :Cache,      'clearbooks/library/cache'
-  # autoload :Choice,     'clearbooks/library/choice'
-  autoload :Client, 'clearbooks/library/client'
-  autoload :Configuration, 'clearbooks/library/configuration'
-
-  autoload :Base, 'clearbooks/model/base'
-  autoload :Invoice, 'clearbooks/model/invoice'
-  autoload :Item, 'clearbooks/model/item'
-  autoload :Entity, 'clearbooks/model/entity'
-
-  DEFAULT_CONFIG      = '.clearbooks/config.yaml'.freeze
+  DEFAULT_CONFIG = '.clearbooks/config.yaml'.freeze
 
   class << self
 
