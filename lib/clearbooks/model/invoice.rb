@@ -1,8 +1,18 @@
+#!/usr/bin/env ruby
+
+
+# @module     Clearbooks
+# @brief      Handles Ruby idomatic expression of Clear Books SOAP API
 module Clearbooks
-  # @class Clearbooks Invoice model {{{
-  # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+  # @class    Clearbooks Invoice model
+  # @brief    FIXME
+  #
+  # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
   class Invoice < Base
-    attr_reader :invoice_id, :date_created, :date_due, :date_accrual, :credit_terms, :description, :entity_id, :reference, :project, :status, :invoice_prefix,
+
+    attr_reader :invoice_id, :date_created, :date_due, :date_accrual, :credit_terms, :description, 
+                :entity_id, :reference, :project, :status, :invoice_prefix,
                 :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id
 
     # @!attribute [r] invoice_id
@@ -91,44 +101,63 @@ module Clearbooks
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
 
+    # @fn       def initialize data {{{
+    # @brief    Constructor for Invoice model
+    #
+    # @param    [FIXME]     data      FIXME
     def initialize data
-      @invoice_id = data.savon(:invoice_id).to_i
-      @date_created = parse_date data.savon(:date_created)
-      @date_due = parse_date data.savon(:date_due)
-      @credit_terms = data.savon(:credit_terms).to_i
-      @description = data.savon :description
-      @entity_id = data.savon(:entity_id).to_i
-      @reference = data.savon :reference
-      @project = data.savon(:project).to_i
-      @status = data.savon :status
-      @invoice_prefix = data.savon :invoice_prefix
-      @invoice_number = data.savon :invoice_number
-      @external_id = data.savon(:external_id).to_i
-      @statement_page = data.savon :statement_page
-      @date_modified = parse_date data.savon(:date_modified)
-      @date_accrual = parse_date data.savon(:date_accrual)
-      @type = data.savon(:type)
-      @bank_payment_id = data.savon(:bank_payment_id).to_i
+      @invoice_id       = data.savon(:invoice_id).to_i
 
-      @items = Item.build( data[:items].is_a?(Array) ? data[:items] : data[:items][:item])
-    end
+      @date_created     = parse_date data.savon(:date_created)
+      @date_due         = parse_date data.savon(:date_due)
 
+      @credit_terms     = data.savon(:credit_terms).to_i
+      @description      = data.savon :description
+
+      @entity_id        = data.savon(:entity_id).to_i
+      @reference        = data.savon :reference
+      @project          = data.savon(:project).to_i
+      @status           = data.savon :status
+
+      @invoice_prefix   = data.savon :invoice_prefix
+      @invoice_number   = data.savon :invoice_number
+      @external_id      = data.savon(:external_id).to_i
+      @statement_page   = data.savon :statement_page
+
+      @date_modified    = parse_date data.savon(:date_modified)
+      @date_accrual     = parse_date data.savon(:date_accrual)
+
+      @type             = data.savon(:type)
+      @bank_payment_id  = data.savon(:bank_payment_id).to_i
+
+      @items = Item.build( data[:items].is_a?(Array) ? data[:items] : data[:items][:item] )
+    end # }}}
+
+    # @fn       def to_savon {{{
+    # @brief    Converts given Invoice (self) to savon readable format
+    #
+    # @return   [Hash]      Returns self as Savon readable Hash
     def to_savon
       {
-          invoice: {
-              :@dateCreated => @date_created,
-              :@entityId => @entity_id,
-              :@type => @type,
-              :@dateDue => @date_due,
-              :@dateAccural => @date_accural,
-              :@creditTerms => @credit_terms,
-              :@reference => @reference,
-              :@project => @project,
-              description: @description,
-              items: items.map(&:to_savon)
-          }
-      }
-    end
-  end # }}}
-end
+        invoice: {
+          :@dateCreated => @date_created,
+          :@entityId    => @entity_id,
+          :@type        => @type,
+          :@dateDue     => @date_due,
+          :@dateAccural => @date_accural,
+          :@creditTerms => @credit_terms,
+          :@reference   => @reference,
+          :@project     => @project,
 
+          description:  @description,
+          items:        items.map(&:to_savon)
+        }
+      }
+    end # }}}
+
+
+  end # of class Invoice
+
+end # of module Clearbooks
+
+# vim:ts=2:tw=100:wm=100:syntax=ruby
