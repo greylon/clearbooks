@@ -49,9 +49,9 @@ module Clearbooks
     # @param    [FIXME]     data      FIXME
     def initialize data
       @id = data.savon(:id).to_i
-      @account_name = data.savon(:account_name)
-      @group_name = data.savon(:group_name)
-      @default_vat_rate = data.savon(:default_vat_rate)
+      @account_name = data.savon :account_name
+      @group_name = data.savon :group_name
+      @default_vat_rate = data.savon :default_vat_rate
       @show_sales = data.savon(:show_sales).to_b
       @show_purchases = data.savon(:show_purchases).to_b
     end # }}}
