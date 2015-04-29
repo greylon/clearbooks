@@ -31,7 +31,7 @@ module Clearbooks
     end
 
     describe '::list_projects' do
-      let(:xml) { File.read('spec/fixtures/response/projects.xml') }
+      let(:xml) { File.read('spec/fixtures/response/list_projects.xml') }
 
       let(:projects) do
         savon.expects(:list_projects).with(message: message).returns(xml)

@@ -18,7 +18,7 @@ module Clearbooks
                                         {apiKey: Clearbooks.config.api_key}}}
 
     operations :create_invoice, :list_invoices,
-               :create_entity, :list_entities,
+               :create_entity, :list_entities, :delete_entity,
                :create_project, :list_projects
 
     # @fn     def list_invoices {{{
@@ -95,6 +95,18 @@ module Clearbooks
       response = super message: {query: {id: query[:id]}, attributes!: attributes}
       response = response.to_hash
       Entity.build response[:list_entities_response][:entities][:entity]
+    end # }}}
+
+    # @fn     def delete_entity {{{
+    # @brief  Deletes entity via Clearbooks API.
+    # @param  [Fixnum] entity_id Id of the entity to be deleted. See official docs: https://www.clearbooks.co.uk/support/api/docs/soap/deleteentity/
+    # @return [Boolean] True if the request was successful, otherwise false.
+    # @example
+    #  Clearbooks.delete_entity 10
+    def delete_entity entity_id
+      response = super message: {entityId: entity_id}
+      response = response.to_hash
+      response[:delete_entity_response][:delete_entity_success]
     end # }}}
 
     # @fn     def create_project {{{

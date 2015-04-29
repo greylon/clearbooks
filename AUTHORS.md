@@ -14,12 +14,6 @@ AUTHORS
     Creator:      Original Developer and Maintainer of the code, please refer first to Maintainer.
     Associated:   Has some relevance to the project and is referable to specific parts of the project.
 
-    CLEARBOOKS
-    P: Bjoern Rennhak
-    M: bjoern AT greylon DOT com
-    L: -
-    W: http://github.com/rennhak
-    S: BDFL, Creator
 
     CLEARBOOKS
     P: Oleg Kukareka
@@ -27,4 +21,11 @@ AUTHORS
     L: -
     W: https://github.com/kukareka
     S: Creator
+
+    CLEARBOOKS
+    P: Bjoern Rennhak
+    M: bjoern AT greylon DOT com
+    L: -
+    W: http://github.com/rennhak
+    S: BDFL, Creator
 
