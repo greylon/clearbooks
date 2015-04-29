@@ -95,5 +95,17 @@ module Clearbooks
       response = response.to_hash
       Entity.build response[:list_entities_response][:entities][:entity]
     end # }}}
+
+    # @fn     def create_project {{{
+    # @brief  Creates project via Clearbooks API.
+    # @param  [Project] project A project to be created. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
+    # @return [Hash] [:project_id] ID of the created project.
+    # @example
+    #
+    def create_project project
+      response = super message: project.to_savon
+      response = response.to_hash
+      { project_id: response[:create_project_response][:create_project_return].to_i }
+    end # }}}
   end # }}}
 end
