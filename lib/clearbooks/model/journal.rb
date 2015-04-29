@@ -51,17 +51,21 @@ module Clearbooks
       @ledgers = Ledger.build data.savon :ledgers
     end # }}}
 
+    # @fn       def to_savon {{{
+    # @brief    Converts given Journal (self) to savon readable format
+    #
+    # @return   [Hash]      Returns self as Savon readable Hash
     def to_savon
       {
-          journal: {
-              :@description => @description,
-              :@accountingDate => @accounting_date.strftime('%F'),
-              :@entity => @entity,
-              :@project => @project,
-              :ledgers => @ledgers.map(&:to_savon)
-          }.compact
+        journal: {
+          :@description => @description,
+          :@accountingDate => @accounting_date.strftime('%F'),
+          :@entity => @entity,
+          :@project => @project,
+          :ledgers => @ledgers.map(&:to_savon)
+        }.compact
       }
-    end
+    end # }}}
 
   end # of class Journal
 
