@@ -8,38 +8,38 @@ require 'rake'
 
 # Custom library includes
 require_relative 'clearbooks/core_ext'
+require_relative 'clearbooks/version'
+require_relative 'clearbooks/error'
 
 
 # @module         module Clearbooks
 # @brief          Clearbooks modules and classes namespace
 module Clearbooks
 
-  require_relative 'clearbooks/version'
-  require_relative 'clearbooks/error'
+  DEFAULT_CONFIG = '.clearbooks/config.yaml'.freeze
 
-  autoload :Client, 'clearbooks/library/client'
-  autoload :Configuration, 'clearbooks/library/configuration'
 
-  autoload :Base, 'clearbooks/model/base'
-  autoload :Invoice, 'clearbooks/model/invoice'
-  autoload :Item, 'clearbooks/model/item'
-  autoload :Entity, 'clearbooks/model/entity'
-  autoload :Project, 'clearbooks/model/project'
-  autoload :AccountCode, 'clearbooks/model/account_code'
-  autoload :Journal, 'clearbooks/model/journal'
-  autoload :Ledger, 'clearbooks/model/ledger'
+  autoload :Client,         'clearbooks/library/client'
+  autoload :Configuration,  'clearbooks/library/configuration'
 
-  DEFAULT_CONFIG      = '.clearbooks/config.yaml'.freeze
+  autoload :Base,           'clearbooks/model/base'
+  autoload :Invoice,        'clearbooks/model/invoice'
+  autoload :Item,           'clearbooks/model/item'
+  autoload :Entity,         'clearbooks/model/entity'
+  autoload :Project,        'clearbooks/model/project'
+  autoload :AccountCode,    'clearbooks/model/account_code'
+  autoload :Journal,        'clearbooks/model/journal'
+  autoload :Ledger,         'clearbooks/model/ledger'
+
 
   class << self
 
     # @fn       def client {{{
     # @brief    Clearbooks client instance. You can use static methods in Clearbooks module instead of referring to the client instance.
     #
-    # @example
-    #   Clearbooks.list_invoices
-    #   # or
-    #   Clearbooks.client.list_invoices
+    # @example  Clearbooks.list_invoices
+    #           # or
+    #           Clearbooks.client.list_invoices
     def client
       @client ||= Client.new
     end # }}}
@@ -57,12 +57,11 @@ module Clearbooks
     #
     # @return   [Hash]    Returns Configuration object
     #
-    # @example
-    #       Clearbooks.configure do |config|
-    #         config.api_key = 'api_key'
-    #         config.log = true
-    #         config.logger = Logger.new(STDOUT)
-    #       end
+    # @example  Clearbooks.configure do |config|
+    #             config.api_key = 'api_key'
+    #             config.log = true
+    #             config.logger = Logger.new(STDOUT)
+    #           end
     def configure
       yield config
     end # }}}
