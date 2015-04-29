@@ -46,7 +46,7 @@ module Clearbooks
     # @fn       def initialize data {{{
     # @brief    Constructor for Item model
     #
-    # @param    [FIXME]     data      FIXME
+    # @param    [Hash]     data      Item attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
     def initialize data
       @description  = data.savon :description
       @unit_price   = BigDecimal.new data.savon :unit_price
