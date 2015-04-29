@@ -10,7 +10,7 @@ module Clearbooks
     let(:message) { :any }
 
     describe '::list_invoices' do
-      let(:response) { File.read('spec/fixtures/response/invoices.xml') }
+      let(:response) { File.read('spec/fixtures/response/list_invoices.xml') }
       let(:invoices) do
         savon.expects(:list_invoices).with(message: message).returns(response)
         Clearbooks.list_invoices
