@@ -6,7 +6,7 @@
 module Clearbooks
 
   # @class    Clearbooks Journal model
-  # @brief    FIXME
+  # @brief    Used to create a new journal via Clearbooks API.
   #
   # @see      https://www.clearbooks.co.uk/support/api/docs/soap/listaccountcodes/
   class Journal < Base
@@ -42,7 +42,7 @@ module Clearbooks
     # @fn       def initialize data {{{
     # @brief    Constructor for Journal model
     #
-    # @param    [FIXME]     data      FIXME
+    # @param    [Hash]     data      Journal attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
     def initialize data
       @description = data.savon :description
       @accounting_date = parse_date data.savon :accounting_date

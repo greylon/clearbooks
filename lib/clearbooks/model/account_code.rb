@@ -6,7 +6,7 @@
 module Clearbooks
 
   # @class    Clearbooks AccountCode model
-  # @brief    FIXME
+  # @brief    Used to get list of available account codes.
   #
   # @see      https://www.clearbooks.co.uk/support/api/docs/soap/listaccountcodes/
   class AccountCode < Base
@@ -46,7 +46,7 @@ module Clearbooks
     # @fn       def initialize data {{{
     # @brief    Constructor for AccountCode model
     #
-    # @param    [FIXME]     data      FIXME
+    # @param    [Hash]     data      Account code attributes. See https://www.clearbooks.co.uk/support/api/docs/soap/listaccountcodes/
     def initialize data
       @id               = data.savon(:id).to_i
       @account_name     = data.savon :account_name

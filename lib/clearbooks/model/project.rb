@@ -6,7 +6,7 @@
 module Clearbooks
 
   # @class    Clearbooks Project model
-  # @brief    FIXME
+  # @brief    Used to list existing projects or create new.
   #
   # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
   class Project < Base
@@ -28,7 +28,7 @@ module Clearbooks
     # @fn       def initialize data {{{
     # @brief    Constructor for Project model
     #
-    # @param    [FIXME]     data      FIXME
+    # @param    [Hash]     data      Project attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
     def initialize data
       @id           = data.savon(:id).to_i
       @description  = data.savon :description

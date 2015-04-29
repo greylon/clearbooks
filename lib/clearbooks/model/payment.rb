@@ -6,7 +6,7 @@
 module Clearbooks
 
   # @class    Clearbooks Payment model
-  # @brief    Represents a payment in Clearbooks API
+  # @brief    Used to create payments in Clearbooks API
   #
   # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createpayment/
   class Payment < Base
@@ -64,7 +64,7 @@ module Clearbooks
     # @fn       def initialize data {{{
     # @brief    Constructor for Payment model
     #
-    # @param    [FIXME]     data      FIXME
+    # @param    [Hash]     data      Payment attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createpayment/
     def initialize data
       @accounting_date  = parse_date data.savon :accounting_date
       @type = data.savon :type

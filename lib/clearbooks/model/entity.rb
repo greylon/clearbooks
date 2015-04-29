@@ -5,7 +5,7 @@
 module Clearbooks
 
   # @class    Clearbooks Entity model
-  # @brief    FIXME
+  # @brief    Used to list existing entities or create new.
   #
   # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
   class Entity < Base
@@ -134,7 +134,7 @@ module Clearbooks
     # @fn         def initialize data {{{
     # @brief      Constructor of Entity class handling entity ie. personal data
     #
-    # @param      [FIXME]     data        FIXME
+    # @param      [Hash]     data        Entity attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
     #
     def initialize data
       @id               = data.savon(:id).to_i
@@ -201,11 +201,11 @@ module Clearbooks
     private
 
     # @fn         def entity_extra extra {{{
-    # @brief      FIXME
+    # @brief      Convert supplier/customer attributes to Savon readable format.
     #
-    # @param      [FIXME]       extra       FIXME
+    # @param      [Hash]       extra         Supplier or customer attributes.
     #
-    # @return     [FIXME]       FIXME
+    # @return     [Hash]       Supplier/customer attributes in Savon readable format
     def entity_extra extra
       if extra
         {

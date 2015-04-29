@@ -6,9 +6,9 @@
 module Clearbooks
 
   # @class    Clearbooks Ledger model
-  # @brief    FIXME
+  # @brief    Represents a transaction item in a Journal
   #
-  # @see      https://www.clearbooks.co.uk/support/api/docs/soap/listaccountcodes/
+  # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
   class Ledger < Base
 
     attr_reader :account, :amount
@@ -26,7 +26,7 @@ module Clearbooks
     # @fn       def initialize data {{{
     # @brief    Constructor for Ledger model
     #
-    # @param    [FIXME]     data      FIXME
+    # @param    [Hash]     data      Ledger attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
     def initialize data
       @account = data.savon :account
       @amount = BigDecimal.new data.savon :amount
