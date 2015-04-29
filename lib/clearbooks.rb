@@ -17,16 +17,16 @@ module Clearbooks
   require_relative 'clearbooks/version'
   require_relative 'clearbooks/error'
 
-  autoload :Client,         'clearbooks/library/client'
-  autoload :Configuration,  'clearbooks/library/configuration'
+  autoload :Client, 'clearbooks/library/client'
+  autoload :Configuration, 'clearbooks/library/configuration'
 
-  autoload :Base,           'clearbooks/model/base'
-  autoload :Invoice,        'clearbooks/model/invoice'
-  autoload :Item,           'clearbooks/model/item'
-  autoload :Entity,         'clearbooks/model/entity'
+  autoload :Base, 'clearbooks/model/base'
+  autoload :Invoice, 'clearbooks/model/invoice'
+  autoload :Item, 'clearbooks/model/item'
+  autoload :Entity, 'clearbooks/model/entity'
+  autoload :Project, 'clearbooks/model/project'
 
-  DEFAULT_CONFIG = '.clearbooks/config.yaml'.freeze
-
+  DEFAULT_CONFIG      = '.clearbooks/config.yaml'.freeze
 
   class << self
 
