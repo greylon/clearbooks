@@ -45,11 +45,23 @@ module Clearbooks
     # @param    [FIXME]     data      FIXME
     def initialize data
       @description = data.savon :description
-      @accounting_date = data.savon :accounting_date
+      @accounting_date = parse_date data.savon :accounting_date
       @entity = data.savon :entity
       @project = data.savon :project
       @ledgers = Ledger.build data.savon :ledgers
     end # }}}
+
+    def to_savon
+      {
+          journal: {
+              :@description => @description,
+              :@accounting_date => @accounting_date,
+              :@entity => @entity,
+              :@project => @project,
+              :@ledgers => @ledgers.map(&:to_savon)
+          }.compact
+      }
+    end
 
   end # of class Journal
 
