@@ -90,7 +90,7 @@ module Clearbooks
 
       it 'deletes an entity with given id' do
         savon.expects(:delete_entity).with(message: message).returns(xml)
-        expect(Clearbooks.delete_entity(1)).to be_truthy
+        expect(Clearbooks.delete_entity(1)).to eq true
       end
     end
 

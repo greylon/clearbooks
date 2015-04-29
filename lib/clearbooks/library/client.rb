@@ -19,7 +19,8 @@ module Clearbooks
 
     operations :create_invoice, :list_invoices,
                :create_entity, :list_entities, :delete_entity,
-               :create_project, :list_projects
+               :create_project, :list_projects,
+               :list_account_codes
 
     # @fn     def list_invoices {{{
     # @brief  Get list of invoices from Clearbooks API.
@@ -133,6 +134,17 @@ module Clearbooks
       response = super message: {query: query}
       response = response.to_hash
       Project.build response[:list_projects_response][:projects][:project]
+    end # }}}
+
+    # @fn     def list_account_codes {{{
+    # @brief  Get list of account codes from Clearbooks API.
+    # @return [Array, AccountCode] An array or projects.
+    # @example
+    #   Clearbooks.list_account_codes
+    def list_account_codes
+      response = super
+      response = response.to_hash
+      AccountCode.build response[:list_account_codes_response][:account_codes][:account_code]
     end # }}}
   end # }}}
 end

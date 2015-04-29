@@ -40,7 +40,7 @@ module Clearbooks
 
       it 'returns list of projects' do
         expect(projects).to be_an Array
-         expect(projects.length).to eq 3
+        expect(projects.length).to eq 3
       end
 
       describe Project do

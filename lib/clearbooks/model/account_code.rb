@@ -56,8 +56,8 @@ module Clearbooks
       @account_name = data.savon(:account_name)
       @group_name = data.savon(:group_name)
       @default_vat_rate = data.savon(:default_vat_rate)
-      @show_sales = data.savon(:show_sales)
-      @show_purchases = data.savon(:show_purchases)
+      @show_sales = data.savon(:show_sales).to_b
+      @show_purchases = data.savon(:show_purchases).to_b
     end # }}}
 
   end # of class AccountCode
