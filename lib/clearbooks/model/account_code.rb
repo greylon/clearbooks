@@ -1,10 +1,6 @@
 #!/usr/bin/env ruby
 
 
-# System include
-require 'bigdecimal'
-
-
 # @module     Clearbooks
 # @brief      Handles Ruby idomatic expression of Clear Books SOAP API
 module Clearbooks
