@@ -4,8 +4,8 @@ require 'savon'
 module Clearbooks
   describe Clearbooks do
 
-    # before(:all) { savon.mock! }
-    # after(:all) { savon.unmock! }
+    before(:all) { savon.mock! }
+    after(:all) { savon.unmock! }
 
     let(:message) { :any }
 
@@ -16,10 +16,10 @@ module Clearbooks
                    status: 'open')
       end
 
-      # let(:xml) { File.read('spec/fixtures/response/create_project.xml') }
+      let(:xml) { File.read('spec/fixtures/response/create_project.xml') }
 
       let(:response) do
-        # savon.expects(:create_entity).with(message: message).returns(xml)
+        savon.expects(:create_project).with(message: message).returns(xml)
         Clearbooks.create_project(project)
       end
 
