@@ -2,7 +2,8 @@ module Clearbooks
   # @class Clearbooks Entity model {{{
   # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
   class Entity < Base
-    attr_reader :company_name,	# string required
+    attr_reader :id,
+                :company_name,	# string required
                 :contact_name,	# string optional
                 :building,      # string optional
                 :address1,      # string optional
@@ -18,6 +19,7 @@ module Clearbooks
                 :fax,           # string optional
                 :website,	      # string optional
                 :external_id,   # integer optional
+                :statement_url,
                 :supplier,
                    # default_account_code	string optional
                    # default_vat_rate	string optional
@@ -26,6 +28,14 @@ module Clearbooks
                    # default_account_code	string optional
                    # default_vat_rate	string optional
                    # default_credit_terms	integer optional
+
+    # @!attribute [r] id
+    # @return [Fixnum] Entity Id.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+
+    # @!attribute [r] statement_url
+    # @return [String] The URL the customer/supplier can access to view statements.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] company_name
     # Optional.
@@ -113,6 +123,7 @@ module Clearbooks
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     def initialize data
+      @id = data.savon(:id).to_i
       @company_name = data.savon :company_name
       @contact_name = data.savon :contact_name
       @building = data.savon :building
@@ -127,6 +138,7 @@ module Clearbooks
       @phone2 = data.savon :phone2
       @fax = data.savon :fax
       @website = data.savon :website
+      @statement_url = data.savon :statement_url
       @external_id = data.savon(:external_id).to_i
 
       @supplier = entity_extra data.savon :supplier

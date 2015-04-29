@@ -17,7 +17,8 @@ module Clearbooks
                       attributes!: {'tns:authenticate' =>
                                         {apiKey: Clearbooks.config.api_key}}}
 
-    operations :list_invoices, :create_invoice, :create_entity
+    operations :list_invoices, :create_invoice,
+               :create_entity, :list_entities
 
     # @fn     def list_invoices {{{
     # @brief  Query list of invoices from Clearbooks API.
@@ -80,6 +81,19 @@ module Clearbooks
       response = super message: entity.to_savon
       response = response.to_hash
       { entity_id: response[:create_entity_response][:create_entity_return].to_i }
+    end # }}}
+
+    # @fn     def list_entities {{{
+    # @brief  Query list of entities from Clearbooks API.
+    # @param  [Hash] query Hash of options to filter entities. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/list-entities/
+    # @return [Array, Entity] An array or entities.
+    # @example
+    #   Clearbooks.list_entities
+    def list_entities query = {}
+      attributes = {query: query.except(:id)}
+      response = super message: {query: {id: query[:id]}, attributes!: attributes}
+      response = response.to_hash
+      Entity.build response[:list_entities_response][:entities][:entity]
     end # }}}
   end # }}}
 end

@@ -2,7 +2,7 @@ module Clearbooks
   # @class Clearbooks Invoice model {{{
   # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
   class Invoice < Base
-    attr_reader :invoice_id, :date_created, :date_due, :credit_terms, :description, :entity_id, :reference, :project, :status, :invoice_prefix,
+    attr_reader :invoice_id, :date_created, :date_due, :date_accrual, :credit_terms, :description, :entity_id, :reference, :project, :status, :invoice_prefix,
                 :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id
 
     # @!attribute [r] invoice_id
@@ -106,7 +106,7 @@ module Clearbooks
       @external_id = data.savon(:external_id).to_i
       @statement_page = data.savon :statement_page
       @date_modified = parse_date data.savon(:date_modified)
-      @date_accural = parse_date data.savon(:date_accural)
+      @date_accrual = parse_date data.savon(:date_accrual)
       @type = data.savon(:type)
       @bank_payment_id = data.savon(:bank_payment_id).to_i
 
