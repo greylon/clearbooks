@@ -1,7 +1,15 @@
-require 'spec_helper'
+#!/usr/bin/env ruby
+
+
+# System include
 require 'savon'
 
+# Custom include
+require 'spec_helper'
+
+
 module Clearbooks
+
   describe Clearbooks do
 
     before(:all) { savon.mock! }
@@ -95,3 +103,5 @@ module Clearbooks
     end
   end
 end
+
+

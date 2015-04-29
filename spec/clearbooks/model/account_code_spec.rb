@@ -1,7 +1,15 @@
-require 'spec_helper'
+#!/usr/bin/env ruby
+
+
+# System include
 require 'savon'
 
+# Custom include
+require 'spec_helper'
+
+
 module Clearbooks
+
   describe Clearbooks do
 
     before(:all) { savon.mock! }
@@ -33,7 +41,12 @@ module Clearbooks
           expect(account_code.show_sales).to eq false
           expect(account_code.show_purchases).to eq true
         end
+
       end
-    end
-  end
-end
+
+    end # of describe '::list_account_codes
+
+  end # of describe Clearbooks
+
+end # of module Clearbooks
+
