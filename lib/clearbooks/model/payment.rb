@@ -66,14 +66,14 @@ module Clearbooks
     #
     # @param    [FIXME]     data      FIXME
     def initialize data
-      @accounting_date  = date_parse data.savon :accounting_date
-      @type = date.savon :type
-      @description = date.savon :description
-      @amount = BigDecimal.new date.savon :amount
-      @entity_id = date.savon(:entity_id).to_i
-      @payment_method = date.savon(:payment_method).to_i
-      @bank_account = date.savon :bank_account
-      @invoices = date.savon :invoices
+      @accounting_date  = parse_date data.savon :accounting_date
+      @type = data.savon :type
+      @description = data.savon :description
+      @amount = BigDecimal.new data.savon :amount
+      @entity_id = data.savon(:entity_id).to_i
+      @payment_method = data.savon(:payment_method).to_i
+      @bank_account = data.savon :bank_account
+      @invoices = data.savon :invoices
     end # }}}
 
     # @fn       def to_savon {{{

@@ -30,7 +30,7 @@ module Clearbooks
   autoload :AccountCode,    'clearbooks/model/account_code'
   autoload :Journal,        'clearbooks/model/journal'
   autoload :Ledger,         'clearbooks/model/ledger'
-
+  autoload :Payment,         'clearbooks/model/payment'
 
   class << self
 
