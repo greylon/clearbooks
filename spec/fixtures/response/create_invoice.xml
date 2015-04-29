@@ -1,0 +1,11 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:ns1="https://secure.clearbooks.co.uk/api/soap/">
+  <SOAP-ENV:Header>
+    <ns1:authenticate>true</ns1:authenticate>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <SOAP-ENV:createInvoiceResponse>
+      <createInvoiceReturn due="50" invoice_id="3" invoice_prefix="PUR" invoice_number="3"/>
+    </SOAP-ENV:createInvoiceResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
