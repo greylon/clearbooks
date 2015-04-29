@@ -22,7 +22,8 @@ module Clearbooks
                :create_project, :list_projects,
                :list_account_codes,
                :create_journal, :delete_journal,
-               :create_payment
+               :create_payment,
+               :allocate_payment
 
     # @fn     def list_invoices {{{
     # @brief  Get list of invoices from Clearbooks API.
@@ -183,6 +184,35 @@ module Clearbooks
       response = super message: payment.to_savon
       response = response.to_hash
       { payment_id: response[:create_payment_response][:create_payment_return][:@payment_id].to_i }
+    end # }}}
+
+    # @fn     def allocate_payment {{{
+    # @brief  Allocate a payment against an invoice or set of invoices.
+    # @param  [Hash] params Params of the payment. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/allocatepayment/
+    # @return [Hash] [:success, :msg] Operation results and brief message.
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/allocatepayment/
+    def allocate_payment params
+      invoices = params[:invoices].map do |i|
+        {
+            :@id      => i[:id],
+            :@amount  => i[:amount]
+        }
+      end
+
+      payment = {
+          :@paymentId => params[:payment_id],
+          :@entityId  => params[:entity_id],
+          :@type      => params[:type],
+          :invoices   => { invoice: invoices }
+      }
+
+      response = super message: {payment: payment}
+      response = response.to_hash
+      response = response[:allocate_payment_response][:status]
+      {
+          success:  response[:@success].to_b,
+          msg:      response[:@msg]
+      }
     end # }}}
   end # }}}
 end
