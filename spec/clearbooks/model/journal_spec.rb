@@ -22,7 +22,7 @@ module Clearbooks
     let(:entity) { 100 }
     let(:project) { 200 }
     let(:accounts) { ['4001001', '4001002'] }
-    let(:amounts) { [100.50, 200.50] }
+    let(:amounts) { [19.99, 29.99] }
     let(:ledgers) do
       [accounts, amounts].transpose.map do |data|
         Ledger.new(account: data[0], amount: data[1].to_s)

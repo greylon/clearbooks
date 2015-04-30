@@ -16,7 +16,7 @@ require_relative 'clearbooks/error'
 # @brief          Clearbooks modules and classes namespace
 module Clearbooks
 
-  DEFAULT_CONFIG = '.clearbooks/config.yaml'.freeze
+  DEFAULT_CONFIG = '.clearbooks/config.yml'.freeze
 
   autoload :Client,         'clearbooks/library/client'
   autoload :Configuration,  'clearbooks/library/configuration'
