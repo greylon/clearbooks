@@ -18,7 +18,6 @@ module Clearbooks
 
   DEFAULT_CONFIG = '.clearbooks/config.yaml'.freeze
 
-
   autoload :Client,         'clearbooks/library/client'
   autoload :Configuration,  'clearbooks/library/configuration'
 
