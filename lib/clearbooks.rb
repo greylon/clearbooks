@@ -8,7 +8,6 @@ require 'rake'
 
 # Custom library includes
 require_relative 'clearbooks/core_ext'
-require_relative 'clearbooks/version'
 require_relative 'clearbooks/error'
 
 

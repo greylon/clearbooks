@@ -75,17 +75,17 @@ Gem::Specification.new do |spec|
   ## Dependencies
 
   # Ruby VM
-  spec.required_ruby_version  = '~> 2.2'
+  spec.required_ruby_version  = '>= 1.9'
 
   # General
-  spec.add_runtime_dependency 'thor'
+  spec.add_runtime_dependency 'thor', '~> 0.19'
 
   # Middlewares
-  spec.add_runtime_dependency 'savon'
+  spec.add_runtime_dependency 'savon', '~> 2.11'
 
-  spec.add_runtime_dependency 'andand'
+  spec.add_runtime_dependency 'andand', '~> 1.3'
 
-  spec.add_runtime_dependency 'pry'
+  spec.add_runtime_dependency 'pry', '~> 0.10'
 
 
   # Post Install
