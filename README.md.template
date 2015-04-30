@@ -50,10 +50,10 @@ gem install clearbooks
 or by adding to `Gemfile`
 
 ```ruby
-gem 'clearbooks', git: 'https://github.com/greylon/clearbooks.git'
+gem 'clearbooks', github: 'greylon/clearbooks'
 ```
 
-## Get SaaS API key and install it
+## Configuration
 
 Go to Clearbooks http://clearbooks.co.uk and get your API key.
 
@@ -61,35 +61,121 @@ Save this key in in `~/.clearbooks/config.yml`.
 
 
 ```sh
-~# echo "api_key: {your_api_key}" >> ~/.clearbooks/config.yml
+$ echo "api_key: {your_api_key}" >> ~/.clearbooks/config.yml
 ```
 
-You can also provide the API key in `ENV['CLEARBOOKS_API_KEY']``
+You can also provide the API key in `ENV['CLEARBOOKS_API_KEY']`
 
 ```sh
-~# CLEARBOOKS_API_KEY=your_api_key clearbooks
+$ CLEARBOOKS_API_KEY=your_api_key clearbooks
+```
+
+Or use `Clearbooks.configure` block:
+```ruby
+require 'clearbooks'
+
+Clearbooks.configure do |config|
+    config.api_key = 'your_api_key'     # Unless you have key in ~/.clearbooks/config.yml
+                                        # or ENV['CLEARBOOKS_API_KEY']
+    config.log = true                   # If you need logging
+    config.logger = Logger.new(STDOUT)  # Or any other logger of your choice
+end
 ```
 
 ## Usage
 
-As library
-
+### Usage in Ruby code
 
 ```ruby
-2.2.2 :001 > require 'clearbooks'
- => true
-2.2.2 :002 > clearbooks = Clearbooks.new
+
+Clearbooks.list_invoices        # returns Array of existing invoices
+Clearbooks.list_entities        # returns Array of existing entities
+Clearbooks.list_projects        # returns Array of existing projects
+Clearbooks.list_account_codes   # returns Array of available account codes
+
+Clearbooks.create_invoice Clearbooks::Invoice.new(date_created: Date.today,
+      credit_terms: 30,
+      entity_id: 1,
+      type: :purchases,
+      items: [
+        Item.new(description: 'Item 1', unit_price: '9.99',
+            quantity: 5, type: '1001001', vat: 0, vat_rate: '0.00:Out'),
+        Item.new(description: 'Item 2', unit_price: '19.99',
+            quantity: 7, type: '1001001', vat: 0, vat_rate: '0.00:Out')]
+      ])
 ```
-
-or from the command line
-
+See the API reference below or on official Clearbooks site: https://www.clearbooks.co.uk/support/api/docs/soap/
+# Usage in command line
+Type `clearbooks` or `clearbooks console` in the command line to launch [pry](https://github.com/pry/pry) in context of Clearbooks:
 ```sh
-~# clearbooks --help
-
-Commands:
-  clearbooks help [COMMAND]  # Describe available commands or one specific command
+$ clearbooks
+[1] pry(Clearbooks)> list_invoices
+# ...
+[1] pry(Clearbooks)> create_invoice Invoice.new(params)
+# ...
+[1] pry(Clearbooks)> exit
 ```
 
+# Clearbooks API reference
+Detailed API reference can be obtained from official Clearbooks site: https://www.clearbooks.co.uk/support/api/docs/soap/
+## Supported operations
+### Managing invoices
+##### Clearbooks.list_invoices
+Example:
+```ruby
+Clearbooks.list_invoices(
+    id:             [1, 2, 3],          # Optional. Filter invoices by invoice id
+    entity_id:      [1, 2, 3],          # Optional. Filter invoices by entity id
+    ledger:         :sales,             # Optional. One of [:sales, :purchases]
+    status:         :all,               # Optional. One of
+                                        # [:draft, :voided, :bad_debt, :valid, :paid, :unpaid,
+                                        #       :credited, :credit_note, :refund, :recurring]
+    modified_since: '2015-01-01',       # Optional.
+    offset: 0                          # Optional. It returns 100 invoices a time.
+    ) # Clearbooks.list_invoices
+
+ # Returns an Array of Invoice objects with attributes according to official API docs.
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/listinvoices/
+##### Clearbooks.create_invoice
+Example:
+```ruby
+Clearbooks.create_invoice Clearbooks::Invoice.new(
+    date_created:   Date.today, # Reqiured. The tax point of the invoice.
+    date_due:       Date.today, # The date the invoice is due.
+    credit_terms:   30,         # The number of days after the tax point that the invoice is due.
+                                # Either :date_due or :credit_terms is required.
+    entity_id:      1,          # Required. The customer or supplier id.
+    date_accrual:   Date.today, # Optional. The invoice accrual date.
+    description:    'desc'      # Optional.
+    type:           :purchases, # Optional. One of [:purchases, :sales, :cn-sales, :cn-purchases]
+    bank_payment_id:200,        # Optional. The bank account code.
+        # Can be extracted from the bank account URL:
+        # 1. Go to Clearbooks site > Money > Bank accounts > All
+        # 2. Click the bank account.
+        # 3. In the address bar you will see the url like:                                                          #   https://secure.clearbooks.co.uk/company/accounting/banking/statement/7502001/
+        # 4. The last number (7502001) is the bank account code.
+
+    items: [
+        Item.new(
+            description: 'Item 1',  # Reqiured.
+            unit_price: '9.99',     # Required.
+            quantity: 5,            # Required.
+            type: '1001001',        # Required. The item account code.
+                                    # Use Clearbooks.list_account_codes
+                                    # to get available account codes.
+            vat: 0,                 # Reqiured.
+            vat_rate: '0.00:Out'    # Required.
+            )] # items
+) # Clearbooks.create_invoice
+# returns a Hash:
+    {
+        invoice_id: 1,
+        invoice_prefix: 'INV',
+        invoice_number: '1'
+    }
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 ## On what Hardware does it run?
 
 This Software was originally developed and tested on 32-bit x86 / SMP based PCs running on
