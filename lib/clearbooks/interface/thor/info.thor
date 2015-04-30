@@ -3,10 +3,8 @@
 
 # System includes
 require 'ostruct'
-require 'awesome_print'
 require 'andand'
 require 'tempfile'
-require 'os'
 
 # Custom includes
 require File.expand_path( File.dirname( __FILE__ ) + '/mixin/shell' )

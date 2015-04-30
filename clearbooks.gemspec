@@ -83,6 +83,9 @@ Gem::Specification.new do |spec|
   # Middlewares
   spec.add_runtime_dependency 'savon'
 
+  spec.add_runtime_dependency 'andand'
+
+
   # Post Install
   spec.post_install_message = <<-EOS
                                                              

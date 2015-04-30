@@ -44,11 +44,14 @@ group :development do # {{{
 
   gem 'guard'
   gem 'guard-shell'
+  gem 'ptools'
 
   # Notifications from live-reload etc.
   gem 'growl'
   gem 'ruby-growl'
   gem 'rb-inotify' unless RUBY_PLATFORM=~ /darwin/
+
+
 
 end # }}}
 
