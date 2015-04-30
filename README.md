@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.13.0-14-g9cb3d4a
+Version 0.13.0-15-g9ff338a
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
@@ -57,20 +57,21 @@ gem 'clearbooks', github: 'greylon/clearbooks'
 
 Go to Clearbooks http://clearbooks.co.uk and get your API key.
 
-Save this key in in `~/.clearbooks/config.yml`.
+Save the API key in `~/.clearbooks/config.yml`.
 
 
 ```sh
 $ echo "api_key: {your_api_key}" >> ~/.clearbooks/config.yml
 ```
 
-You can also provide the API key in `ENV['CLEARBOOKS_API_KEY']`
+Or provide the API key in `ENV['CLEARBOOKS_API_KEY']`
 
 ```sh
 $ CLEARBOOKS_API_KEY=your_api_key clearbooks
 ```
 
 Or use `Clearbooks.configure` block:
+
 ```ruby
 require 'clearbooks'
 
@@ -84,7 +85,7 @@ end
 
 ## Usage
 
-### Usage in Ruby code
+### Ruby code
 
 ```ruby
 
@@ -104,8 +105,9 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(date_created: Date.today,
             quantity: 7, type: '1001001', vat: 0, vat_rate: '0.00:Out')]
       ])
 ```
-See the API reference below or on official Clearbooks site: https://www.clearbooks.co.uk/support/api/docs/soap/
-# Usage in command line
+See the API reference below or visit the official Clearbooks site: https://www.clearbooks.co.uk/support/api/docs/soap/
+
+### Command line
 Type `clearbooks` or `clearbooks console` in the command line to launch [pry](https://github.com/pry/pry) in context of Clearbooks:
 ```sh
 $ clearbooks
@@ -117,11 +119,15 @@ $ clearbooks
 ```
 
 # Clearbooks API reference
+
 Detailed API reference can be obtained from official Clearbooks site: https://www.clearbooks.co.uk/support/api/docs/soap/
-## Supported operations
-### Managing invoices
-##### Clearbooks.list_invoices
+
+## Managing invoices
+
+### Clearbooks.list_invoices
+
 Example:
+
 ```ruby
 Clearbooks.list_invoices(
     id:             [1, 2, 3],          # Optional. Filter invoices by invoice id
@@ -137,8 +143,11 @@ Clearbooks.list_invoices(
  # Returns an Array of Invoice objects with attributes according to official API docs.
 ```
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/listinvoices/
-##### Clearbooks.create_invoice
+
+### Clearbooks.create_invoice
+
 Example:
+
 ```ruby
 Clearbooks.create_invoice Clearbooks::Invoice.new(
     date_created:   Date.today, # Reqiured. The tax point of the invoice.
@@ -153,7 +162,8 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
         # Can be extracted from the bank account URL:
         # 1. Go to Clearbooks site > Money > Bank accounts > All
         # 2. Click the bank account.
-        # 3. In the address bar you will see the url like:                                                          #   https://secure.clearbooks.co.uk/company/accounting/banking/statement/7502001/
+        # 3. In the address bar you will see the url like:
+        #   https://secure.clearbooks.co.uk/company/accounting/banking/statement/7502001/
         # 4. The last number (7502001) is the bank account code.
 
     items: [
@@ -168,7 +178,9 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
             vat_rate: '0.00:Out'    # Required.
             )] # items
 ) # Clearbooks.create_invoice
+
 # returns a Hash:
+
     {
         invoice_id: 1,
         invoice_prefix: 'INV',
@@ -176,6 +188,7 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
     }
 ```
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
 ## On what Hardware does it run?
 
 This Software was originally developed and tested on 32-bit x86 / SMP based PCs running on
