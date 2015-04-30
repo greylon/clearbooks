@@ -39,12 +39,30 @@ group :development do # {{{
      gem 'pry-stack_explorer'
   end
 
+  gem 'shotgun'
+  gem 'rerun'
+
+  gem 'guard'
+  gem 'guard-shell'
+
+  # Notifications from live-reload etc.
+  gem 'growl'
+  gem 'ruby-growl'
+  gem 'rb-inotify' unless RUBY_PLATFORM=~ /darwin/
+
 end # }}}
 
 group :test do # {{{
 
   # # Testing / Development
   gem 'rspec', '~> 2.0'
+  gem 'guard-rspec', require: false
+  gem 'nyan-cat-formatter'
+  gem 'simplecov', '~> 0.8.1'
+  gem 'simplecov-rcov'
+  gem 'simplecov-rcov-text'
+  gem 'metric_fu', '>= 4.5.x'
+  gem 'cucumber'
 
 end # }}}
 
