@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.13.0-15-g9ff338a
+Version 0.13.0-16-gf9de442
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
@@ -188,6 +188,41 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
     }
 ```
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+## Managing entities
+
+### Clearbooks.list_entities
+
+Example:
+
+```ruby
+Clearbooks.list_entities(
+    id: [1, 2, 3],                  # Optional. Filter entities by id.
+    type: :customers,               # Optional. One of [:customers, :suppliers]
+    modified_since: '2015-01-01',   # Optional.
+    offset: 0                       # Optional.
+) # Clearbooks.list_entities
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/list-entities/
+
+### Clearbooks.create_entity
+
+Example:
+
+```ruby
+Clearbooks.create_entity Clearbooks::Entity.new(
+    company_name: 'Company',
+    contact_name: 'John Doe',
+    supplier: {
+       default_account_code: '1001001',
+       default_credit_terms: 30,
+       default_vat_rate: 0
+   }
+) # Clearbooks::Entity.new
+```
+
+Full list of options: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
 ## On what Hardware does it run?
 
