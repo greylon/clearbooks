@@ -158,7 +158,7 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
     date_accrual:   Date.today, # Optional. The invoice accrual date.
     description:    'desc'      # Optional.
     type:           :purchases, # Optional. One of [:purchases, :sales, :cn-sales, :cn-purchases]
-    bank_payment_id:200,        # Optional. The bank account code.
+    bank_payment_id: 200,       # Optional. The bank account code.
         # Can be extracted from the bank account URL:
         # 1. Go to Clearbooks site > Money > Bank accounts > All
         # 2. Click the bank account.
@@ -230,6 +230,44 @@ Example:
 ```
 
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deleteentity/
+
+
+## Managing payments
+### Clearbooks.create_payment
+
+Example:
+
+```ruby
+Clearbooks.create_payment Payment.new(
+    accounting_date: Date.today,    # Optional
+    type: :sales,                   # Optional. One of [:purchases, :sales]
+    description: 'description',     # Optional.
+    amount: 19.99,                  # Optional.
+    entity_id: 1,                   # Optional.
+    payment_method: 2,              # Optional.
+    bank_account: 200,              # Optional. See Clearbooks.create_invoice
+    invoices: [                     # Optional.
+        {id: 1, amount: 9.99}
+    ] # invoices
+) # Payment.new
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createpayment/
+
+### Clearbooks.allocate_payment
+
+Example:
+```ruby
+Clearbooks.allocate_payment(
+    payment_id:   1,        # Reqiured.
+    entity_id:    1,        # Required.
+    type:         :sales,   # Required. One of [:sales, :purchases]
+    invoices:     [
+        {id: 1, amount: 9.99}
+    ]
+) # Clearbooks.allocate_payment
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/allocatepayment/
 
 
 ## Managing journals
