@@ -201,6 +201,8 @@ Clearbooks.list_entities(
     modified_since: '2015-01-01',   # Optional.
     offset: 0                       # Optional.
 ) # Clearbooks.list_entities
+
+# returns an Array of Entity objects with attributes according to official API docs.
 ```
 
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/list-entities/
@@ -268,6 +270,30 @@ Clearbooks.allocate_payment(
 ) # Clearbooks.allocate_payment
 ```
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/allocatepayment/
+
+## Managing projects
+### Clearbooks.list_projects
+
+Example:
+
+```ruby
+Clearbooks.list_projects { offset: 0 }
+# returns an Array of Project objects with attributes according to official API docs.
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/listprojects/
+
+### Clearbooks.create_project
+
+Example:
+```ruby
+Clearbooks.create_project Project.new(
+    description: 'Description',     # Required.
+    project_name: 'Project name',   # Optional.
+    status: :open                   # Optional. One of [:open, :closed, :deleted]
+) # Clearbooks.create_project
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
 
 
 ## Managing journals
