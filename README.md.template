@@ -41,13 +41,13 @@ It allows the handling of invoices, expenses, financial accounts and mobile acco
 
 ## Installing
 
-By running gem comand
+To install the `Clearbooks` gem, run the `gem` command:
 
 ```sh
 gem install clearbooks
 ```
 
-or by adding to `Gemfile`
+Or update your `Gemfile`:
 
 ```ruby
 gem 'clearbooks', github: 'greylon/clearbooks'
@@ -55,7 +55,9 @@ gem 'clearbooks', github: 'greylon/clearbooks'
 
 ## Configuration
 
-Go to Clearbooks http://clearbooks.co.uk and get your API key.
+To use the Clearbooks API, you need to get an API key on http://clearbooks.co.uk.
+
+Login to the site and choose `Settings` > `API`.
 
 Save the API key in `~/.clearbooks/config.yml`.
 
