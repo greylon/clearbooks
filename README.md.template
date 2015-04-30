@@ -325,6 +325,18 @@ Example:
 ```
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deletejournal/
 
+## Managing account codes
+### Clearbooks.list_account_codes
+
+Example:
+
+```ruby
+Clearbooks.list_account_codes
+# returns an Array of AccountCode objects with attributes according to official API docs.
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/listaccountcodes/
+
 ## On what Hardware does it run?
 
 This Software was originally developed and tested on 32-bit x86 / SMP based PCs running on
