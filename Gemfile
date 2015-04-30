@@ -55,6 +55,7 @@ end # }}}
 group :test do # {{{
 
   # # Testing / Development
+  gem 'aruba'
   gem 'rspec', '~> 2.0'
   gem 'guard-rspec', require: false
   gem 'nyan-cat-formatter'
