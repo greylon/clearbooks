@@ -92,10 +92,10 @@ end # of module Clearbooks
 
 
 ## Library
-require_relative 'clearbooks/library/dbc'
-require_relative 'clearbooks/library/helpers'
-require_relative 'clearbooks/library/logger'
-require_relative 'clearbooks/library/secure_config'
+# require_relative 'clearbooks/library/dbc'
+# require_relative 'clearbooks/library/helpers'
+# require_relative 'clearbooks/library/logger'
+# require_relative 'clearbooks/library/secure_config'
 
 
 # vim:ts=2:tw=100:wm=100:syntax=ruby
