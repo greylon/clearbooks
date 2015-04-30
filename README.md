@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.13.0-24-g46442a9
+Version 0.16.0
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
