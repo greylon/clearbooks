@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.13.0-20-g81f6b34
+Version 0.13.0-22-gc5827ce
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
@@ -324,6 +324,18 @@ Example:
     Clearbooks.delete_journal(1) # Delete journal by id
 ```
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deletejournal/
+
+## Managing account codes
+### Clearbooks.list_account_codes
+
+Example:
+
+```ruby
+Clearbooks.list_account_codes
+# returns an Array of AccountCode objects with attributes according to official API docs.
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/listaccountcodes/
 
 ## On what Hardware does it run?
 
