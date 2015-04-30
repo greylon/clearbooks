@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.13.0-16-gf9de442
+Version 0.13.0-19-gef10ce2
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
@@ -158,7 +158,7 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
     date_accrual:   Date.today, # Optional. The invoice accrual date.
     description:    'desc'      # Optional.
     type:           :purchases, # Optional. One of [:purchases, :sales, :cn-sales, :cn-purchases]
-    bank_payment_id:200,        # Optional. The bank account code.
+    bank_payment_id: 200,       # Optional. The bank account code.
         # Can be extracted from the bank account URL:
         # 1. Go to Clearbooks site > Money > Bank accounts > All
         # 2. Click the bank account.
@@ -190,7 +190,6 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
 ## Managing entities
-
 ### Clearbooks.list_entities
 
 Example:
@@ -215,14 +214,90 @@ Clearbooks.create_entity Clearbooks::Entity.new(
     company_name: 'Company',
     contact_name: 'John Doe',
     supplier: {
-       default_account_code: '1001001',
+       default_account_code: '1001001', # See Clearbooks.list_account_codes
        default_credit_terms: 30,
        default_vat_rate: 0
    }
 ) # Clearbooks::Entity.new
 ```
-
 Full list of options: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+
+### Clearbooks.delete_entity
+
+Example:
+```ruby
+    Clearbooks.delete_entity(1) # Delete entity by id.
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deleteentity/
+
+
+## Managing payments
+### Clearbooks.create_payment
+
+Example:
+
+```ruby
+Clearbooks.create_payment Payment.new(
+    accounting_date: Date.today,    # Optional
+    type: :sales,                   # Optional. One of [:purchases, :sales]
+    description: 'description',     # Optional.
+    amount: 19.99,                  # Optional.
+    entity_id: 1,                   # Optional.
+    payment_method: 2,              # Optional.
+    bank_account: 200,              # Optional. See Clearbooks.create_invoice
+    invoices: [                     # Optional.
+        {id: 1, amount: 9.99}
+    ] # invoices
+) # Payment.new
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createpayment/
+
+### Clearbooks.allocate_payment
+
+Example:
+```ruby
+Clearbooks.allocate_payment(
+    payment_id:   1,        # Reqiured.
+    entity_id:    1,        # Required.
+    type:         :sales,   # Required. One of [:sales, :purchases]
+    invoices:     [
+        {id: 1, amount: 9.99}
+    ]
+) # Clearbooks.allocate_payment
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/allocatepayment/
+
+
+## Managing journals
+### Clearbooks.create_journal
+
+Example:
+
+```ruby
+Clearbooks.create_journal Journal.new(
+    description: 'Desc',            # Required.
+    accounting_date: Date.today,    # Optional.
+    entity: 1,                      # Optional.
+    project: 1,                     # Optional
+    ledgers: [                      # Optional
+        {
+            account: '1001001',     # Optional. See Clearbooks.list_account_codes
+            amount:  19.99,         # Optional.
+    ] # ledgers
+) # Journal.new
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
+
+### Clearbooks.delete_journal
+
+Example:
+```ruby
+    Clearbooks.delete_journal(1) # Delete journal by id
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deletejournal/
 
 ## On what Hardware does it run?
 
