@@ -32,7 +32,6 @@ group :development do # {{{
 
   # REPL
   gem 'racksh'
-  gem 'pry'
 
   platforms :ruby_19, :ruby_20 do
      gem 'pry-debugger'

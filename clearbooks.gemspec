@@ -85,6 +85,8 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'andand'
 
+  spec.add_runtime_dependency 'pry'
+
 
   # Post Install
   spec.post_install_message = <<-EOS
