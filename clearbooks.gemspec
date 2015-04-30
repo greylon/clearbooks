@@ -83,49 +83,10 @@ Gem::Specification.new do |spec|
   # Middlewares
   spec.add_runtime_dependency 'savon'
 
-  # Package building
-  spec.add_runtime_dependency 'fpm'
-
-  # Shell
-  spec.add_runtime_dependency 'ptools'
-  spec.add_runtime_dependency 'os'
-
-  # Encryption / Security
-  spec.add_runtime_dependency 'bcrypt-ruby'
-  spec.add_runtime_dependency 'scrypt'
-
-  # Data RPCs and Messaging
-  spec.add_runtime_dependency 'faraday'
-  spec.add_runtime_dependency 'mime-types'
-
-  # Data Exchange Containers/Parsing
-  spec.add_runtime_dependency 'oj'
-  spec.add_runtime_dependency 'ox'
-  # spec.add_runtime_dependency 'nokogiri'
-  # spec.add_runtime_dependency 'hpricot'
-  # spec.add_runtime_dependency 'cobravsmongoose'
-
-  # Caching
-  spec.add_runtime_dependency 'moneta'
-
-  # l10n
-  spec.add_runtime_dependency 'gettext'
-
-  # Monadic/Functional
   spec.add_runtime_dependency 'andand'
-  spec.add_runtime_dependency 'ick'
-
-  # Misc System
-  spec.add_runtime_dependency 'awesome_print'
-  spec.add_runtime_dependency 'ntp'
-  spec.add_runtime_dependency 'uuid'
-  spec.add_runtime_dependency 'money'
-
-  ## System libraries needed (info for the user)
-  # spec.requirements 'iconv zlib libmagic'
 
 
-  ## Post Install
+  # Post Install
   spec.post_install_message = <<-EOS
                                                              
       ____ _     _____    _    ____  ____   ___   ___  _  ______  
