@@ -214,7 +214,7 @@ Clearbooks.create_entity Clearbooks::Entity.new(
     company_name: 'Company',
     contact_name: 'John Doe',
     supplier: {
-       default_account_code: '1001001',
+       default_account_code: '1001001', # See Clearbooks.list_account_codes
        default_credit_terms: 30,
        default_vat_rate: 0
    }
@@ -226,11 +226,40 @@ Full list of options: https://www.clearbooks.co.uk/support/api/docs/soap/createe
 
 Example:
 ```ruby
-    Clearbooks.delete_entity(1) # Deletes Entity by id.
+    Clearbooks.delete_entity(1) # Delete entity by id.
 ```
 
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deleteentity/
 
+
+## Managing journals
+### Clearbooks.create_journal
+
+Example:
+
+```ruby
+Clearbooks.create_journal Journal.new(
+    description: 'Desc',            # Required.
+    accounting_date: Date.today,    # Optional.
+    entity: 1,                      # Optional.
+    project: 1,                     # Optional
+    ledgers: [                      # Optional
+        {
+            account: '1001001',     # Optional. See Clearbooks.list_account_codes
+            amount:  19.99,         # Optional.
+    ] # ledgers
+) # Journal.new
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
+
+### Clearbooks.delete_journal
+
+Example:
+```ruby
+    Clearbooks.delete_journal(1) # Delete journal by id
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deletejournal/
 
 ## On what Hardware does it run?
 
