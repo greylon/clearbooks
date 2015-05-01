@@ -52,8 +52,6 @@ group :development do # {{{
   gem 'ruby-growl'
   gem 'rb-inotify' unless RUBY_PLATFORM=~ /darwin/
 
-
-
 end # }}}
 
 group :test do # {{{
