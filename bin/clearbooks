@@ -20,6 +20,7 @@ class Default < Thor
   def console
     Clearbooks.pry
   end
+
 end # of class Default
 
 Default.start( ARGV )

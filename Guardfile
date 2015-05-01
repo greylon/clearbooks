@@ -25,18 +25,21 @@ guard :shell, :all_on_start => false do
 
 end # of guard :shell, :all_on_start => false do
 
-
 guard :rspec, cmd: 'bundle exec rspec' do
+
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/clearbooks/(.+)\.rb$})     { |m| "spec/#{m[1]}_spec.rb" }
   watch('lib/clearbooks.rb')     { 'spec' }
   watch('spec/spec_helper.rb')  { 'spec' }
+
 end
 
 guard 'rake', :task => 'docs:generate' do
+
   watch(%r{^lib/clearbooks/(.+)\.rb$})
   watch('lib/clearbooks.rb')
   watch('README.md.template')
+
 end
 
 ### Simple Helpers
