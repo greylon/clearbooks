@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.15.1
+Version 0.16.0
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
@@ -41,54 +41,303 @@ It allows the handling of invoices, expenses, financial accounts and mobile acco
 
 ## Installing
 
-By running gem comand
+To install the `Clearbooks` gem, run the `gem` command:
 
 ```sh
 gem install clearbooks
 ```
 
-or by adding to `Gemfile`
+Or update your `Gemfile`:
 
 ```ruby
-gem 'clearbooks', git: 'https://github.com/greylon/clearbooks.git'
+gem 'clearbooks', github: 'greylon/clearbooks'
 ```
 
-## Get SaaS API key and install it
+## Configuration
 
-Go to Clearbooks http://clearbooks.co.uk and get your API key.
+To use the Clearbooks API, you need to get an API key on http://clearbooks.co.uk.
 
-Save this key in in `~/.clearbooks/config.yml`.
+Login to the site and choose `Settings` > `API`.
+
+Save the API key in `~/.clearbooks/config.yml`.
 
 
 ```sh
-~# echo "api_key: {your_api_key}" >> ~/.clearbooks/config.yml
+$ echo "api_key: {your_api_key}" >> ~/.clearbooks/config.yml
 ```
 
-You can also provide the API key in `ENV['CLEARBOOKS_API_KEY']``
+Or provide the API key in `ENV['CLEARBOOKS_API_KEY']`
 
 ```sh
-~# CLEARBOOKS_API_KEY=your_api_key clearbooks
+$ CLEARBOOKS_API_KEY=your_api_key clearbooks
+```
+
+Or use `Clearbooks.configure` block:
+
+```ruby
+require 'clearbooks'
+
+Clearbooks.configure do |config|
+    config.api_key = 'your_api_key'     # Unless you have key in ~/.clearbooks/config.yml
+                                        # or ENV['CLEARBOOKS_API_KEY']
+    config.log = true                   # If you need logging
+    config.logger = Logger.new(STDOUT)  # Or any other logger of your choice
+end
 ```
 
 ## Usage
 
-As library
-
+### Ruby code
 
 ```ruby
-2.2.2 :001 > require 'clearbooks'
- => true
-2.2.2 :002 > clearbooks = Clearbooks.new
+
+Clearbooks.list_invoices        # returns Array of existing invoices
+Clearbooks.list_entities        # returns Array of existing entities
+Clearbooks.list_projects        # returns Array of existing projects
+Clearbooks.list_account_codes   # returns Array of available account codes
+
+Clearbooks.create_invoice Clearbooks::Invoice.new(date_created: Date.today,
+      credit_terms: 30,
+      entity_id: 1,
+      type: :purchases,
+      items: [
+        Item.new(description: 'Item 1', unit_price: '9.99',
+            quantity: 5, type: '1001001', vat: 0, vat_rate: '0.00:Out'),
+        Item.new(description: 'Item 2', unit_price: '19.99',
+            quantity: 7, type: '1001001', vat: 0, vat_rate: '0.00:Out')]
+      ])
 ```
+See the API reference below or visit the official Clearbooks site: https://www.clearbooks.co.uk/support/api/docs/soap/
 
-or from the command line
-
+### Command line
+Type `clearbooks` or `clearbooks console` in the command line to launch [pry](https://github.com/pry/pry) in context of Clearbooks:
 ```sh
-~# clearbooks --help
-
-Commands:
-  clearbooks help [COMMAND]  # Describe available commands or one specific command
+$ clearbooks
+[1] pry(Clearbooks)> list_invoices
+# ...
+[1] pry(Clearbooks)> create_invoice Invoice.new(params)
+# ...
+[1] pry(Clearbooks)> exit
 ```
+
+# Clearbooks API reference
+
+Detailed API reference can be obtained from official Clearbooks site: https://www.clearbooks.co.uk/support/api/docs/soap/
+
+## Managing invoices
+
+### Clearbooks.list_invoices
+
+Example:
+
+```ruby
+Clearbooks.list_invoices(
+    id:             [1, 2, 3],          # Optional. Filter invoices by invoice id
+    entity_id:      [1, 2, 3],          # Optional. Filter invoices by entity id
+    ledger:         :sales,             # Optional. One of [:sales, :purchases]
+    status:         :all,               # Optional. One of
+                                        # [:draft, :voided, :bad_debt, :valid, :paid, :unpaid,
+                                        #       :credited, :credit_note, :refund, :recurring]
+    modified_since: '2015-01-01',       # Optional.
+    offset: 0                          # Optional. It returns 100 invoices a time.
+    ) # Clearbooks.list_invoices
+
+ # Returns an Array of Invoice objects with attributes according to official API docs.
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/listinvoices/
+
+### Clearbooks.create_invoice
+
+Example:
+
+```ruby
+Clearbooks.create_invoice Clearbooks::Invoice.new(
+    date_created:   Date.today, # Reqiured. The tax point of the invoice.
+    date_due:       Date.today, # The date the invoice is due.
+    credit_terms:   30,         # The number of days after the tax point that the invoice is due.
+                                # Either :date_due or :credit_terms is required.
+    entity_id:      1,          # Required. The customer or supplier id.
+    date_accrual:   Date.today, # Optional. The invoice accrual date.
+    description:    'desc'      # Optional.
+    type:           :purchases, # Optional. One of [:purchases, :sales, :cn-sales, :cn-purchases]
+    bank_payment_id: 200,       # Optional. The bank account code.
+        # Can be extracted from the bank account URL:
+        # 1. Go to Clearbooks site > Money > Bank accounts > All
+        # 2. Click the bank account.
+        # 3. In the address bar you will see the url like:
+        #   https://secure.clearbooks.co.uk/company/accounting/banking/statement/7502001/
+        # 4. The last number (7502001) is the bank account code.
+
+    items: [
+        Item.new(
+            description: 'Item 1',  # Reqiured.
+            unit_price: '9.99',     # Required.
+            quantity: 5,            # Required.
+            type: '1001001',        # Required. The item account code.
+                                    # Use Clearbooks.list_account_codes
+                                    # to get available account codes.
+            vat: 0,                 # Reqiured.
+            vat_rate: '0.00:Out'    # Required.
+            )] # items
+) # Clearbooks.create_invoice
+
+# returns a Hash:
+
+    {
+        invoice_id: 1,
+        invoice_prefix: 'INV',
+        invoice_number: '1'
+    }
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+## Managing entities
+### Clearbooks.list_entities
+
+Example:
+
+```ruby
+Clearbooks.list_entities(
+    id: [1, 2, 3],                  # Optional. Filter entities by id.
+    type: :customers,               # Optional. One of [:customers, :suppliers]
+    modified_since: '2015-01-01',   # Optional.
+    offset: 0                       # Optional.
+) # Clearbooks.list_entities
+
+# returns an Array of Entity objects with attributes according to official API docs.
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/list-entities/
+
+### Clearbooks.create_entity
+
+Example:
+
+```ruby
+Clearbooks.create_entity Clearbooks::Entity.new(
+    company_name: 'Company',
+    contact_name: 'John Doe',
+    supplier: {
+       default_account_code: '1001001', # See Clearbooks.list_account_codes
+       default_credit_terms: 30,
+       default_vat_rate: 0
+   }
+) # Clearbooks::Entity.new
+```
+Full list of options: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+
+### Clearbooks.delete_entity
+
+Example:
+```ruby
+    Clearbooks.delete_entity(1) # Delete entity by id.
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deleteentity/
+
+
+## Managing payments
+### Clearbooks.create_payment
+
+Example:
+
+```ruby
+Clearbooks.create_payment Payment.new(
+    accounting_date: Date.today,    # Optional
+    type: :sales,                   # Optional. One of [:purchases, :sales]
+    description: 'description',     # Optional.
+    amount: 19.99,                  # Optional.
+    entity_id: 1,                   # Optional.
+    payment_method: 2,              # Optional.
+    bank_account: 200,              # Optional. See Clearbooks.create_invoice
+    invoices: [                     # Optional.
+        {id: 1, amount: 9.99}
+    ] # invoices
+) # Payment.new
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createpayment/
+
+### Clearbooks.allocate_payment
+
+Example:
+```ruby
+Clearbooks.allocate_payment(
+    payment_id:   1,        # Reqiured.
+    entity_id:    1,        # Required.
+    type:         :sales,   # Required. One of [:sales, :purchases]
+    invoices:     [
+        {id: 1, amount: 9.99}
+    ]
+) # Clearbooks.allocate_payment
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/allocatepayment/
+
+## Managing projects
+### Clearbooks.list_projects
+
+Example:
+
+```ruby
+Clearbooks.list_projects { offset: 0 }
+# returns an Array of Project objects with attributes according to official API docs.
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/listprojects/
+
+### Clearbooks.create_project
+
+Example:
+```ruby
+Clearbooks.create_project Project.new(
+    description: 'Description',     # Required.
+    project_name: 'Project name',   # Optional.
+    status: :open                   # Optional. One of [:open, :closed, :deleted]
+) # Clearbooks.create_project
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createproject/
+
+
+## Managing journals
+### Clearbooks.create_journal
+
+Example:
+
+```ruby
+Clearbooks.create_journal Journal.new(
+    description: 'Desc',            # Required.
+    accounting_date: Date.today,    # Optional.
+    entity: 1,                      # Optional.
+    project: 1,                     # Optional
+    ledgers: [                      # Optional
+        {
+            account: '1001001',     # Optional. See Clearbooks.list_account_codes
+            amount:  19.99,         # Optional.
+    ] # ledgers
+) # Journal.new
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createjournal/
+
+### Clearbooks.delete_journal
+
+Example:
+```ruby
+    Clearbooks.delete_journal(1) # Delete journal by id
+```
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/deletejournal/
+
+## Managing account codes
+### Clearbooks.list_account_codes
+
+Example:
+
+```ruby
+Clearbooks.list_account_codes
+# returns an Array of AccountCode objects with attributes according to official API docs.
+```
+
+Reference: https://www.clearbooks.co.uk/support/api/docs/soap/listaccountcodes/
 
 ## On what Hardware does it run?
 
@@ -201,33 +450,7 @@ Here is a current listing of all tasks:
 
 
 ```
-rake build                  # Build clearbooks-0.15.1.gem into the pkg directory
-rake cucumber:pretty        # Run Cucumber features
-rake cucumber:progress      # Run Cucumber features
-rake default                # Show the default task when executing rake without arguments
-rake docs:generate          # Generate Yardoc documentation for this project
-rake docs:graph             # Generate Yard Graphs for this project
-rake guard:default          # Execute Ruby Guard
-rake help                   # Shows the usage help screen
-rake install                # Build and install clearbooks-0.15.1.gem into system gems
-rake install:local          # Build and install clearbooks-0.15.1.gem into system gems without network access
-rake man:build              # Build the manual pages
-rake man:clean              # Clean up from the built man pages
-rake measurement:benchmark  # When executing rake tasks measure elapsed time, used with other tasks
-rake measurement:profiling  # Run profiling over stack
-rake metric:metric          # Run metric fu for project
-rake package:clean          # Clean all files from pkg folder
-rake readme                 # Generate proper README file from templates
-rake readme:all             # Generate proper README file from templates
-rake readme:subdirs         # Builds generates readme files in all sub-directories
-rake readme:topdir          # Generate top level README file from template
-rake release                # Create tag v0.15.1 and build and push clearbooks-0.15.1.gem to Rubygems
-rake spec                   # RSpec Core Tasks
-rake todo                   # Look for TODO and FIXME tags in the code
-rake version                # Git Tag number of this repo
-rake yardgraph              # Generate Yard Graphs for this project
-rake yardoc                 # Generate Yardoc documentation for this project
-
+$rake_tasks$
 ```
 
 #### Thor Tasks
@@ -238,44 +461,7 @@ Here is a current listing of all tasks:
 
 
 ```
-default
--------
-thor :build                  # build
-thor :clean                  # clean
-thor :default                # Show the default task when executing rake without arguments
-thor :docs:generate          # Generate Yardoc documentation for this project
-thor :docs:graph             # Generate Yard Graphs for this project
-thor :guard:default          # Execute Ruby Guard
-thor :help                   # Shows the usage help screen
-thor :install                # Build and install clearbooks-0.15.1 .gem into system gems
-thor :man:build              # Build the manual pages
-thor :man:clean              # Clean up from the built man pages
-thor :measurement:benchmark  # When executing rake tasks measure elapsed time, used with other tasks
-thor :measurement:profiling  # Run profiling over stack
-thor :metric:metric          # Run metric fu for project
-thor :package:clean          # Clean all files from pkg folder
-thor :readme:all             # Generate proper README file from templates
-thor :readme:subdirs         # Builds generates readme files in all sub-directories
-thor :readme:topdir          # Generate top level README file from template
-thor :release                # release
-thor :spec                   # Run RSpec code examples
-thor :todo                   # Look for TODO and FIXME tags in the code
-thor :version                # Git Tag number of this repo
-
-config
-------
-thor config:clean     # Removes clearbooks config file
-thor config:generate  # Generate clearbooks config file
-
-info
-----
-thor info:overview  # Shows system overview
-
-version
--------
-thor version:show  # Show version of this app
-
-
+$thor_tasks$
 ```
 
 ## If something goes wrong
