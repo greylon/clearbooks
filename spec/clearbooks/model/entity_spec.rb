@@ -1,7 +1,15 @@
-require 'spec_helper'
+#!/usr/bin/env ruby
+
+
+# System include
 require 'savon'
 
+# Custom include
+require 'spec_helper'
+
+
 module Clearbooks
+
   describe Clearbooks do
 
     before(:all) { savon.mock! }
@@ -40,8 +48,8 @@ module Clearbooks
       end
     end
 
-    describe '::list_entities', :focus => true do
-      let(:xml) { File.read('spec/fixtures/response/entities.xml') }
+    describe '::list_entities' do
+      let(:xml) { File.read('spec/fixtures/response/list_entities.xml') }
 
       let(:entities) do
         savon.expects(:list_entities).with(message: message).returns(xml)
@@ -82,6 +90,15 @@ module Clearbooks
           expect(entity.supplier[:default_credit_terms]).to eq 30
           expect(entity.customer).to be_nil
         end
+      end
+    end
+
+    describe '::delete_entity' do
+      let(:xml) { File.read('spec/fixtures/response/delete_entity.xml') }
+
+      it 'deletes an entity with given id' do
+        savon.expects(:delete_entity).with(message: message).returns(xml)
+        expect(Clearbooks.delete_entity(1)).to eq true
       end
     end
 

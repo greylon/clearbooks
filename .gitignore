@@ -9,3 +9,4 @@
 /.clearbooks/
 /.idea/
 /Gemfile.lock
+*.gem

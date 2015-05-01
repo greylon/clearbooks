@@ -75,57 +75,20 @@ Gem::Specification.new do |spec|
   ## Dependencies
 
   # Ruby VM
-  spec.required_ruby_version  = '~> 2.2'
+  spec.required_ruby_version  = '>= 1.9'
 
   # General
-  spec.add_runtime_dependency 'thor'
+  spec.add_runtime_dependency 'thor', '~> 0.19'
 
   # Middlewares
-  spec.add_runtime_dependency 'savon'
+  spec.add_runtime_dependency 'savon', '~> 2.11'
 
-  # Package building
-  spec.add_runtime_dependency 'fpm'
+  spec.add_runtime_dependency 'andand', '~> 1.3'
 
-  # Shell
-  spec.add_runtime_dependency 'ptools'
-  spec.add_runtime_dependency 'os'
-
-  # Encryption / Security
-  spec.add_runtime_dependency 'bcrypt-ruby'
-  spec.add_runtime_dependency 'scrypt'
-
-  # Data RPCs and Messaging
-  spec.add_runtime_dependency 'faraday'
-  spec.add_runtime_dependency 'mime-types'
-
-  # Data Exchange Containers/Parsing
-  spec.add_runtime_dependency 'oj'
-  spec.add_runtime_dependency 'ox'
-  # spec.add_runtime_dependency 'nokogiri'
-  # spec.add_runtime_dependency 'hpricot'
-  # spec.add_runtime_dependency 'cobravsmongoose'
-
-  # Caching
-  spec.add_runtime_dependency 'moneta'
-
-  # l10n
-  spec.add_runtime_dependency 'gettext'
-
-  # Monadic/Functional
-  spec.add_runtime_dependency 'andand'
-  spec.add_runtime_dependency 'ick'
-
-  # Misc System
-  spec.add_runtime_dependency 'awesome_print'
-  spec.add_runtime_dependency 'ntp'
-  spec.add_runtime_dependency 'uuid'
-  spec.add_runtime_dependency 'money'
-
-  ## System libraries needed (info for the user)
-  # spec.requirements 'iconv zlib libmagic'
+  spec.add_runtime_dependency 'pry', '~> 0.10'
 
 
-  ## Post Install
+  # Post Install
   spec.post_install_message = <<-EOS
                                                              
       ____ _     _____    _    ____  ____   ___   ___  _  ______  

@@ -3,9 +3,9 @@
 
 # System includes
 require 'ostruct'
-require 'awesome_print'
 require 'andand'
 require 'tempfile'
+require 'awesome_print'
 require 'os'
 
 # Custom includes

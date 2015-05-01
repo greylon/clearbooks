@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'clearbooks/version'
 
 # @class  Server command class
 # @brief  Implements the server command

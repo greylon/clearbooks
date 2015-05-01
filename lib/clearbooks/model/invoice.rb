@@ -6,7 +6,7 @@
 module Clearbooks
 
   # @class    Clearbooks Invoice model
-  # @brief    FIXME
+  # @brief    Used to list existing invoices or create new.
   #
   # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
   class Invoice < Base
@@ -104,7 +104,7 @@ module Clearbooks
     # @fn       def initialize data {{{
     # @brief    Constructor for Invoice model
     #
-    # @param    [FIXME]     data      FIXME
+    # @param    [Hash]     data      Invoice attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
     def initialize data
       @invoice_id       = data.savon(:invoice_id).to_i
 
@@ -150,7 +150,7 @@ module Clearbooks
           :@project     => @project,
 
           description:  @description,
-          items:        items.map(&:to_savon)
+          items:        { item: items.map(&:to_savon) }
         }
       }
     end # }}}

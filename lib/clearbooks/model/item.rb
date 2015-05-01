@@ -1,10 +1,6 @@
 #!/usr/bin/env ruby
 
 
-# System include
-require 'bigdecimal'
-
-
 # @module     Clearbooks
 # @brief      Handles Ruby idomatic expression of Clear Books SOAP API
 module Clearbooks
@@ -50,10 +46,10 @@ module Clearbooks
     # @fn       def initialize data {{{
     # @brief    Constructor for Item model
     #
-    # @param    [FIXME]     data      FIXME
+    # @param    [Hash]     data      Item attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
     def initialize data
       @description  = data.savon :description
-      @unit_price   = BigDecimal.new data.savon :unit_price
+      @unit_price   = BigDecimal.new data.savon(:unit_price), 2
       @quantity     = data.savon(:quantity).to_i
       @type         = data.savon :type
       @vat          = data.savon :vat
@@ -66,15 +62,12 @@ module Clearbooks
     # @return   [Hash]      Returns self as Savon readable Hash
     def to_savon
       {
-        item: {
-          :@unitPrice => @unit_price.to_f,
-          :@quantity  => @quantity,
-          :@type      => @type,
-          :@vat       => @vat,
-          :@vat_rate  => @vat_rate,
-
-          description: @description
-        }
+            :@unitPrice     => @unit_price.to_f,
+            :@quantity      => @quantity,
+            :@type          => @type,
+            :@vat           => @vat,
+            :@vat_rate      => @vat_rate,
+            :description    => @description
       }
     end # }}}
 

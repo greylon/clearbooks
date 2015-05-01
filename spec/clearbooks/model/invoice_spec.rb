@@ -1,7 +1,15 @@
-require 'spec_helper'
+#!/usr/bin/env ruby
+
+
+# System include
 require 'savon'
 
+# Custom include
+require 'spec_helper'
+
+
 module Clearbooks
+
   describe Clearbooks do
 
     before(:all) { savon.mock! }
@@ -10,7 +18,7 @@ module Clearbooks
     let(:message) { :any }
 
     describe '::list_invoices' do
-      let(:response) { File.read('spec/fixtures/response/invoices.xml') }
+      let(:response) { File.read('spec/fixtures/response/list_invoices.xml') }
       let(:invoices) do
         savon.expects(:list_invoices).with(message: message).returns(response)
         Clearbooks.list_invoices
@@ -72,8 +80,10 @@ module Clearbooks
     end
 
     describe '::create_invoice' do
-      let(:items) { [Item.new(description: 'abcd', unit_price: 10,
-                              quantity: 5, type: '1001001', vat: 0, vat_rate: '0.00:Out')] }
+      let(:items) { [Item.new(description: 'abcd', unit_price: 9.99,
+                              quantity: 5, type: '1001001', vat: 0, vat_rate: '0.00:Out'),
+                     Item.new(description: 'abcd', unit_price: 19.99,
+                              quantity: 7, type: '1001001', vat: 0, vat_rate: '0.00:Out')] }
       let(:invoice) { Invoice.new(date_created: Date.today,
                                   credit_terms: 30,
                                   entity_id: 1,
@@ -95,3 +105,5 @@ module Clearbooks
     end
   end
 end
+
+

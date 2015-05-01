@@ -8,14 +8,14 @@ require 'rake'
 
 # Custom library includes
 require_relative 'clearbooks/core_ext'
+require_relative 'clearbooks/error'
 
 
 # @module         module Clearbooks
 # @brief          Clearbooks modules and classes namespace
 module Clearbooks
 
-  require_relative 'clearbooks/version'
-  require_relative 'clearbooks/error'
+  DEFAULT_CONFIG = '.clearbooks/config.yml'.freeze
 
   autoload :Client,         'clearbooks/library/client'
   autoload :Configuration,  'clearbooks/library/configuration'
@@ -24,19 +24,20 @@ module Clearbooks
   autoload :Invoice,        'clearbooks/model/invoice'
   autoload :Item,           'clearbooks/model/item'
   autoload :Entity,         'clearbooks/model/entity'
-
-  DEFAULT_CONFIG = '.clearbooks/config.yaml'.freeze
-
+  autoload :Project,        'clearbooks/model/project'
+  autoload :AccountCode,    'clearbooks/model/account_code'
+  autoload :Journal,        'clearbooks/model/journal'
+  autoload :Ledger,         'clearbooks/model/ledger'
+  autoload :Payment,         'clearbooks/model/payment'
 
   class << self
 
     # @fn       def client {{{
     # @brief    Clearbooks client instance. You can use static methods in Clearbooks module instead of referring to the client instance.
     #
-    # @example
-    #   Clearbooks.list_invoices
-    #   # or
-    #   Clearbooks.client.list_invoices
+    # @example  Clearbooks.list_invoices
+    #           # or
+    #           Clearbooks.client.list_invoices
     def client
       @client ||= Client.new
     end # }}}
@@ -54,12 +55,11 @@ module Clearbooks
     #
     # @return   [Hash]    Returns Configuration object
     #
-    # @example
-    #       Clearbooks.configure do |config|
-    #         config.api_key = 'api_key'
-    #         config.log = true
-    #         config.logger = Logger.new(STDOUT)
-    #       end
+    # @example  Clearbooks.configure do |config|
+    #             config.api_key = 'api_key'
+    #             config.log = true
+    #             config.logger = Logger.new(STDOUT)
+    #           end
     def configure
       yield config
     end # }}}
@@ -87,13 +87,6 @@ module Clearbooks
   end # of class << self
 
 end # of module Clearbooks
-
-
-## Library
-require_relative 'clearbooks/library/dbc'
-require_relative 'clearbooks/library/helpers'
-require_relative 'clearbooks/library/logger'
-require_relative 'clearbooks/library/secure_config'
 
 
 # vim:ts=2:tw=100:wm=100:syntax=ruby

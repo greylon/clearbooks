@@ -17,6 +17,8 @@ require 'rdiscount'
 require 'benchmark'
 require 'wicked_pdf'
 
+require 'clearbooks/version'
+
 
 ### Project Customization for Thor and Rake
 
@@ -32,7 +34,7 @@ task :readme do |t|
   target    = "README.md"
 
   content      = File.readlines( source ).collect!{ |line| line.rstrip }
-  version   = `git describe --tags`.strip
+  version   = Clearbooks::VERSION
 
   content[ content.index( "$Version$" ) ] = "Version " + version if( content.include?( "$Version$" ) )
   File.write( target, content.join("\n") )

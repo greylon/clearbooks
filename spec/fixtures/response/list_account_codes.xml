@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:ns1="https://secure.clearbooks.co.uk/api/soap/">
+  <SOAP-ENV:Header>
+    <ns1:authenticate>true</ns1:authenticate>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <SOAP-ENV:listAccountCodesResponse>
+      <accountCodes>
+        <ns1:AccountCode id="4001001" account_name="Salaries" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4001002" account_name="PAYE" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4001003" account_name="Employees' NICs" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4001004" account_name="Employers' NICs" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4001005" account_name="Pension" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4002001" account_name="Rent and rates" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4002002" account_name="Heat and lighting" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4002003" account_name="Insurance" group_name="Administrative expenses" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4003001" account_name="Telephone" group_name="Administrative expenses" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4003002" account_name="Internet" group_name="Administrative expenses" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4004001" account_name="General admin" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4004002" account_name="Subscriptions" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4004003" account_name="Printing and stationery" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4004004" account_name="Cleaning" group_name="Administrative expenses" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4004005" account_name="Postage and packaging" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4005001" account_name="Travel" group_name="Administrative expenses" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4005002" account_name="Mileage" group_name="Administrative expenses" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4005003" account_name="Subsistence" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4006001" account_name="Advertising" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4006002" account_name="Marketing" group_name="Administrative expenses" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4007001" account_name="Accounting fees" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4007002" account_name="Legal fees" group_name="Administrative expenses" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4008001" account_name="Entertaining staff" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4008002" account_name="Entertaining clients" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4009001" account_name="Operating leases" group_name="Administrative expenses"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="4010001" account_name="Fixtures &amp;amp; fittings dep"
+                         group_name="Administrative expenses" default_vat_rate="0.00:Out" show_sales="false"
+                         show_purchases="false"/>
+        <ns1:AccountCode id="4010002" account_name="Plant &amp;amp; equipment dep" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="4010003" account_name="Land &amp;amp; property dep" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="4010004" account_name="Motor vehicles dep" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="4011001" account_name="Bad debt expense" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="4012001" account_name="Amortisation" group_name="Administrative expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="2001001" account_name="Cost of sales" group_name="Cost of sales" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="2001002" account_name="Labour" group_name="Cost of sales" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="2001003" account_name="Materials" group_name="Cost of sales" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="2002001" account_name="CIS labour cost (20%)" group_name="Cost of sales"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="2002002" account_name="CIS labour cost (30%)" group_name="Cost of sales"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="2002003" account_name="CIS labour cost (Gross)" group_name="Cost of sales"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="7501001" account_name="Trade debtors" group_name="Current assets"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="7501002" account_name="Bad debt provision" group_name="Current assets" default_vat_rate=""
+                         show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="7502001" account_name="Bank Account 1" group_name="Current assets"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="7503001" account_name="CIS debtor" group_name="Current assets" default_vat_rate="0.00:Out"
+                         show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="7503003" account_name="Loans receivable" group_name="Current assets"
+                         default_vat_rate="0.00:Out" show_sales="true" show_purchases="true"/>
+        <ns1:AccountCode id="7504001" account_name="Inventory" group_name="Current assets" default_vat_rate="0.00:Out"
+                         show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="8501001" account_name="Trade creditors" group_name="Current liabilities"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="8502001" account_name="VAT control" group_name="Current liabilities"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="8502002" account_name="VAT cash control" group_name="Current liabilities"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="8502003" account_name="VAT payable" group_name="Current liabilities"
+                         default_vat_rate="0.00:Out" show_sales="true" show_purchases="true"/>
+        <ns1:AccountCode id="8503001" account_name="CIS creditor" group_name="Current liabilities"
+                         default_vat_rate="0.00:Out" show_sales="true" show_purchases="true"/>
+        <ns1:AccountCode id="8503002" account_name="Corporation tax" group_name="Current liabilities"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="8503005" account_name="Deferred revenue" group_name="Current liabilities"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="9501001" account_name="Dividends" group_name="Dividends" default_vat_rate="0.00:Out"
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="9001001" account_name="Share capital" group_name="Equity" default_vat_rate="0.00:Out"
+                         show_sales="true" show_purchases="false"/>
+        <ns1:AccountCode id="9001002" account_name="Retained earnings" group_name="Equity" default_vat_rate="0.00:Out"
+                         show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="6001001" account_name="Interest expense" group_name="Finance costs"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="6001002" account_name="Bank charges" group_name="Finance costs" default_vat_rate="0.00:Out"
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="5501001" account_name="Interest income" group_name="Finance income"
+                         default_vat_rate="0.00:Out" show_sales="true" show_purchases="false"/>
+        <ns1:AccountCode id="7001001" account_name="Fixtures &amp;amp; fittings" group_name="Non current assets"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="7001002" account_name="Plant &amp;amp; equipment" group_name="Non current assets"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="7001003" account_name="Land &amp;amp; property" group_name="Non current assets"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="7001004" account_name="Motor vehicles" group_name="Non current assets" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="7002001" account_name="Fixtures &amp;amp; fittings acc dep" group_name="Non current assets"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="7002002" account_name="Plant &amp;amp; equipment acc dep" group_name="Non current assets"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="7002003" account_name="Land &amp;amp; property acc dep" group_name="Non current assets"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="7002004" account_name="Motor vehicles acc dep" group_name="Non current assets"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="7004001" account_name="Intangible assets" group_name="Non current assets"
+                         default_vat_rate="" show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="7005001" account_name="Accumulated amortisation" group_name="Non current assets"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="8001001" account_name="Loans payable" group_name="Non current liabilities"
+                         default_vat_rate="0.00:Out" show_sales="true" show_purchases="true"/>
+        <ns1:AccountCode id="5001001" account_name="Forex movement" group_name="Other expenses"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="false"/>
+        <ns1:AccountCode id="3001001" account_name="Other income" group_name="Other income" default_vat_rate=""
+                         show_sales="true" show_purchases="false"/>
+        <ns1:AccountCode id="3001002" account_name="Reclaimed expenses" group_name="Other income" default_vat_rate=""
+                         show_sales="true" show_purchases="true"/>
+        <ns1:AccountCode id="1001001" account_name="Revenue" group_name="Revenue" default_vat_rate="" show_sales="true"
+                         show_purchases="false"/>
+        <ns1:AccountCode id="1001002" account_name="Labour revenue" group_name="Revenue" default_vat_rate=""
+                         show_sales="true" show_purchases="false"/>
+        <ns1:AccountCode id="1001003" account_name="Materials revenue" group_name="Revenue" default_vat_rate=""
+                         show_sales="true" show_purchases="false"/>
+        <ns1:AccountCode id="1002001" account_name="CIS labour revenue (20%)" group_name="Revenue" default_vat_rate=""
+                         show_sales="true" show_purchases="false"/>
+        <ns1:AccountCode id="1002002" account_name="CIS labour revenue (30%)" group_name="Revenue" default_vat_rate=""
+                         show_sales="true" show_purchases="false"/>
+        <ns1:AccountCode id="1002003" account_name="CIS labour revenue (Gross)" group_name="Revenue" default_vat_rate=""
+                         show_sales="false" show_purchases="true"/>
+        <ns1:AccountCode id="6501001" account_name="Corporation tax" group_name="Tax expense"
+                         default_vat_rate="0.00:Out" show_sales="false" show_purchases="true"/>
+      </accountCodes>
+    </SOAP-ENV:listAccountCodesResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
