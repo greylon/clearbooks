@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.16.2
+Version 0.16.3
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
@@ -450,7 +450,7 @@ Here is a current listing of all tasks:
 
 
 ```
-rake build                  # Build clearbooks-0.16.2.gem into the pkg directory
+rake build                  # Build clearbooks-0.16.3.gem into the pkg directory
 rake cucumber:pretty        # Run Cucumber features
 rake cucumber:progress      # Run Cucumber features
 rake default                # Show the default task when executing rake without arguments
@@ -458,7 +458,8 @@ rake docs:generate          # Generate Yardoc documentation for this project
 rake docs:graph             # Generate Yard Graphs for this project
 rake guard:default          # Execute Ruby Guard
 rake help                   # Shows the usage help screen
-rake install                # Build and install clearbooks-0.16.2.gem into system gems
+rake install                # Build and install clearbooks-0.16.3.gem into system gems
+rake install:local          # Build and install clearbooks-0.16.3.gem into system gems without network access
 rake man:build              # Build the manual pages
 rake man:clean              # Clean up from the built man pages
 rake measurement:benchmark  # When executing rake tasks measure elapsed time, used with other tasks
@@ -469,7 +470,7 @@ rake readme                 # Generate proper README file from templates
 rake readme:all             # Generate proper README file from templates
 rake readme:subdirs         # Builds generates readme files in all sub-directories
 rake readme:topdir          # Generate top level README file from template
-rake release                # Create tag v0.16.2 and build and push clearbooks-0.16.2.gem to Rubygems
+rake release                # Create tag v0.16.3 and build and push clearbooks-0.16.3.gem to Rubygems
 rake spec                   # RSpec Core Tasks
 rake todo                   # Look for TODO and FIXME tags in the code
 rake version                # Git Tag number of this repo
@@ -495,7 +496,7 @@ thor :docs:generate          # Generate Yardoc documentation for this project
 thor :docs:graph             # Generate Yard Graphs for this project
 thor :guard:default          # Execute Ruby Guard
 thor :help                   # Shows the usage help screen
-thor :install                # Build and install clearbooks-0.16.2 .gem into system gems
+thor :install                # Build and install clearbooks-0.16.3 .gem into system gems
 thor :man:build              # Build the manual pages
 thor :man:clean              # Clean up from the built man pages
 thor :measurement:benchmark  # When executing rake tasks measure elapsed time, used with other tasks
