@@ -49,7 +49,7 @@ module Clearbooks
     # @param    [Hash]     data      Item attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
     def initialize data
       @description  = data.savon :description
-      @unit_price   = BigDecimal.new data.savon :unit_price
+      @unit_price   = BigDecimal.new data.savon(:unit_price), 2
       @quantity     = data.savon(:quantity).to_i
       @type         = data.savon :type
       @vat          = data.savon :vat

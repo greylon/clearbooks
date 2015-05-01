@@ -5,6 +5,8 @@
 require 'ostruct'
 require 'andand'
 require 'tempfile'
+require 'awesome_print'
+require 'os'
 
 # Custom includes
 require File.expand_path( File.dirname( __FILE__ ) + '/mixin/shell' )

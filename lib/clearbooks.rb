@@ -8,7 +8,6 @@ require 'rake'
 
 # Custom library includes
 require_relative 'clearbooks/core_ext'
-require_relative 'clearbooks/version'
 require_relative 'clearbooks/error'
 
 
@@ -16,7 +15,7 @@ require_relative 'clearbooks/error'
 # @brief          Clearbooks modules and classes namespace
 module Clearbooks
 
-  DEFAULT_CONFIG = '.clearbooks/config.yaml'.freeze
+  DEFAULT_CONFIG = '.clearbooks/config.yml'.freeze
 
   autoload :Client,         'clearbooks/library/client'
   autoload :Configuration,  'clearbooks/library/configuration'

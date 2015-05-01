@@ -44,6 +44,8 @@ group :development do # {{{
   gem 'guard'
   gem 'guard-shell'
   gem 'ptools'
+  gem 'os'
+  gem 'awesome_print'
 
   # Notifications from live-reload etc.
   gem 'growl'

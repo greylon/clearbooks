@@ -80,9 +80,9 @@ module Clearbooks
     end
 
     describe '::create_invoice' do
-      let(:items) { [Item.new(description: 'abcd', unit_price: '9.99',
+      let(:items) { [Item.new(description: 'abcd', unit_price: 9.99,
                               quantity: 5, type: '1001001', vat: 0, vat_rate: '0.00:Out'),
-                     Item.new(description: 'abcd', unit_price: '19.99',
+                     Item.new(description: 'abcd', unit_price: 19.99,
                               quantity: 7, type: '1001001', vat: 0, vat_rate: '0.00:Out')] }
       let(:invoice) { Invoice.new(date_created: Date.today,
                                   credit_terms: 30,

@@ -15,6 +15,9 @@ require 'fileutils'
 require 'thor' unless defined? Thor::Runner
 require 'thor/rake_compat'
 
+
+require 'clearbooks/version'
+
 # @class        class Default < Thor
 # @brief        Default Tasks for Thor, with thight Rake integration
 class Default < Thor
