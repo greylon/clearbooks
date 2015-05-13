@@ -13,6 +13,7 @@ module Clearbooks
     client wsdl: Clearbooks.config.wsdl,
         log: Clearbooks.config.log,
         logger: Clearbooks.config.logger,
+        log_level: Clearbooks.config.log_level,
         soap_header: {'tns:authenticate' => '',
                       attributes!: {'tns:authenticate' =>
                                         {apiKey: Clearbooks.config.api_key}}}
