@@ -13,7 +13,8 @@ module Clearbooks
 
     attr_reader :invoice_id, :date_created, :date_due, :date_accrual, :credit_terms, :description, 
                 :entity_id, :reference, :project, :status, :invoice_prefix,
-                :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id
+                :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id,
+                :gross, :net, :vat, :paid, :balance
 
     # @!attribute [r] invoice_id
     # @return [Fixnum] Invoice Id.
@@ -129,6 +130,12 @@ module Clearbooks
 
       @type             = data.savon(:type)
       @bank_payment_id  = data.savon(:bank_payment_id).to_i
+
+      @gross            = BigDecimal.new data.savon(:gross)
+      @net              = BigDecimal.new data.savon(:net)
+      @vat              = BigDecimal.new data.savon(:vat)
+      @paid             = BigDecimal.new data.savon(:paid)
+      @balance          = BigDecimal.new data.savon(:balance)
 
       @items = Item.build( data[:items].is_a?(Array) ? data[:items] : data[:items][:item] )
     end # }}}
