@@ -16,6 +16,8 @@ module Clearbooks
                 :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id,
                 :gross, :net, :vat, :paid, :balance
 
+    alias :id :invoice_id
+
     # @!attribute [r] invoice_id
     # @return [Fixnum] Invoice Id.
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
@@ -123,7 +125,7 @@ module Clearbooks
       @invoice_prefix   = data.savon :invoice_prefix
       @invoice_number   = data.savon :invoice_number
       @external_id      = data.savon(:external_id).to_i
-      @statement_page   = data.savon :statement_page
+      @statement_page   = CGI.unescapeHTML data.savon :statement_page
 
       @date_modified    = parse_date data.savon(:date_modified)
       @date_accrual     = parse_date data.savon(:date_accrual)
