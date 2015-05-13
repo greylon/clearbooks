@@ -41,4 +41,15 @@ class Hash
       hash
     end
   end
+
+  # @fn         def camelize_keys {{{
+  # @brief      Converts keys to camel case
+  def camelize_keys
+    self.inject(Hash.new) do |h, (k, v)|
+      kk = k.to_s.camelize :lower
+      kk = kk.to_sym if k.is_a? Symbol
+      h[kk] = v
+      h
+    end
+  end
 end
