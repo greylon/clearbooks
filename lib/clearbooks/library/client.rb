@@ -38,7 +38,7 @@ module Clearbooks
       entity_id = query.delete :entity_id
       response = super message: {query: {entityId: {'xsd:integer' => entity_id}}, attributes!: {query: query.camelize_keys}}
       response = response.to_hash
-      Invoice.build response[:list_invoices_response][:create_invoices_return][:invoice]
+      Invoice.build response[:list_invoices_response][:create_invoices_return].andand[:invoice]
     end # }}}
 
     # @fn     def create_invoice {{{

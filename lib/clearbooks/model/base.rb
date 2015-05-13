@@ -20,10 +20,12 @@ module Clearbooks
       #
       # @note     Still returns an array when called with a hash representing a single item.
       def build data
-        unless data.is_a? Array
-          [ create(data) ]
+        if data.nil?
+          Array.new
+        elsif data.is_a? Array
+          data.map { |d| create(d) }
         else
-          return data.map { |d| create(d) }
+          [ create(data) ]
         end
       end  # }}}
 
