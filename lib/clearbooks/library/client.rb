@@ -36,8 +36,11 @@ module Clearbooks
       defaults = { ledger: :sales }
       attributes = defaults.merge(query)
       entity_id = attributes.delete :entity_id
-      query = entity_id ? {entityId: {'xsd:integer' => entity_id}} : ''
-      response = super message: {query: query, attributes!: {query: attributes}}
+      invoice_id = attributes.delete :id
+      children = {}
+      children[:entityId] = {'xsd:integer' => entity_id} if entity_id
+      children[:id] = {'xsd:integer' => invoice_id} if invoice_id
+      response = super message: {query: children, attributes!: {query: attributes}}
       response = response.to_hash
       Invoice.build response[:list_invoices_response][:create_invoices_return].andand[:invoice]
     end # }}}
