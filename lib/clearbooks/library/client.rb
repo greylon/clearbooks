@@ -19,7 +19,7 @@ module Clearbooks
                                         {apiKey: Clearbooks.config.api_key}}}
 
     operations :create_invoice, :list_invoices,
-               :create_entity, :list_entities, :delete_entity,
+               :create_entity, :list_entities, :delete_entity, :update_entity,
                :create_project, :list_projects,
                :list_account_codes,
                :create_journal, :delete_journal,
@@ -92,6 +92,12 @@ module Clearbooks
       response = super message: entity.to_savon
       response = response.to_hash
       { entity_id: response[:create_entity_response][:create_entity_return].to_i }
+    end # }}}
+
+    def update_entity entity
+      response = super message: {entityId: entity.id}.merge(entity.to_savon)
+      response = response.to_hash
+      { entity_id: response[:update_entity_response][:update_entity_return].to_i }
     end # }}}
 
     # @fn     def list_entities {{{
