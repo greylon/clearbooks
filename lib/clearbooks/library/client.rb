@@ -34,9 +34,10 @@ module Clearbooks
     #   Clearbooks.list_invoices
     def list_invoices query = {}
       defaults = { ledger: :sales }
-      query = defaults.merge(query)
-      entity_id = query.delete :entity_id
-      response = super message: {query: {entityId: {'xsd:integer' => entity_id}}, attributes!: {query: query.camelize_keys}}
+      attributes = defaults.merge(query)
+      entity_id = attributes.delete :entity_id
+      query = entity_id ? {entityId: {'xsd:integer' => entity_id}} : ''
+      response = super message: {query: query, attributes!: {query: attributes}}
       response = response.to_hash
       Invoice.build response[:list_invoices_response][:create_invoices_return].andand[:invoice]
     end # }}}

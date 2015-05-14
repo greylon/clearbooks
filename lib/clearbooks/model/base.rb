@@ -58,7 +58,7 @@ module Clearbooks
       if date.nil? || date.is_a?(Date)
         date
       else
-        DateTime.strptime(date, '%Y-%m-%d %H:%M:%S').to_date
+        DateTime.strptime(date, '%Y-%m-%d %H:%M:%S').to_date rescue Date.strptime(date, '%Y-%m-%d')
       end
     end # }}}
 
