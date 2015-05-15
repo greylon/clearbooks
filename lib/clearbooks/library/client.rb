@@ -18,7 +18,7 @@ module Clearbooks
                       attributes!: {'tns:authenticate' =>
                                         {apiKey: Clearbooks.config.api_key}}}
 
-    operations :create_invoice, :list_invoices,
+    operations :create_invoice, :list_invoices, :void_invoice,
                :create_entity, :list_entities, :delete_entity, :update_entity,
                :create_project, :list_projects,
                :list_account_codes,
@@ -70,6 +70,19 @@ module Clearbooks
       }
     end # }}}
 
+    # FIXME add documentation
+    def void_invoice ledger, invoice_id
+      message = {
+          invoice: {
+              :@type => ledger,
+              :@id => invoice_id
+          }
+      }
+      response = super message: message
+      response = response.to_hash
+      response[:void_invoice_response][:void_success]
+    end
+
     # @fn     def create_entity {{{
     # @brief  Creates entity via Clearbooks API.
     # @param  [Entity] entity An entity to be created. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
@@ -94,6 +107,7 @@ module Clearbooks
       { entity_id: response[:create_entity_response][:create_entity_return].to_i }
     end # }}}
 
+    # FIXME add documentation
     def update_entity entity
       response = super message: {entityId: entity.id}.merge(entity.to_savon)
       response = response.to_hash

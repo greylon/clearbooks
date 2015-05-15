@@ -1,4 +1,6 @@
 require 'yaml'
+require 'andand'
+require 'logger'
 
 module Clearbooks
   class Configuration
@@ -10,7 +12,8 @@ module Clearbooks
 
       @api_key = ENV['CLEARBOOKS_API_KEY'] || defaults['api_key']
       @wsdl = defaults['wsdl'] || 'https://secure.clearbooks.co.uk/api/wsdl/'
-      @logger = Logger.new(STDOUT) if @log = defaults['log']
+      @log = defaults['log'] || false
+      @logger = Logger.new(STDOUT)
       @log_level = defaults['log_level'].andand.to_sym || :info
       self
     end
