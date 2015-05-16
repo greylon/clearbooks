@@ -2,7 +2,7 @@
 
 
 # @class        class Hash
-# @brief
+# @brief        Ruby Hash Object functions adding Savon and some other tweaks
 class Hash
 
   # @fn         def except *keys {{{
@@ -12,7 +12,7 @@ class Hash
     copy = self.dup
     keys.each { |key| copy.delete(key) }
     copy
-  end #}}}
+  end # }}}
 
   # @fn         def compact {{{
   # @brief      Deletes keys with +nil+ values from hash copy and returns it
@@ -29,7 +29,7 @@ class Hash
     else
       v
     end
-  end #}}}
+  end # }}}
 
   # @fn         def from_savon {{{
   # @brief      Translates ":@key" savon attribute keys to ":key"
@@ -40,7 +40,7 @@ class Hash
       hash[k.to_sym] = v
       hash
     end
-  end
+  end # }}}
 
   # @fn         def camelize_keys {{{
   # @brief      Converts keys to camel case
@@ -51,5 +51,7 @@ class Hash
       h[kk] = v
       h
     end
-  end
+  end # }}}
 end
+
+

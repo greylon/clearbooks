@@ -32,7 +32,7 @@ def egrep( pattern )
 end # }}}
 
 # @fn       def clean target # {{{
-# @brief    Clean thrift output from folder
+# @brief    Clean output from folder
 #
 # @param    [String]      target      Target folder to clean
 def clean target
