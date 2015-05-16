@@ -18,11 +18,22 @@ module Clearbooks
                       attributes!: {'tns:authenticate' =>
                                         {apiKey: Clearbooks.config.api_key}}}
 
-    operations :create_invoice, :list_invoices, :void_invoice,
-               :create_entity, :list_entities, :delete_entity, :update_entity,
-               :create_project, :list_projects,
+    operations :create_invoice,
+               :list_invoices,
+               :void_invoice,
+
+               :create_entity,
+               :list_entities,
+               :delete_entity,
+               :update_entity,
+
+               :create_project,
+               :list_projects,
+
                :list_account_codes,
-               :create_journal, :delete_journal,
+
+               :create_journal,
+               :delete_journal,
                :create_payment,
                :allocate_payment
 
@@ -70,7 +81,13 @@ module Clearbooks
       }
     end # }}}
 
-    # FIXME add documentation
+    # @fn     def void_invoice {{{
+    # @brief  Voids invoice via Clearbooks API.
+    # @param  [String] ledger 'sales' or 'purchases'.
+    # @param  [Fixnum] invoice_id Invoice id.
+    # @return [Hash] [:@success, :@msg] Boolean result of the operation and a short message describing an error (if any).
+    # @example
+    #   Clearbooks.void_invoice 'purchases', 10
     def void_invoice ledger, invoice_id
       message = {
           invoice: {
@@ -107,7 +124,25 @@ module Clearbooks
       { entity_id: response[:create_entity_response][:create_entity_return].to_i }
     end # }}}
 
-    # FIXME add documentation
+    # @fn     def update_entity {{{
+    # @brief  Updates entity via Clearbooks API.
+    # @param  [Entity] entity An entity to be updated. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+    # @return [Hash] [:entity_id] ID of the updated entity.
+    # @example
+    #  Clearbooks.create_entity Clearbooks::Entity.new(id: 10,
+    #             company_name: 'DataLogic',
+    #             contact_name: 'Oleg Kukareka',
+    #             address1: 'Kiev',
+    #             country: 'UA',
+    #             postcode: '04073',
+    #             email: 'info@datalogic.co.uk',
+    #             website: 'https://datalogic.co.uk',
+    #             phone1: '01234 567890',
+    #             supplier: {
+    #             default_account_code: '1001001',
+    #             default_credit_terms: 30,
+    #             default_vat_rate: 0
+    #         })
     def update_entity entity
       response = super message: {entityId: entity.id}.merge(entity.to_savon)
       response = response.to_hash
