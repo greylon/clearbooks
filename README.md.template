@@ -191,6 +191,24 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
 ```
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
+### Clearbooks.void_invoice
+
+Example:
+
+```ruby
+Clearbooks.void_invoice(
+    'purchases',    # 'purchases' or 'sales'
+    10              # Invoice id
+) # Clearbooks.void_invoice
+
+# returns a Hash:
+
+    {
+        :@success   => true,
+        :@msg       => 'Some status message'
+    }
+```
+
 ## Managing entities
 ### Clearbooks.list_entities
 
@@ -215,6 +233,24 @@ Example:
 
 ```ruby
 Clearbooks.create_entity Clearbooks::Entity.new(
+    company_name: 'Company',
+    contact_name: 'John Doe',
+    supplier: {
+       default_account_code: '1001001', # See Clearbooks.list_account_codes
+       default_credit_terms: 30,
+       default_vat_rate: 0
+   }
+) # Clearbooks::Entity.new
+```
+Full list of options: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+
+### Clearbooks.update_entity
+
+Example:
+
+```ruby
+Clearbooks.update_entity Clearbooks::Entity.new(
+    id: 10,
     company_name: 'Company',
     contact_name: 'John Doe',
     supplier: {

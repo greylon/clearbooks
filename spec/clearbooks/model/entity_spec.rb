@@ -48,6 +48,38 @@ module Clearbooks
       end
     end
 
+    describe '::update_entity' do
+      let(:entity) do
+        Entity.new(id: 10,
+                   company_name: 'DataLogic',
+                   contact_name: 'Oleg Kukareka',
+                   address1: 'Kiev',
+                   country: 'UA',
+                   postcode: '04073',
+                   email: 'info@datalogic.co.uk',
+                   website: 'https://datalogic.co.uk',
+                   phone1: '01234 567890',
+                   supplier: {
+                       default_account_code: '1001001',
+                       default_credit_terms: 30,
+                       default_vat_rate: 0
+                   })
+      end
+
+      let(:xml) { File.read('spec/fixtures/response/update_entity.xml') }
+
+      let(:response) do
+        savon.expects(:update_entity).with(message: message).returns(xml)
+        Clearbooks.update_entity(entity)
+      end
+
+      it 'updates existing entity' do
+        expect(response).to be_a Hash
+        expect(response[:entity_id]).to be_a Fixnum
+        expect(response[:entity_id]).to be > 0
+      end
+    end
+
     describe '::list_entities' do
       let(:xml) { File.read('spec/fixtures/response/list_entities.xml') }
 
@@ -83,7 +115,7 @@ module Clearbooks
           expect(entity.phone2).to eq '1234 567890'
           expect(entity.fax).to eq '2345 67890'
           expect(entity.website).to eq 'https://datalogic.co.uk'
-          expect(entity.external_id).to eq 3
+          expect(entity.external_id).to eq '3'
           expect(entity.statement_url).to eq 'https://secure.clearbooks.co.uk/s/58055:YGD2d9_WFz6GvKUv4V4anw'
           expect(entity.supplier[:default_account_code]).to eq '30'
           expect(entity.supplier[:default_vat_rate]).to eq '10'

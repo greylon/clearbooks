@@ -96,6 +96,7 @@ module Clearbooks
 
     # @fn     def void_invoice {{{
     # @brief  Voids invoice via Clearbooks API.
+    # Operation taken from WSDL schema https://secure.clearbooks.co.uk/api/wsdl/
     # @param  [String] ledger 'sales' or 'purchases'.
     # @param  [Fixnum] invoice_id Invoice id.
     # @return [Hash] [:@success, :@msg] Boolean result of the operation and a short message describing an error (if any).
@@ -140,6 +141,7 @@ module Clearbooks
 
     # @fn     def update_entity {{{
     # @brief  Updates entity via Clearbooks API.
+    # Operation taken from WSDL schema https://secure.clearbooks.co.uk/api/wsdl/
     # @param  [Entity] entity An entity to be updated. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
     # @return [Hash] [:entity_id] ID of the updated entity.
     # @example
