@@ -119,13 +119,13 @@ module Clearbooks
     # @param  [Entity] entity An entity to be created. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
     # @return [Hash] [:entity_id] ID of the created entity.
     # @example
-    #  Clearbooks.create_entity Clearbooks::Entity.new(company_name: 'DataLogic',
-    #         contact_name: 'Oleg Kukareka',
-    #             address1: 'Kiev',
-    #             country: 'UA',
-    #             postcode: '04073',
-    #             email: 'info@datalogic.co.uk',
-    #             website: 'https://datalogic.co.uk',
+    #  Clearbooks.create_entity Clearbooks::Entity.new(company_name: 'Example Inc.',
+    #         contact_name: 'John Doe',
+    #             address1: 'London',
+    #             country: 'UK',
+    #             postcode: '01100',
+    #             email: 'info@example.com',
+    #             website: 'http://example.com',
     #             phone1: '01234 567890',
     #             supplier: {
     #             default_account_code: '1001001',
@@ -146,13 +146,13 @@ module Clearbooks
     # @return [Hash] [:entity_id] ID of the updated entity.
     # @example
     #  Clearbooks.create_entity Clearbooks::Entity.new(id: 10,
-    #             company_name: 'DataLogic',
-    #             contact_name: 'Oleg Kukareka',
-    #             address1: 'Kiev',
-    #             country: 'UA',
-    #             postcode: '04073',
-    #             email: 'info@datalogic.co.uk',
-    #             website: 'https://datalogic.co.uk',
+    #             company_name: 'Example Inc.',
+    #             contact_name: 'John Doe',
+    #             address1: 'London',
+    #             country: 'UK',
+    #             postcode: '01100',
+    #             email: 'info@example.com',
+    #             website: 'http://example.com',
     #             phone1: '01234 567890',
     #             supplier: {
     #             default_account_code: '1001001',

@@ -21,6 +21,8 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.order = 'random'
 
+  Clearbooks.config.api_key ||= ''
+
 end # of RSpec.configure
 
 # vim:ts=2:tw=100:wm=100:syntax=ruby

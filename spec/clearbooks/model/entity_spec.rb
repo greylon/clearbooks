@@ -19,13 +19,13 @@ module Clearbooks
 
     describe '::create_entity' do
       let(:entity) do
-        Entity.new(company_name: 'DataLogic',
-                   contact_name: 'Oleg Kukareka',
-                   address1: 'Kiev',
-                   country: 'UA',
-                   postcode: '04073',
-                   email: 'info@datalogic.co.uk',
-                   website: 'https://datalogic.co.uk',
+        Entity.new(company_name: 'Example Inc.',
+                   contact_name: 'John Doe',
+                   address1: 'London',
+                   country: 'UL',
+                   postcode: '01100',
+                   email: 'info@example.com',
+                   website: 'http://example.com',
                    phone1: '01234 567890',
                    supplier: {
                        default_account_code: '1001001',
@@ -51,13 +51,13 @@ module Clearbooks
     describe '::update_entity' do
       let(:entity) do
         Entity.new(id: 10,
-                   company_name: 'DataLogic',
-                   contact_name: 'Oleg Kukareka',
-                   address1: 'Kiev',
-                   country: 'UA',
-                   postcode: '04073',
-                   email: 'info@datalogic.co.uk',
-                   website: 'https://datalogic.co.uk',
+                   company_name: 'Example Inc.',
+                   contact_name: 'John Doe',
+                   address1: 'London',
+                   country: 'UK',
+                   postcode: '01100',
+                   email: 'info@example.com',
+                   website: 'http://example.com',
                    phone1: '01234 567890',
                    supplier: {
                        default_account_code: '1001001',
@@ -90,7 +90,7 @@ module Clearbooks
 
       it 'returns list of entnties' do
         expect(entities).to be_an Array
-        expect(entities.length).to eq 4
+        expect(entities.length).to eq 2
       end
 
       describe Entity do
@@ -101,22 +101,22 @@ module Clearbooks
         end
 
         it 'has proper attribute values' do
-          expect(entity.id).to eq 7
-          expect(entity.company_name).to eq 'DataLogic'
-          expect(entity.contact_name).to eq 'Oleg Kukareka'
+          expect(entity.id).to eq 6
+          expect(entity.company_name).to eq 'Example Inc.'
+          expect(entity.contact_name).to eq 'John Foo'
           expect(entity.address1).to eq 'Street 1'
-          expect(entity.town).to eq 'Kiev'
-          expect(entity.county).to eq 'Ukraine'
-          expect(entity.postcode).to eq '04073'
-          expect(entity.email).to eq 'info@datalogic.co.uk'
+          expect(entity.town).to eq 'London'
+          expect(entity.county).to eq 'United Kingdom'
+          expect(entity.postcode).to eq '01100'
+          expect(entity.email).to eq 'info@example.com'
           expect(entity.phone1).to eq '01234 567890'
           expect(entity.building).to eq 'Building2'
           expect(entity.address2).to eq 'Street2'
           expect(entity.phone2).to eq '1234 567890'
           expect(entity.fax).to eq '2345 67890'
-          expect(entity.website).to eq 'https://datalogic.co.uk'
+          expect(entity.website).to eq 'http://example.com'
           expect(entity.external_id).to eq '3'
-          expect(entity.statement_url).to eq 'https://secure.clearbooks.co.uk/s/58055:YGD2d9_WFz6GvKUv4V4anw'
+          expect(entity.statement_url).to eq 'https://secure.clearbooks.co.uk/'
           expect(entity.supplier[:default_account_code]).to eq '30'
           expect(entity.supplier[:default_vat_rate]).to eq '10'
           expect(entity.supplier[:default_credit_terms]).to eq 30
