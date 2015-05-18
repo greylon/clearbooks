@@ -18,7 +18,8 @@ module Clearbooks
     # @fn       def initialize
     # @brief    Constructor for Clearbooks::Configuration class objects
     def initialize
-      defaults  = YAML.load_file(DEFAULT_CONFIG) rescue nil
+      defaults  =   YAML.load_file('config/clearbooks.yml') rescue nil
+      defaults  ||= YAML.load_file(DEFAULT_CONFIG) rescue nil
       defaults  ||= YAML.load_file(File.expand_path("~/#{DEFAULT_CONFIG}")) rescue Hash.new
 
       @api_key = ENV['CLEARBOOKS_API_KEY'] || defaults['api_key']
