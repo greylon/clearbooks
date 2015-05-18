@@ -66,9 +66,9 @@ module Clearbooks
             :@quantity      => @quantity,
             :@type          => @type,
             :@vat           => @vat,
-            :@vat_rate      => @vat_rate,
+            :@vatRate       => @vat_rate,
             :description    => @description
-      }
+      }.compact
     end # }}}
 
   end # of class Item

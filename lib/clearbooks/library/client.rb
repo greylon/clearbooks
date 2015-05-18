@@ -19,31 +19,50 @@ module Clearbooks
 
     extend Savon::Model
 
-    client  wsdl:         Clearbooks.config.wsdl,
-            log:          Clearbooks.config.log,
-            logger:       Clearbooks.config.logger,
-            soap_header:  {  'tns:authenticate' => '', attributes!: {'tns:authenticate' => { apiKey: Clearbooks.config.api_key } } }
+    client wsdl: Clearbooks.config.wsdl,
+        log: Clearbooks.config.log,
+        logger: Clearbooks.config.logger,
+        log_level: Clearbooks.config.log_level,
+        soap_header: {'tns:authenticate' => '',
+                      attributes!: {'tns:authenticate' =>
+                                        {apiKey: Clearbooks.config.api_key}}}
 
-    operations :create_invoice, :list_invoices, :create_entity, :list_entities, :delete_entity,
-               :create_project, :list_projects, :list_account_codes, :create_journal, 
-               :delete_journal, :create_payment, :allocate_payment
+    operations :create_invoice,
+               :list_invoices,
+               :void_invoice,
 
+               :create_entity,
+               :list_entities,
+               :delete_entity,
+               :update_entity,
 
-    # @fn       def list_invoices {{{
-    # @brief    Get list of invoices from Clearbooks API
-    #
-    # @param    [Hash]    query     Hash of options to filter invoices. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/listinvoices/
-    #
-    # @return   [Array, Invoice]    An array or invoices.
-    #
-    # @example  Clearbooks.list_invoices
-    #
+               :create_project,
+               :list_projects,
+
+               :list_account_codes,
+
+               :create_journal,
+               :delete_journal,
+               :create_payment,
+               :allocate_payment
+
+    # @fn     def list_invoices {{{
+    # @brief  Get list of invoices from Clearbooks API.
+    # @param  [Hash] query Hash of options to filter invoices. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/listinvoices/
+    # @return [Array, Invoice] An array or invoices.
+    # @example
+    #   Clearbooks.list_invoices
     def list_invoices query = {}
-      defaults  = { ledger: :sales }
-      query     = defaults.merge(query)
-      response  = super message: {query: '', attributes!: {query: query}}
-      response  = response.to_hash
-      Invoice.build response[:list_invoices_response][:create_invoices_return][:invoice]
+      defaults = { ledger: :sales }
+      attributes = defaults.merge(query)
+      entity_id = attributes.delete :entity_id
+      invoice_id = attributes.delete :id
+      children = {}
+      children[:entityId] = {'xsd:integer' => entity_id} if entity_id
+      children[:id] = {'xsd:integer' => invoice_id} if invoice_id
+      response = super message: {query: children, attributes!: {query: attributes}}
+      response = response.to_hash
+      Invoice.build response[:list_invoices_response][:create_invoices_return].andand[:invoice]
     end # }}}
 
     # @fn       def create_invoice {{{
@@ -75,21 +94,38 @@ module Clearbooks
       }
     end # }}}
 
-    # @fn       def create_entity {{{
-    # @brief    Creates entity via Clearbooks API
-    #
-    # @param    [Entity]    entity      An entity to be created. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
-    #
-    # @return   [Hash]      [:entity_id] ID of the created entity.
-    #
+    # @fn     def void_invoice {{{
+    # @brief  Voids invoice via Clearbooks API.
+    # Operation taken from WSDL schema https://secure.clearbooks.co.uk/api/wsdl/
+    # @param  [String] ledger 'sales' or 'purchases'.
+    # @param  [Fixnum] invoice_id Invoice id.
+    # @return [Hash] [:@success, :@msg] Boolean result of the operation and a short message describing an error (if any).
     # @example
-    #  Clearbooks.create_entity Clearbooks::Entity.new(company_name: 'DataLogic',
-    #         contact_name: 'Oleg Kukareka',
-    #             address1: 'Kiev',
-    #             country: 'UA',
-    #             postcode: '04073',
-    #             email: 'info@datalogic.co.uk',
-    #             website: 'https://datalogic.co.uk',
+    #   Clearbooks.void_invoice 'purchases', 10
+    def void_invoice ledger, invoice_id
+      message = {
+          invoice: {
+              :@type => ledger,
+              :@id => invoice_id
+          }
+      }
+      response = super message: message
+      response = response.to_hash
+      response[:void_invoice_response][:void_success]
+    end
+
+    # @fn     def create_entity {{{
+    # @brief  Creates entity via Clearbooks API.
+    # @param  [Entity] entity An entity to be created. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+    # @return [Hash] [:entity_id] ID of the created entity.
+    # @example
+    #  Clearbooks.create_entity Clearbooks::Entity.new(company_name: 'Example Inc.',
+    #         contact_name: 'John Doe',
+    #             address1: 'London',
+    #             country: 'UK',
+    #             postcode: '01100',
+    #             email: 'info@example.com',
+    #             website: 'http://example.com',
     #             phone1: '01234 567890',
     #             supplier: {
     #             default_account_code: '1001001',
@@ -103,7 +139,33 @@ module Clearbooks
       { entity_id: response[:create_entity_response][:create_entity_return].to_i }
     end # }}}
 
-    # @fn       def list_entities {{{
+    # @fn     def update_entity {{{
+    # @brief  Updates entity via Clearbooks API.
+    # Operation taken from WSDL schema https://secure.clearbooks.co.uk/api/wsdl/
+    # @param  [Entity] entity An entity to be updated. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+    # @return [Hash] [:entity_id] ID of the updated entity.
+    # @example
+    #  Clearbooks.create_entity Clearbooks::Entity.new(id: 10,
+    #             company_name: 'Example Inc.',
+    #             contact_name: 'John Doe',
+    #             address1: 'London',
+    #             country: 'UK',
+    #             postcode: '01100',
+    #             email: 'info@example.com',
+    #             website: 'http://example.com',
+    #             phone1: '01234 567890',
+    #             supplier: {
+    #             default_account_code: '1001001',
+    #             default_credit_terms: 30,
+    #             default_vat_rate: 0
+    #         })
+    def update_entity entity
+      response = super message: {entityId: entity.id}.merge(entity.to_savon)
+      response = response.to_hash
+      { entity_id: response[:update_entity_response][:update_entity_return].to_i }
+    end # }}}
+
+    # @fn     def list_entities {{{
     # @brief  Get list of entities from Clearbooks API.
     # @param  [Hash] query Hash of options to filter entities. See the list of available options in official docs: https://www.clearbooks.co.uk/support/api/docs/soap/list-entities/
     # @return [Array, Entity] An array or entities.

@@ -20,10 +20,12 @@ module Clearbooks
       #
       # @note     Still returns an array when called with a hash representing a single item.
       def build data
-        unless data.is_a? Array
-          [ create(data) ]
+        if data.nil?
+          Array.new
+        elsif data.is_a? Array
+          data.map { |d| create(d) }
         else
-          return data.map { |d| create(d) }
+          [ create(data) ]
         end
       end  # }}}
 
@@ -56,7 +58,7 @@ module Clearbooks
       if date.nil? || date.is_a?(Date)
         date
       else
-        DateTime.strptime date, '%Y-%m-%d %H:%M:%S'
+        DateTime.strptime(date, '%Y-%m-%d %H:%M:%S').to_date rescue Date.strptime(date, '%Y-%m-%d')
       end
     end # }}}
 

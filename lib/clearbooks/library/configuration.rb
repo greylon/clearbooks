@@ -2,6 +2,8 @@
 
 # System include
 require 'yaml'
+require 'andand'
+require 'logger'
 
 
 # @module     Clearbooks
@@ -11,8 +13,7 @@ module Clearbooks
   # @class    Configuration
   # @brief    Handles configurations of clearbooks gem such as api keys
   class Configuration
-
-    attr_accessor :api_key, :wsdl, :log, :logger
+    attr_accessor :api_key, :wsdl, :log, :logger, :log_level
 
     # @fn       def initialize
     # @brief    Constructor for Clearbooks::Configuration class objects
@@ -20,10 +21,11 @@ module Clearbooks
       defaults  = YAML.load_file(DEFAULT_CONFIG) rescue nil
       defaults  ||= YAML.load_file(File.expand_path("~/#{DEFAULT_CONFIG}")) rescue Hash.new
 
-      @api_key  = ENV['CLEARBOOKS_API_KEY'] || defaults['api_key']
-      @wsdl     = defaults['wsdl'] || 'https://secure.clearbooks.co.uk/api/wsdl/'
-      @logger   = Logger.new(STDOUT) if @log = defaults['log']
-
+      @api_key = ENV['CLEARBOOKS_API_KEY'] || defaults['api_key']
+      @wsdl = defaults['wsdl'] || 'https://secure.clearbooks.co.uk/api/wsdl/'
+      @log = defaults['log'] || false
+      @logger = Logger.new(STDOUT)
+      @log_level = defaults['log_level'].andand.to_sym || :info
       self
     end # }}}
 
