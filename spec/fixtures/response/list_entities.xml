@@ -15,27 +15,11 @@
           <customer/>
           <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
         </ns1:Entity>
-        <ns1:Entity id="2" company_name="Doski LLC" contact_name="Mr John Foo" address1="1270 LONDON ROAD NORBURY"
-                    town="London" county="" postcode="SW164DH" email="john.foo@datalogic.ua" phone1="380672382496"
-                    building="DOSHI &amp; CO 1ST FLOOR WINDSOR HOUSE" address2="" phone2="" fax="" website=""
-                    date_modified="2015-04-27 17:39:23" external_id="" company_number="06889723"
-                    statement_url="https://secure.clearbooks.co.uk/s/58055:IVm_rJOxQvRyPODa-U77HQ">
-          <supplier default_account_code="30" default_vat_rate="0" default_credit_terms="30"/>
-          <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
-        </ns1:Entity>
-        <ns1:Entity id="6" company_name="DataLogic" contact_name=" Oleg Kukareka" address1="Kiev" town="" county=""
-                    postcode="04073" email="info@datalogic.co.uk" phone1="01234 567890" building="" address2=""
-                    phone2="" fax="" website="https://datalogic.co.uk" date_modified="2015-04-28 15:59:17"
-                    external_id="0" company_number=""
-                    statement_url="https://secure.clearbooks.co.uk/s/58055:oGADQmCXvwNPIsBANlv9Xg">
-          <supplier default_account_code="30" default_vat_rate="0" default_credit_terms="30"/>
-          <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
-        </ns1:Entity>
-        <ns1:Entity id="7" company_name="DataLogic" contact_name="Oleg Kukareka" address1="Street 1" town="Kiev" county="Ukraine"
-                    postcode="04073" email="info@datalogic.co.uk" phone1="01234 567890" building="Building2" address2="Street2"
-                    phone2="1234 567890" fax="2345 67890" website="https://datalogic.co.uk" date_modified="2015-04-28 16:10:57"
+        <ns1:Entity id="6" company_name="Example Inc." contact_name="John Foo" address1="Street 1" town="London" county="United Kingdom"
+                    postcode="01100" email="info@example.com" phone1="01234 567890" building="Building2" address2="Street2"
+                    phone2="1234 567890" fax="2345 67890" website="http://example.com" date_modified="2015-04-28 15:59:17"
                     external_id="3" company_number=""
-                    statement_url="https://secure.clearbooks.co.uk/s/58055:YGD2d9_WFz6GvKUv4V4anw">
+                    statement_url="https://secure.clearbooks.co.uk/">
           <supplier default_account_code="30" default_vat_rate="10" default_credit_terms="30"/>
           <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
         </ns1:Entity>

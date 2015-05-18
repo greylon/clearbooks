@@ -13,7 +13,10 @@ module Clearbooks
 
     attr_reader :invoice_id, :date_created, :date_due, :date_accrual, :credit_terms, :description, 
                 :entity_id, :reference, :project, :status, :invoice_prefix,
-                :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id
+                :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id,
+                :gross, :net, :vat, :paid, :balance, :external_id # FIXME add docs for new attributes
+
+    alias :id :invoice_id
 
     # @!attribute [r] invoice_id
     # @return [Fixnum] Invoice Id.
@@ -106,29 +109,36 @@ module Clearbooks
     #
     # @param    [Hash]     data      Invoice attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
     def initialize data
-      @invoice_id       = data.savon(:invoice_id).to_i
+      @invoice_id       = Integer data.savon(:invoice_id) rescue nil
 
-      @date_created     = parse_date data.savon(:date_created)
-      @date_due         = parse_date data.savon(:date_due)
+      @date_created     = parse_date data.savon :date_created
+      @date_due         = parse_date data.savon :date_due
 
-      @credit_terms     = data.savon(:credit_terms).to_i
+      @credit_terms     = Integer data.savon(:credit_terms) rescue nil
       @description      = data.savon :description
 
-      @entity_id        = data.savon(:entity_id).to_i
+      @entity_id        = Integer data.savon(:entity_id) rescue nil
       @reference        = data.savon :reference
-      @project          = data.savon(:project).to_i
+      @project          = Integer data.savon(:project) rescue nil
       @status           = data.savon :status
 
       @invoice_prefix   = data.savon :invoice_prefix
       @invoice_number   = data.savon :invoice_number
-      @external_id      = data.savon(:external_id).to_i
-      @statement_page   = data.savon :statement_page
+      @external_id      = data.savon :external_id
+      @statement_page   = CGI.unescapeHTML data.savon :statement_page rescue nil
 
-      @date_modified    = parse_date data.savon(:date_modified)
-      @date_accrual     = parse_date data.savon(:date_accrual)
+      @date_modified    = parse_date data.savon :date_modified
+      @date_accrual     = parse_date data.savon :date_accrual
 
-      @type             = data.savon(:type)
-      @bank_payment_id  = data.savon(:bank_payment_id).to_i
+      @type             = data.savon :type
+      @bank_payment_id  = Integer data.savon(:bank_payment_id) rescue nil
+
+      @gross            = BigDecimal data.savon(:gross) rescue nil
+      @net              = BigDecimal data.savon(:net) rescue nil
+      @vat              = BigDecimal data.savon(:vat) rescue nil
+      @paid             = BigDecimal data.savon(:paid) rescue nil
+      @balance          = BigDecimal data.savon(:balance) rescue nil
+      @external_id      = data.savon(:external_id)
 
       @items = Item.build( data[:items].is_a?(Array) ? data[:items] : data[:items][:item] )
     end # }}}
@@ -148,10 +158,11 @@ module Clearbooks
           :@creditTerms => @credit_terms,
           :@reference   => @reference,
           :@project     => @project,
+          :@external_id => @external_id,
 
           description:  @description,
           items:        { item: items.map(&:to_savon) }
-        }
+        }.compact
       }
     end # }}}
 

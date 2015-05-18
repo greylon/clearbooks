@@ -103,6 +103,20 @@ module Clearbooks
         expect(response[:invoice_number]).to eq '3'
       end
     end
+
+    describe '::void_invoice' do
+      let(:xml) { File.read('spec/fixtures/response/void_invoice.xml') }
+      let(:response) do
+        savon.expects(:void_invoice).with(message: message).returns(xml)
+        Clearbooks.void_invoice 'purchases', 10
+      end
+
+      it 'voids an invoice' do
+        expect(response).to be_a Hash
+        expect(response[:@success]).to eq 'true'
+        expect(response[:@msg]).to eq 'The invoice has been voided'
+      end
+    end
   end
 end
 

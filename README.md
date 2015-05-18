@@ -1,5 +1,5 @@
 # Clearbooks
-Version 0.16.3
+Version 0.17.0-1-gfea1f5d
 
 [![Gem Version](https://badge.fury.io/rb/clearbooks.svg)](http://badge.fury.io/rb/clearbooks)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://img.shields.io/badge/license-MIT-brightgreen.svg)
@@ -191,6 +191,24 @@ Clearbooks.create_invoice Clearbooks::Invoice.new(
 ```
 Reference: https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
+### Clearbooks.void_invoice
+
+Example:
+
+```ruby
+Clearbooks.void_invoice(
+    'purchases',    # 'purchases' or 'sales'
+    10              # Invoice id
+) # Clearbooks.void_invoice
+
+# returns a Hash:
+
+    {
+        :@success   => true,
+        :@msg       => 'Some status message'
+    }
+```
+
 ## Managing entities
 ### Clearbooks.list_entities
 
@@ -215,6 +233,24 @@ Example:
 
 ```ruby
 Clearbooks.create_entity Clearbooks::Entity.new(
+    company_name: 'Company',
+    contact_name: 'John Doe',
+    supplier: {
+       default_account_code: '1001001', # See Clearbooks.list_account_codes
+       default_credit_terms: 30,
+       default_vat_rate: 0
+   }
+) # Clearbooks::Entity.new
+```
+Full list of options: https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+
+### Clearbooks.update_entity
+
+Example:
+
+```ruby
+Clearbooks.update_entity Clearbooks::Entity.new(
+    id: 10,
     company_name: 'Company',
     contact_name: 'John Doe',
     supplier: {
@@ -450,7 +486,7 @@ Here is a current listing of all tasks:
 
 
 ```
-rake build                  # Build clearbooks-0.16.3.gem into the pkg directory
+rake build                  # Build clearbooks-0.17.0.gem into the pkg directory
 rake cucumber:pretty        # Run Cucumber features
 rake cucumber:progress      # Run Cucumber features
 rake default                # Show the default task when executing rake without arguments
@@ -458,8 +494,8 @@ rake docs:generate          # Generate Yardoc documentation for this project
 rake docs:graph             # Generate Yard Graphs for this project
 rake guard:default          # Execute Ruby Guard
 rake help                   # Shows the usage help screen
-rake install                # Build and install clearbooks-0.16.3.gem into system gems
-rake install:local          # Build and install clearbooks-0.16.3.gem into system gems without network access
+rake install                # Build and install clearbooks-0.17.0.gem into system gems
+rake install:local          # Build and install clearbooks-0.17.0.gem into system gems without network access
 rake man:build              # Build the manual pages
 rake man:clean              # Clean up from the built man pages
 rake measurement:benchmark  # When executing rake tasks measure elapsed time, used with other tasks
@@ -470,7 +506,7 @@ rake readme                 # Generate proper README file from templates
 rake readme:all             # Generate proper README file from templates
 rake readme:subdirs         # Builds generates readme files in all sub-directories
 rake readme:topdir          # Generate top level README file from template
-rake release                # Create tag v0.16.3 and build and push clearbooks-0.16.3.gem to Rubygems
+rake release                # Create tag v0.17.0 and build and push clearbooks-0.17.0.gem to Rubygems
 rake spec                   # RSpec Core Tasks
 rake todo                   # Look for TODO and FIXME tags in the code
 rake version                # Git Tag number of this repo
@@ -496,7 +532,7 @@ thor :docs:generate          # Generate Yardoc documentation for this project
 thor :docs:graph             # Generate Yard Graphs for this project
 thor :guard:default          # Execute Ruby Guard
 thor :help                   # Shows the usage help screen
-thor :install                # Build and install clearbooks-0.16.3 .gem into system gems
+thor :install                # Build and install clearbooks-0.17.0.gem into system gems
 thor :man:build              # Build the manual pages
 thor :man:clean              # Clean up from the built man pages
 thor :measurement:benchmark  # When executing rake tasks measure elapsed time, used with other tasks

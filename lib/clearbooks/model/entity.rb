@@ -137,7 +137,7 @@ module Clearbooks
     # @param      [Hash]     data        Entity attributes. For the list of available options see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
     #
     def initialize data
-      @id               = data.savon(:id).to_i
+      @id               = Integer data.savon(:id) rescue nil
       @company_name     = data.savon :company_name
       @contact_name     = data.savon :contact_name
 
@@ -156,7 +156,7 @@ module Clearbooks
       @website          = data.savon :website
 
       @statement_url    = data.savon :statement_url
-      @external_id      = data.savon(:external_id).to_i
+      @external_id      = data.savon :external_id
 
       @supplier = entity_extra data.savon :supplier
       @supplier = @supplier.from_savon if @supplier
@@ -211,7 +211,7 @@ module Clearbooks
         {
             :@default_account_code	=> extra[:default_account_code],
             :@default_vat_rate      => extra[:default_vat_rate],
-            :@default_credit_terms  => extra[:default_credit_terms].to_i,
+            :@default_credit_terms  => (Integer extra[:default_credit_terms] rescue nil),
         }.compact
       end
     end # }}}

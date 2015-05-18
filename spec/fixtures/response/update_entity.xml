@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:ns1="https://secure.clearbooks.co.uk/api/soap/">
+  <SOAP-ENV:Header>
+    <ns1:authenticate>true</ns1:authenticate>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <SOAP-ENV:updateEntityResponse>
+      <updateEntityReturn>6</updateEntityReturn>
+    </SOAP-ENV:updateEntityResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
