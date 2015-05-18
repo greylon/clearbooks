@@ -59,7 +59,7 @@ To use the Clearbooks API, you need to get an API key on http://clearbooks.co.uk
 
 Login to the site and choose `Settings` > `API`.
 
-Save the API key in `~/.clearbooks/config.yml`.
+Store the API key and configuration options in `config/clearbooks.yml`, `.clearbooks/config.yml`, or `~/.clearbooks/config.yml`.
 
 
 ```sh
