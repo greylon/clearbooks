@@ -119,9 +119,9 @@ module Clearbooks
           expect(entity.external_id).to eq '106'
           expect(entity.vat_number).to eq '105'
           expect(entity.company_number).to eq '106'
-          expect(entity.statement_url).to eq 'https://secure.clearbooks.co.uk/s/64372:t8MdYoBZxFiSuyAyKVNBFw'
-          expect(entity.supplier[:default_account_code]).to eq '0'
-          expect(entity.supplier[:default_vat_rate]).to eq '0'
+          expect(entity.statement_url).to eq 'https://secure.clearbooks.co.uk/s/64372:97lRduxMpTcowPCTWOxvLg'
+          expect(entity.supplier[:default_account_code]).to eq '30'
+          expect(entity.supplier[:default_vat_rate]).to eq '0.2'
           expect(entity.supplier[:default_credit_terms]).to eq 30
           expect(entity.customer).to be_nil
         end
