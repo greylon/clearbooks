@@ -27,3 +27,32 @@
     </SOAP-ENV:listEntitiesResponse>
   </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns1="https://secure.clearbooks.co.uk/api/soap/">
+    <SOAP-ENV:Header>
+        <ns1:authenticate>true</ns1:authenticate>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <SOAP-ENV:listEntitiesResponse>
+            <entities>
+                <ns1:Entity id="1" company_name="Bank Account 1" contact_name="" address1="" town="" county="" country="" postcode="" email="" phone1="" building="" address2="" phone2="" fax="" website="" date_modified="2010-03-04 11:32:14" external_id="0" vat_number="" company_number="" statement_url="https://secure.clearbooks.co.uk/s/64372:jPr2XuqMLUE8cu3nncYs-w">
+                    <supplier/>
+                    <customer/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+                <ns1:Entity id="5" company_name="John Doe" contact_name="Mr John Doe" address1="Lane 1" town="Town 1" county="" country="GB" postcode="10115" email="johndoe@test.com" phone1="+1 234 567 8910" building="110" address2="" phone2="" fax="" website="" date_modified="2015-10-30 08:09:44" external_id="" vat_number="" company_number="" statement_url="https://secure.clearbooks.co.uk/s/64372:t8MdYoBZxFiSuyAyKVNBFw">
+                    <customer default_account_code="0" default_vat_rate="0" default_credit_terms="30"/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+                <ns1:Entity id="6" company_name="Jane Industries" contact_name="Mr Jane Doe" address1="Lane 1" town="Town 1" county="" country="GB" postcode="" email="janedoe@test.com" phone1="+1 234 5678911" building="110" address2="" phone2="" fax="" website="" date_modified="2015-10-30 08:11:29" external_id="" vat_number="" company_number="" statement_url="https://secure.clearbooks.co.uk/s/64372:97lRduxMpTcowPCTWOxvLg">
+                    <supplier default_account_code="30" default_vat_rate="0" default_credit_terms="30"/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+            </entities>
+        </SOAP-ENV:listEntitiesResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
