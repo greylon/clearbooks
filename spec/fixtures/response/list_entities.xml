@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-                   xmlns:ns1="https://secure.clearbooks.co.uk/api/soap/">
-  <SOAP-ENV:Header>
-    <ns1:authenticate>true</ns1:authenticate>
-  </SOAP-ENV:Header>
-  <SOAP-ENV:Body>
-    <SOAP-ENV:listEntitiesResponse>
-      <entities>
-        <ns1:Entity id="1" company_name="Bank Account 1" contact_name="" address1="" town="" county="" postcode=""
-                    email="" phone1="" building="" address2="" phone2="" fax="" website=""
-                    date_modified="2010-03-04 11:32:14" external_id="0" company_number=""
-                    statement_url="https://secure.clearbooks.co.uk/s/58055:5y6ve9PH-tZyCSVTi22g8Q">
-          <supplier/>
-          <customer/>
-          <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
-        </ns1:Entity>
-        <ns1:Entity id="6" company_name="Example Inc." contact_name="John Foo" address1="Street 1" town="London" county="United Kingdom"
-                    postcode="01100" email="info@example.com" phone1="01234 567890" building="Building2" address2="Street2"
-                    phone2="1234 567890" fax="2345 67890" website="http://example.com" date_modified="2015-04-28 15:59:17"
-                    external_id="3" company_number=""
-                    statement_url="https://secure.clearbooks.co.uk/">
-          <supplier default_account_code="30" default_vat_rate="10" default_credit_terms="30"/>
-          <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
-        </ns1:Entity>
-      </entities>
-    </SOAP-ENV:listEntitiesResponse>
-  </SOAP-ENV:Body>
+<SOAP-ENV:Envelope
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns1="https://secure.clearbooks.co.uk/api/soap/">
+    <SOAP-ENV:Header>
+        <ns1:authenticate>true</ns1:authenticate>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <SOAP-ENV:listEntitiesResponse>
+            <entities>
+                <ns1:Entity id="1" company_name="Bank Account 1" contact_name="" address1="" town="" county="" country="" postcode="" email="" phone1="" building="" address2="" phone2="" fax="" website="" date_modified="2010-03-04 11:32:14" external_id="0" vat_number="" company_number="" statement_url="https://secure.clearbooks.co.uk/s/64372:jPr2XuqMLUE8cu3nncYs-w">
+                    <supplier/>
+                    <customer/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+                <ns1:Entity id="2" company_name="Supplier 1" contact_name="" address1="" town="" county="" country="" postcode="" email="supplier1@ex.com" phone1="+94727790315" building="" address2="" phone2="" fax="+94727790315" website="" date_modified="2015-10-26 14:55:00" external_id="aeolus_1" vat_number="" company_number="" statement_url="https://secure.clearbooks.co.uk/s/64372:uuU7uPz-VOcmDAcfGMWbWw">
+                    <supplier default_account_code="30" default_vat_rate="0.2" default_credit_terms="30"/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+                <ns1:Entity id="3" company_name="Test User" contact_name="" address1="" town="" county="" country="" postcode="" email="ziyan@jdeen.com" phone1="ziyan@jdeen.com" building="" address2="" phone2="" fax="" website="" date_modified="2015-10-30 08:00:58" external_id="aeolus_3" vat_number="" company_number="" statement_url="https://secure.clearbooks.co.uk/s/64372:ut2JNQrd4jRklcyIPC_8jQ">
+                    <customer default_account_code="1001001" default_vat_rate="0.2" default_credit_terms="30"/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+                <ns1:Entity id="4" company_name="Supplier 2" contact_name="" address1="" town="" county="" country="" postcode="" email="supplier2@ex.com" phone1="" building="" address2="" phone2="" fax="" website="" date_modified="2015-10-26 14:54:58" external_id="aeolus_2" vat_number="" company_number="" statement_url="https://secure.clearbooks.co.uk/s/64372:Ma2LVzrkvgMcuUriKA80Rg">
+                    <supplier default_account_code="30" default_vat_rate="0.2" default_credit_terms="30"/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+                <ns1:Entity id="5" company_name="John Doe" contact_name="Mr John Doe" address1="Example Lane" town="London" county="Greater London" country="GB" postcode="01100" email="johndoe@test.com" phone1="+1 234 567 8910" building="Building 1" address2="Example Place" phone2="+1 234 567 8912" fax="+1 234 567 8914" website="http://www.johndoe.com" date_modified="2015-10-30 12:55:07" external_id="106" vat_number="106" company_number="106" statement_url="https://secure.clearbooks.co.uk/s/64372:t8MdYoBZxFiSuyAyKVNBFw">
+                    <customer default_account_code="0" default_vat_rate="0" default_credit_terms="30"/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+                <ns1:Entity id="6" company_name="Jane Industries" contact_name="Mrs Jane Doe" address1="Example Lane" town="London" county="Greater London" country="GB" postcode="01100" email="janedoe@test.com" phone1="+1 234 567 8911" building="Building 2" address2="Example Place" phone2="+1 234 567 8913" fax="+1 234 567 8917" website="http://www.janedoe.com" date_modified="2015-10-30 13:00:28" external_id="106" vat_number="105" company_number="106" statement_url="https://secure.clearbooks.co.uk/s/64372:97lRduxMpTcowPCTWOxvLg">
+                    <supplier default_account_code="30" default_vat_rate="0.2" default_credit_terms="30"/>
+                    <bankAccount bankName="" name="" sortcode="" accountNumber=""/>
+                </ns1:Entity>
+            </entities>
+        </SOAP-ENV:listEntitiesResponse>
+    </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
+

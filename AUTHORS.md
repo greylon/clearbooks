@@ -23,9 +23,17 @@ AUTHORS
     S: Creator
 
     CLEARBOOKS
+    P: Ziyan Junaideen
+    M: jdeen-solutions AT outlook DOT com
+    L: -
+    W: http://github.com/ziyan-junaideen
+    S: Associated
+
+    CLEARBOOKS
     P: Bjoern Rennhak
     M: bjoern AT greylon DOT com
     L: -
     W: http://github.com/rennhak
     S: BDFL, Creator
+
 
