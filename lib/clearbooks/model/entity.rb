@@ -27,6 +27,8 @@ module Clearbooks
                 :fax,           # string optional
                 :website,       # string optional
                 :external_id,   # integer optional
+                :vat_number,    # integer optional
+                :company_number,# integer optional
                 :statement_url,
                 :supplier,
                    # default_account_code   string optional
@@ -119,6 +121,16 @@ module Clearbooks
     # Optional.
     # @return [Fixnum]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+    
+    # @!attribute [r] vat_number
+    # Optional.
+    # @return [Fixnum]
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
+
+    # @!attribute [r] company_number
+    # Optional.
+    # @return [Fixnum]
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createentity/
 
     # @!attribute [r] supplier
     # Optional. [:default_account_code, :default_vat_rate, :default_credit_terms]
@@ -155,6 +167,8 @@ module Clearbooks
       @fax              = data.savon :fax
       @website          = data.savon :website
 
+      @company_number   = data.savon :company_number
+      @vat_number       = data.savon :vat_number
       @statement_url    = data.savon :statement_url
       @external_id      = data.savon :external_id
 
@@ -173,26 +187,28 @@ module Clearbooks
     def to_savon
       {
         entity: {
-          :@company_name  => @company_name,
-          :@contact_name  => @contact_name,
+          :@company_name    => @company_name,
+          :@contact_name    => @contact_name,
 
-          :@building      => @building,
-          :@address1      => @address1,
-          :@address2      => @address2,
-          :@town          => @town,
-          :@county        => @county,
-          :@country       => @country,
-          :@postcode      => @postcode,
+          :@building        => @building,
+          :@address1        => @address1,
+          :@address2        => @address2,
+          :@town            => @town,
+          :@county          => @county,
+          :@country         => @country,
+          :@postcode        => @postcode,
 
-          :@email         => @email,
-          :@phone1        => @phone1,
-          :@phone2        => @phone2,
-          :@fax           => @fax,
-          :@website       => @website,
+          :@email           => @email,
+          :@phone1          => @phone1,
+          :@phone2          => @phone2,
+          :@fax             => @fax,
+          :@website         => @website,
 
-          :@external_id   => @external_id,
-          :supplier       => entity_extra(@supplier),
-          :customer       => entity_extra(@customer)
+          :@company_number  => @company_number,
+          :@vat_number      => @vat_number,
+          :@external_id     => @external_id,
+          :supplier         => entity_extra(@supplier),
+          :customer         => entity_extra(@customer)
         }.compact
       }
     end # }}}
