@@ -88,6 +88,7 @@ module Clearbooks
                                   credit_terms: 30,
                                   entity_id: 1,
                                   type: 'purchases',
+                                  vat_treatment: 'UK',
                                   items: items)}
       let(:xml) { File.read('spec/fixtures/response/create_invoice.xml') }
       let(:response) do

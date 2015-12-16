@@ -11,10 +11,10 @@ module Clearbooks
   # @see      https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
   class Invoice < Base
 
-    attr_reader :invoice_id, :date_created, :date_due, :date_accrual, :credit_terms, :description, 
+    attr_reader :invoice_id, :date_created, :date_due, :date_accrual, :credit_terms, :description,
                 :entity_id, :reference, :project, :status, :invoice_prefix,
                 :invoice_number, :external_id, :statement_page, :date_modified, :items, :type, :bank_payment_id,
-                :gross, :net, :vat, :paid, :balance, :external_id # FIXME add docs for new attributes
+                :gross, :net, :vat, :vat_treatment, :paid, :balance, :external_id # FIXME add docs for new attributes
 
     alias :id :invoice_id
 
@@ -72,6 +72,11 @@ module Clearbooks
     # @!attribute [r] bank_payment_id
     # Optional. The bank account code.
     # @return [Fixnum]
+    # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
+
+    # @!attribute [r] vat_treatment
+    # Optional.  Vat treatment of the invoice.
+    # @return [String]
     # @see https://www.clearbooks.co.uk/support/api/docs/soap/createinvoice/
 
     # @!attribute [r] date_modified
@@ -133,6 +138,8 @@ module Clearbooks
       @type             = data.savon :type
       @bank_payment_id  = Integer data.savon(:bank_payment_id) rescue nil
 
+      @vat_treatment    = data.savon :vat_treatment
+
       @gross            = BigDecimal data.savon(:gross) rescue nil
       @net              = BigDecimal data.savon(:net) rescue nil
       @vat              = BigDecimal data.savon(:vat) rescue nil
@@ -150,15 +157,16 @@ module Clearbooks
     def to_savon
       {
         invoice: {
-          :@dateCreated => @date_created,
-          :@entityId    => @entity_id,
-          :@type        => @type,
-          :@dateDue     => @date_due,
-          :@dateAccural => @date_accural,
-          :@creditTerms => @credit_terms,
-          :@reference   => @reference,
-          :@project     => @project,
-          :@external_id => @external_id,
+          :@dateCreated  => @date_created,
+          :@entityId     => @entity_id,
+          :@type         => @type,
+          :@dateDue      => @date_due,
+          :@dateAccural  => @date_accural,
+          :@creditTerms  => @credit_terms,
+          :@reference    => @reference,
+          :@project      => @project,
+          :@external_id  => @external_id,
+          :@vatTreatment => @vat_treatment,
 
           description:  @description,
           items:        { item: items.map(&:to_savon) }
